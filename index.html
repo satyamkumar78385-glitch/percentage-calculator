@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Percentage Calculator</title>
 
     <style>
@@ -10,27 +11,37 @@
             font-family: Arial;
             background: #f1f5f9;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
+            margin: 0;
         }
 
         .calculator {
             max-width: 400px;
-            margin: auto;
+            margin: 20px auto;
             background: red;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 5px 15px #999;
+            box-sizing: border-box;
         }
 
-        h1 {
+        h1, h2 {
             color: black;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
         }
 
         input {
             width: 90%;
             padding: 12px;
-            margin: 8px;
+            margin: 8px 0;
             font-size: 16px;
+            box-sizing: border-box;
+            border: 2px solid black;
+            border-radius: 8px;
         }
 
         button {
@@ -40,12 +51,26 @@
             border: none;
             border-radius: 8px;
             font-size: 18px;
+            cursor: pointer;
         }
 
-        #result {
+        button:active {
+            transform: scale(0.97);
+        }
+
+        #result,
+        #shoppingResult {
             margin-top: 20px;
             font-size: 22px;
             font-weight: bold;
+        }
+
+        #result {
+            color: green;
+        }
+
+        /* Shopping Result - Green */
+        #shoppingResult {
             color: green;
         }
     </style>
@@ -53,78 +78,116 @@
 
 <body>
 
-<div class="calculator">
+    <!-- Percentage Calculator -->
 
-    <h1>Percentage Calculator</h1>
+    <div class="calculator">
 
-    <p>Enter Your Marks</p>
+        <h1>Percentage Calculator</h1>
 
-    <input type="number" id="obtained"
-           placeholder="Obtained Marks">
+        <p>Enter Your Marks</p>
 
-    <input type="number" id="total"
-           placeholder="Total Marks">
+        <input type="number"
+               id="obtained"
+               placeholder="Obtained Marks">
 
-    <br><br>
+        <input type="number"
+               id="total"
+               placeholder="Total Marks">
 
-    <button onclick="calculate()">
-        Calculate Percentage
-    </button>
+        <br><br>
 
-    <div id="result"></div>
+        <button onclick="calculate()">
+            Calculate Percentage
+        </button>
 
-</div>
+        <div id="result"></div>
 
-<script>
-function calculate() {
+    </div>
 
-    let obtained =
-        Number(document.getElementById("obtained").value);
 
-    let total =
-        Number(document.getElementById("total").value);
+    <!-- Shopping Percentage Calculator -->
 
-    if (total <= 0 || obtained < 0 || obtained > total) {
-        document.getElementById("result").innerHTML =
-        "Please enter correct marks.";
-        return;
-    }
+    <div class="calculator">
 
-    let percentage = (obtained / total) * 100;
+        <h2>🛒 Shopping Percentage Calculator</h2>
 
-    document.getElementById("result").innerHTML =
-        "Your Percentage: " +
-        percentage.toFixed(2) + "%";
-}
-</script>
+        <input type="number"
+               id="price"
+               placeholder="Price (₹)">
+
+        <input type="number"
+               id="percent"
+               placeholder="Discount (%)">
+
+        <br><br>
+
+        <button onclick="calculatePercentage()">
+            Calculate
+        </button>
+
+        <h3 id="shoppingResult"></h3>
+
+    </div>
+
+
+    <script>
+
+        // Percentage Calculator
+
+        function calculate() {
+
+            let obtained =
+                Number(document.getElementById("obtained").value);
+
+            let total =
+                Number(document.getElementById("total").value);
+
+            if (total <= 0 || obtained < 0 || obtained > total) {
+
+                document.getElementById("result").innerHTML =
+                    "Please enter correct marks.";
+
+                return;
+            }
+
+            let percentage = (obtained / total) * 100;
+
+            document.getElementById("result").innerHTML =
+                "Your Percentage: " +
+                percentage.toFixed(2) + "%";
+        }
+
+
+        // Shopping Percentage Calculator
+
+        function calculatePercentage() {
+
+            let price =
+                Number(document.getElementById("price").value);
+
+            let percent =
+                Number(document.getElementById("percent").value);
+
+            if (price <= 0 || percent < 0 || percent > 100) {
+
+                document.getElementById("shoppingResult").innerHTML =
+                    "Please enter valid numbers.";
+
+                return;
+            }
+
+            let discount = (price * percent) / 100;
+
+            let totalAmount = price - discount;
+
+            document.getElementById("shoppingResult").innerHTML =
+                "🟢 Discount: ₹" + discount.toFixed(2) +
+                "<br><br>" +
+                "🔵 Total Amount to Pay: ₹" +
+                totalAmount.toFixed(2);
+        }
+
+    </script>
 
 </body>
 </html>
-<div class="calculator">
-  <h2>🛒 Shopping Percentage Calculator</h2>
-
-  <input type="number" id="price" placeholder="Price (₹)">
-  <input type="number" id="percent" placeholder="Percentage (%)">
-
-  <button onclick="calculatePercentage()">Calculate</button>
-
-  <h3 id="result"></h3>
-</div>
-
-<script>
-function calculatePercentage() {
-    let price = Number(document.getElementById("price").value);
-    let percent = Number(document.getElementById("percent").value);
-
-    if (price <= 0 || percent < 0) {
-        document.getElementById("result").innerText =
-            "Please enter valid numbers.";
-        return;
-    }
-
-    let result = (price * percent) / 100;
-
-    document.getElementById("result").innerText =
-        "Result: ₹" + result.toFixed(2);
-}
-</script>
