@@ -100,3 +100,31 @@ function calculate() {
 
 </body>
 </html>
+<div class="calculator">
+  <h2>🛒 Shopping Percentage Calculator</h2>
+
+  <input type="number" id="price" placeholder="Price (₹)">
+  <input type="number" id="percent" placeholder="Percentage (%)">
+
+  <button onclick="calculatePercentage()">Calculate</button>
+
+  <h3 id="result"></h3>
+</div>
+
+<script>
+function calculatePercentage() {
+    let price = Number(document.getElementById("price").value);
+    let percent = Number(document.getElementById("percent").value);
+
+    if (price <= 0 || percent < 0) {
+        document.getElementById("result").innerText =
+            "Please enter valid numbers.";
+        return;
+    }
+
+    let result = (price * percent) / 100;
+
+    document.getElementById("result").innerText =
+        "Result: ₹" + result.toFixed(2);
+}
+</script>
