@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f5f9;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .calculator {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px #999;
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <h1>Percentage Calculator</h1>
+
+    <p>Enter Your Marks</p>
+
+    <input type="number" id="obtained"
+           placeholder="Obtained Marks">
+
+    <input type="number" id="total"
+           placeholder="Total Marks">
+
+    <br><br>
+
+    <button onclick="calculate()">
+        Calculate Percentage
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+function calculate() {
+
+    let obtained =
+        Number(document.getElementById("obtained").value);
+
+    let total =
+        Number(document.getElementById("total").value);
+
+    if (total <= 0 || obtained < 0 || obtained > total) {
+        document.getElementById("result").innerHTML =
+        "Please enter correct marks.";
+        return;
+    }
+
+    let percentage = (obtained / total) * 100;
+
+    document.getElementById("result").innerHTML =
+        "Your Percentage: " +
+        percentage.toFixed(2) + "%";
+}
+</script>
+
+</body>
+</html>
