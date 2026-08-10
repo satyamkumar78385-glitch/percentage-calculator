@@ -1,104 +1,259 @@
-<!-- 📊 Percentage Calculator -->
-<div class="calculator">
+<!-- =========================
+     PERCENTAGE CALCULATOR
+========================= -->
+
+<div class="calculator-box">
+
   <h2>📊 Percentage Calculator</h2>
 
-  <input type="number" id="amount" placeholder="Amount (₹)">
-  <input type="number" id="percentage" placeholder="Percentage (%)">
+  <h3 class="section-title">Enter Your Mark</h3>
 
-  <button class="calculate-btn" onclick="calculatePercentage()">Calculate</button>
+  <input
+    type="number"
+    id="obtainedMarks"
+    placeholder="Obtained Marks"
+  >
 
-  <p class="result-text">
-    📌 Percentage Amount:
-    <b id="percentageResult">₹0</b>
-  </p>
+  <input
+    type="number"
+    id="totalMarks"
+    placeholder="Total Marks"
+  >
+
+  <button class="calculate-btn" onclick="calculateMarksPercentage()">
+    Calculate
+  </button>
+
+  <div class="result-box">
+    <p>📈 Your Percentage</p>
+    <strong id="marksResult">0%</strong>
+  </div>
+
 </div>
 
 
-<!-- 🛍️ Discount Calculator -->
-<div class="calculator">
-  <h2>🛍️ Discount Calculator</h2>
+<!-- =========================
+     SHOPPING DISCOUNT CALCULATOR
+========================= -->
 
-  <input type="number" id="originalPrice" placeholder="Original Price (₹)">
-  <input type="number" id="discountPercent" placeholder="Discount (%)">
+<div class="calculator-box">
 
-  <button class="calculate-btn" onclick="calculateDiscount()">Calculate</button>
+  <h2>🛍️ Shopping Discount Calculator</h2>
 
-  <p class="result-text">
-    🏷️ Discount Amount:
-    <b id="discountResult">₹0</b>
-  </p>
+  <h3 class="section-title">Enter Shopping Details</h3>
 
-  <p class="result-text">
-    💰 Total Amount to Pay:
-    <b id="payResult">₹0</b>
-  </p>
+  <input
+    type="number"
+    id="originalPrice"
+    placeholder="Original Price (₹)"
+  >
+
+  <input
+    type="number"
+    id="discountPercent"
+    placeholder="Discount (%)"
+  >
+
+  <button class="calculate-btn" onclick="calculateDiscount()">
+    Calculate
+  </button>
+
+  <div class="result-box">
+
+    <p class="green-result">
+      🏷️ Discount Amount
+    </p>
+
+    <strong id="discountResult" class="green-number">
+      ₹0
+    </strong>
+
+    <p class="blue-result">
+      💰 Total Amount to Pay
+    </p>
+
+    <strong id="payResult" class="blue-number">
+      ₹0
+    </strong>
+
+  </div>
+
 </div>
 
 
 <style>
-/* Calculate Button */
-.calculate-btn {
-  background-color: #222;
-  color: white;
-  font-weight: bold;
+
+/* =========================
+   CALCULATOR BOX
+========================= */
+
+.calculator-box {
+  width: 360px;
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 22px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+
+/* Heading */
+
+.calculator-box h2 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+
+/* Section Title */
+
+.section-title {
   font-size: 16px;
-  padding: 12px 25px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0 12px;
+}
+
+
+/* Input */
+
+.calculator-box input {
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  margin: 7px 0;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  outline: none;
+}
+
+
+/* Calculate Button */
+
+.calculate-btn {
+  width: 100%;
+  height: 45px;
+  margin-top: 12px;
+  background: #222;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 .calculate-btn:hover {
-  background-color: #000;
+  background: #000;
 }
 
-/* Result Text */
-.result-text {
-  color: #1976d2;
+
+/* Result Box */
+
+.result-box {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+
+/* Percentage Result */
+
+.result-box p {
+  margin: 0 0 5px;
   font-size: 14px;
   font-weight: bold;
-}
-
-/* Green Results */
-#percentageResult,
-#discountResult {
-  color: #28a745;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-/* Final Amount */
-#payResult {
   color: #1976d2;
-  font-size: 15px;
+}
+
+#marksResult {
+  color: #28a745;
+  font-size: 20px;
   font-weight: bold;
 }
+
+
+/* Shopping Results */
+
+.green-result {
+  color: #28a745 !important;
+  margin-top: 5px !important;
+}
+
+.green-number {
+  color: #28a745;
+  font-size: 19px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.blue-result {
+  color: #1976d2 !important;
+  margin-top: 8px !important;
+}
+
+.blue-number {
+  color: #1976d2;
+  font-size: 19px;
+  font-weight: bold;
+  display: block;
+}
+
 </style>
 
 
 <script>
-function calculatePercentage() {
-  const amount = parseFloat(document.getElementById("amount").value);
-  const percentage = parseFloat(document.getElementById("percentage").value);
 
-  if (isNaN(amount) || isNaN(percentage)) {
-    alert("Please enter both values.");
+/* =========================
+   PERCENTAGE CALCULATOR
+========================= */
+
+function calculateMarksPercentage() {
+
+  const obtained =
+    parseFloat(document.getElementById("obtainedMarks").value);
+
+  const total =
+    parseFloat(document.getElementById("totalMarks").value);
+
+  if (isNaN(obtained) || isNaN(total)) {
+    alert("Please enter obtained marks and total marks.");
     return;
   }
 
-  const result = (amount * percentage) / 100;
+  if (total <= 0 || obtained < 0 || obtained > total) {
+    alert("Please enter valid marks.");
+    return;
+  }
 
-  document.getElementById("percentageResult").textContent =
-    "₹" + result.toFixed(2);
+  const percentage = (obtained / total) * 100;
+
+  document.getElementById("marksResult").textContent =
+    percentage.toFixed(2) + "%";
 }
 
 
+/* =========================
+   SHOPPING DISCOUNT CALCULATOR
+========================= */
+
 function calculateDiscount() {
-  const price = parseFloat(document.getElementById("originalPrice").value);
-  const discount = parseFloat(document.getElementById("discountPercent").value);
+
+  const price =
+    parseFloat(document.getElementById("originalPrice").value);
+
+  const discount =
+    parseFloat(document.getElementById("discountPercent").value);
 
   if (isNaN(price) || isNaN(discount)) {
-    alert("Please enter both values.");
+    alert("Please enter price and discount.");
     return;
   }
 
@@ -107,8 +262,11 @@ function calculateDiscount() {
     return;
   }
 
-  const discountAmount = (price * discount) / 100;
-  const finalPrice = price - discountAmount;
+  const discountAmount =
+    (price * discount) / 100;
+
+  const finalPrice =
+    price - discountAmount;
 
   document.getElementById("discountResult").textContent =
     "₹" + discountAmount.toFixed(2);
@@ -116,4 +274,5 @@ function calculateDiscount() {
   document.getElementById("payResult").textContent =
     "₹" + finalPrice.toFixed(2);
 }
-    </script>
+
+</script>
