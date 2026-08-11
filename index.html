@@ -1,205 +1,1451 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Percentage Calculator</title>
+<title>Smart Calculator</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            background: #f1f5f9;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-        }
+<style>
 
-        /* Made by Satyam */
-        .made-by {
-            color: #0284c7;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .calculator {
-            max-width: 400px;
-            margin: 20px auto;
-            background: red;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px #999;
-            box-sizing: border-box;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2ff;
+    color: #111827;
+}
 
-        h1, h2 {
-            color: black;
-        }
+.header {
+    background: #4f46e5;
+    color: white;
+    text-align: center;
+    padding: 18px 10px;
+    position: relative;
+}
 
-        p {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.header h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: bold;
+}
 
-        input {
-            width: 90%;
-            padding: 12px;
-            margin: 8px 0;
-            font-size: 16px;
-            box-sizing: border-box;
-            border: 2px solid black;
-            border-radius: 8px;
-        }
+.header p {
+    margin: 7px 0 0;
+}
 
-        button {
-            padding: 12px 25px;
-            background: black;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-        }
+.settings-btn {
+    position: absolute;
+    right: 12px;
+    top: 17px;
+    width: auto;
+    margin: 0;
+    padding: 9px 12px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
 
-        button:active {
-            transform: scale(0.97);
-        }
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+}
 
-        #result,
-        #shoppingResult {
-            margin-top: 20px;
-            font-size: 22px;
-            font-weight: bold;
-        }
+.card {
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 18px;
+    border: 2px solid black;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
 
-        #result {
-            color: green;
-        }
+.card h2,
+.card h3 {
+    color: black;
+    font-weight: bold;
+}
 
-        #shoppingResult {
-            color: green;
-        }
-    </style>
+.percentage-card {
+    background: #ffd43b;
+}
+
+.discount-card {
+    background: #ff0000;
+}
+
+.price-card {
+    background: #6ee7a8;
+}
+
+.age-card {
+    background: #60a5fa;
+}
+
+.normal-card {
+    background: #111111;
+    color: white;
+}
+
+.normal-card h2 {
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 16px;
+    background: white;
+    color: black;
+}
+
+input::placeholder {
+    color: #555;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background: black;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.normal-card button {
+    background: #ff0000;
+    color: white;
+}
+
+.result {
+    margin-top: 15px;
+    padding: 13px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.8;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* MOBILE CALCULATOR */
+
+.mobile-calculator {
+    background: #000000;
+    color: white;
+    padding: 15px;
+}
+
+.mobile-calculator h2 {
+    color: white;
+    text-align: center;
+}
+
+.calc-display {
+    width: 100%;
+    height: 85px;
+    background: #222222;
+    color: white;
+    border: 2px solid #555;
+    border-radius: 12px;
+    font-size: 32px;
+    text-align: right;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.calc-buttons button {
+    width: 100%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #333333;
+    color: white;
+    font-size: 21px;
+}
+
+.calc-buttons .operator {
+    background: #ff9500;
+    color: white;
+}
+
+.calc-buttons .clear {
+    background: #ff3b30;
+    color: white;
+}
+
+.calc-buttons .equal {
+    background: #34c759;
+    color: white;
+}
+
+.calc-buttons .zero {
+    grid-column: span 2;
+    border-radius: 30px;
+}
+
+
+/* SETTINGS */
+
+.settings-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 88%;
+    max-width: 370px;
+    height: 100%;
+    background: white;
+    color: black;
+    z-index: 1000;
+    padding: 25px;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.25);
+    overflow-y: auto;
+}
+
+.settings-panel h2 {
+    margin-top: 0;
+}
+
+.settings-item {
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 12px;
+    background: #eef2ff;
+}
+
+.share-btn {
+    background: #10b981;
+}
+
+.rate-btn {
+    background: #8b5cf6;
+}
+
+.contact-btn {
+    background: #2563eb;
+}
+
+.reset-btn {
+    background: #f59e0b;
+    color: black;
+}
+
+.close-btn {
+    background: #ef4444;
+}
+
+.about-box {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #eef2ff;
+    color: black;
+    line-height: 1.7;
+}
+
+.version {
+    text-align: center;
+    margin-top: 18px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 999;
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Your Name -->
-    <div class="made-by">
-        Made by Satyam
-    </div>
+<!-- HEADER -->
 
-    <!-- Percentage Calculator -->
+<div class="header">
 
-    <div class="calculator">
+<button class="settings-btn"
+onclick="openSettings()">⚙️</button>
 
-        <h1>Percentage Calculator</h1>
+<h1>Smart Calculator</h1>
 
-        <p>Enter Your Marks</p>
+<p>
+Percentage • Discount • Price • Age • Calculator
+</p>
 
-        <input type="number"
-               id="obtained"
-               placeholder="Obtained Marks">
-
-        <input type="number"
-               id="total"
-               placeholder="Total Marks">
-
-        <br><br>
-
-        <button onclick="calculate()">
-            Calculate Percentage
-        </button>
-
-        <div id="result"></div>
-
-    </div>
+</div>
 
 
-    <!-- Shopping Percentage Calculator -->
+<!-- OVERLAY -->
 
-    <div class="calculator">
-
-        <h2>🛒 Shopping Percentage Calculator</h2>
-
-        <input type="number"
-               id="price"
-               placeholder="Price (₹)">
-
-        <input type="number"
-               id="percent"
-               placeholder="Discount (%)">
-
-        <br><br>
-
-        <button onclick="calculatePercentage()">
-            Calculate
-        </button>
-
-        <h3 id="shoppingResult"></h3>
-
-    </div>
+<div class="overlay"
+id="overlay"
+onclick="closeSettings()">
+</div>
 
 
-    <script>
+<!-- SETTINGS -->
 
-        // Percentage Calculator
+<div class="settings-panel"
+id="settingsPanel">
 
-        function calculate() {
+<h2>⚙️ Settings</h2>
 
-            let obtained =
-                Number(document.getElementById("obtained").value);
+<div class="settings-item">
 
-            let total =
-                Number(document.getElementById("total").value);
+<button onclick="toggleDarkMode()">
+🌙 Dark Mode
+</button>
 
-            if (total <= 0 || obtained < 0 || obtained > total) {
+</div>
 
-                document.getElementById("result").innerHTML =
-                    "Please enter correct marks.";
+<div class="settings-item">
 
-                return;
-            }
+<button onclick="lightMode()">
+☀️ Light Mode
+</button>
 
-            let percentage = (obtained / total) * 100;
+</div>
 
-            document.getElementById("result").innerHTML =
-                "Your Percentage: " +
-                percentage.toFixed(2) + "%";
-        }
+<div class="settings-item">
+
+<button class="share-btn"
+onclick="shareApp()">
+🔗 Share App
+</button>
+
+</div>
+
+<div class="settings-item">
+
+<button class="rate-btn"
+onclick="rateApp()">
+⭐ Rate App
+</button>
+
+</div>
+
+<div class="settings-item">
+
+<button class="contact-btn"
+onclick="contactDeveloper()">
+📧 Contact Developer
+</button>
+
+</div>
+
+<div class="about-box">
+
+<h2>About Us</h2>
+
+<p>
+<strong>Smart Calculator</strong>
+</p>
+
+<p>
+Developed by
+<strong>Mr. SATYAM KUMAR</strong>
+</p>
+
+<p>
+<strong>Software Developer</strong>
+</p>
+
+<p>
+Contact Me:
+<br>
+<strong>satyamkumar78385@gmail.com</strong>
+</p>
+
+</div>
+
+<div class="settings-item">
+
+<button class="reset-btn"
+onclick="resetSettings()">
+
+🔄 Reset Settings
+
+</button>
+
+</div>
+
+<div class="version">
+Smart Calculator<br>
+Version 1.0.0
+</div>
+
+<button class="close-btn"
+onclick="closeSettings()">
+
+Close Settings
+
+</button>
+
+</div>
 
 
-        // Shopping Percentage Calculator
+<div class="container">
 
-        function calculatePercentage() {
 
-            let price =
-                Number(document.getElementById("price").value);
+<!-- PERCENTAGE -->
 
-            let percent =
-                Number(document.getElementById("percent").value);
+<div class="card percentage-card">
 
-            if (price <= 0 || percent < 0 || percent > 100) {
+<h2>📊 Percentage Calculator</h2>
 
-                document.getElementById("shoppingResult").innerHTML =
-                    "Please enter valid numbers.";
+<input type="number"
+id="totalMarks"
+placeholder="Enter Total Marks">
 
-                return;
-            }
+<input type="number"
+id="obtainedMarks"
+placeholder="Enter Obtained Marks">
 
-            let discount = (price * percent) / 100;
+<input type="number"
+id="percentageInput"
+placeholder="Enter Percentage (%)">
 
-            let totalAmount = price - discount;
+<button onclick="calculatePercentage()">
+Calculate Percentage
+</button>
 
-            document.getElementById("shoppingResult").innerHTML =
-                "🟢 Discount: ₹" + discount.toFixed(2) +
-                "<br><br>" +
-                "🔵 Total Amount to Pay: ₹" +
-                totalAmount.toFixed(2);
-        }
+<div class="result"
+id="percentageResult">
+Result will appear here
+</div>
 
-    </script>
+</div>
+
+
+<!-- DISCOUNT -->
+
+<div class="card discount-card">
+
+<h2>🏷️ Discount Calculator</h2>
+
+<input type="number"
+id="price"
+placeholder="Enter Original Price ₹">
+
+<input type="number"
+id="discount"
+placeholder="Enter Discount (%)">
+
+<button onclick="calculateDiscount()">
+Calculate Discount
+</button>
+
+<div class="result"
+id="discountResult">
+Result will appear here
+</div>
+
+</div>
+
+
+<!-- PRICE -->
+
+<div class="card price-card">
+
+<h2>🛒 Price per Kilogram</h2>
+
+<h3>Calculate Price for Grams</h3>
+
+<input type="number"
+id="kgPrice"
+placeholder="Price for 1 Kilogram ₹">
+
+<input type="number"
+id="grams"
+placeholder="Enter Grams">
+
+<button onclick="calculateGramPrice()">
+Calculate Price
+</button>
+
+<div class="result"
+id="gramResult">
+Result will appear here
+</div>
+
+
+<h3>Calculate Grams for Money</h3>
+
+<input type="number"
+id="kgPrice2"
+placeholder="Price for 1 Kilogram ₹">
+
+<input type="number"
+id="money"
+placeholder="Enter Amount ₹">
+
+<button onclick="calculateMoneyToGram()">
+Calculate Grams
+</button>
+
+<div class="result"
+id="moneyResult">
+Result will appear here
+</div>
+
+</div>
+
+
+<!-- AGE -->
+
+<div class="card age-card">
+
+<h2>🎂 Age Calculator</h2>
+
+<input type="date"
+id="dateOfBirth">
+
+<input type="date"
+id="calculateDate">
+
+<button onclick="setToday()">
+Use Today's Date
+</button>
+
+<button onclick="calculateAge()">
+Calculate Age
+</button>
+
+<div class="result"
+id="ageResult">
+Age will appear here
+</div>
+
+</div>
+
+
+<!-- NORMAL CALCULATOR -->
+
+<div class="card normal-card">
+
+<h2>➕ Normal Calculator</h2>
+
+<input type="number"
+id="number1"
+placeholder="Enter First Number">
+
+<input type="number"
+id="number2"
+placeholder="Enter Second Number">
+
+<button onclick="calculate('+')">
+Add +
+</button>
+
+<button onclick="calculate('-')">
+Subtract −
+</button>
+
+<button onclick="calculate('*')">
+Multiply ×
+</button>
+
+<button onclick="calculate('/')">
+Divide ÷
+</button>
+
+<div class="result"
+id="calculatorResult">
+Result will appear here
+</div>
+
+</div>
+
+
+<!-- MOBILE STYLE CALCULATOR -->
+
+<div class="card mobile-calculator">
+
+<h2>📱 Calculator</h2>
+
+<input
+type="text"
+id="calcDisplay"
+class="calc-display"
+value="0"
+readonly>
+
+<div class="calc-buttons">
+
+<button class="clear"
+onclick="clearCalculator()">
+C
+</button>
+
+<button
+onclick="deleteLast()">
+⌫
+</button>
+
+<button
+onclick="calculatorPercent()">
+%
+</button>
+
+<button class="operator"
+onclick="calculatorOperator('/')">
+÷
+</button>
+
+
+<button onclick="calculatorNumber('7')">
+7
+</button>
+
+<button onclick="calculatorNumber('8')">
+8
+</button>
+
+<button onclick="calculatorNumber('9')">
+9
+</button>
+
+<button class="operator"
+onclick="calculatorOperator('*')">
+×
+</button>
+
+
+<button onclick="calculatorNumber('4')">
+4
+</button>
+
+<button onclick="calculatorNumber('5')">
+5
+</button>
+
+<button onclick="calculatorNumber('6')">
+6
+</button>
+
+<button class="operator"
+onclick="calculatorOperator('-')">
+−
+</button>
+
+
+<button onclick="calculatorNumber('1')">
+1
+</button>
+
+<button onclick="calculatorNumber('2')">
+2
+</button>
+
+<button onclick="calculatorNumber('3')">
+3
+</button>
+
+<button class="operator"
+onclick="calculatorOperator('+')">
++
+</button>
+
+
+<button class="zero"
+onclick="calculatorNumber('0')">
+0
+</button>
+
+<button onclick="calculatorNumber('.')">
+.
+</button>
+
+<button class="equal"
+onclick="calculatorEqual()">
+=
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* SETTINGS */
+
+function openSettings() {
+
+document.getElementById("settingsPanel")
+.style.display = "block";
+
+document.getElementById("overlay")
+.style.display = "block";
+
+}
+
+function closeSettings() {
+
+document.getElementById("settingsPanel")
+.style.display = "none";
+
+document.getElementById("overlay")
+.style.display = "none";
+
+}
+
+
+/* DARK MODE */
+
+function toggleDarkMode() {
+
+document.body.style.background = "#111827";
+
+document.body.style.color = "white";
+
+localStorage.setItem("darkMode","true");
+
+}
+
+function lightMode() {
+
+document.body.style.background = "#eef2ff";
+
+document.body.style.color = "#111827";
+
+localStorage.setItem("darkMode","false");
+
+}
+
+function resetSettings() {
+
+localStorage.removeItem("darkMode");
+
+document.body.style.background = "#eef2ff";
+
+document.body.style.color = "#111827";
+
+alert("Settings have been reset.");
+
+}
+
+
+/* SHARE */
+
+function shareApp() {
+
+let text =
+"Check out my Smart Calculator app!";
+
+if (navigator.share) {
+
+navigator.share({
+title: "Smart Calculator",
+text: text
+});
+
+} else {
+
+alert(text);
+
+}
+
+}
+
+
+/* RATE */
+
+function rateApp() {
+
+alert(
+"Thank you for supporting Smart Calculator!"
+);
+
+}
+
+
+/* CONTACT */
+
+function contactDeveloper() {
+
+window.location.href =
+"mailto:satyamkumar78385@gmail.com?subject=Smart Calculator App";
+
+}
+
+
+/* PERCENTAGE */
+
+function calculatePercentage() {
+
+let total =
+parseFloat(
+document.getElementById("totalMarks").value
+);
+
+let obtained =
+parseFloat(
+document.getElementById("obtainedMarks").value
+);
+
+let percentage =
+parseFloat(
+document.getElementById("percentageInput").value
+);
+
+let result = "";
+
+if (!isNaN(total) && !isNaN(obtained)) {
+
+if (total <= 0) {
+
+result =
+"Total Marks must be greater than 0";
+
+}
+
+else if (obtained > total) {
+
+result =
+"Obtained Marks cannot be greater than Total Marks";
+
+}
+
+else {
+
+let calculated =
+(obtained / total) * 100;
+
+result =
+"Percentage = " +
+calculated.toFixed(2) + "%";
+
+}
+
+}
+
+else if (!isNaN(total) && !isNaN(percentage)) {
+
+let marks =
+(total * percentage) / 100;
+
+result =
+"Obtained Marks = " +
+marks.toFixed(2);
+
+}
+
+else if (!isNaN(obtained) && !isNaN(percentage)) {
+
+let totalMarks =
+(obtained * 100) / percentage;
+
+result =
+"Total Marks = " +
+totalMarks.toFixed(2);
+
+}
+
+else {
+
+result =
+"Enter any two values to calculate the third";
+
+}
+
+document.getElementById("percentageResult")
+.innerText = result;
+
+}
+
+
+/* DISCOUNT */
+
+function calculateDiscount() {
+
+let price =
+parseFloat(
+document.getElementById("price").value
+);
+
+let discount =
+parseFloat(
+document.getElementById("discount").value
+);
+
+if (isNaN(price) || isNaN(discount)) {
+
+document.getElementById("discountResult")
+.innerText =
+"Please enter both values";
+
+return;
+
+}
+
+let discountAmount =
+(price * discount) / 100;
+
+let finalPrice =
+price - discountAmount;
+
+document.getElementById("discountResult")
+.innerText =
+
+"Discount = ₹" +
+discountAmount.toFixed(2) +
+
+" | Final Price = ₹" +
+finalPrice.toFixed(2);
+
+}
+
+
+/* GRAM PRICE */
+
+function calculateGramPrice() {
+
+let kgPrice =
+parseFloat(
+document.getElementById("kgPrice").value
+);
+
+let grams =
+parseFloat(
+document.getElementById("grams").value
+);
+
+if (isNaN(kgPrice) || isNaN(grams)) {
+
+document.getElementById("gramResult")
+.innerText =
+"Please enter both values";
+
+return;
+
+}
+
+let result =
+(kgPrice / 1000) * grams;
+
+document.getElementById("gramResult")
+.innerText =
+
+grams +
+" grams = ₹" +
+result.toFixed(2);
+
+}
+
+
+/* MONEY TO GRAMS */
+
+function calculateMoneyToGram() {
+
+let kgPrice =
+parseFloat(
+document.getElementById("kgPrice2").value
+);
+
+let money =
+parseFloat(
+document.getElementById("money").value
+);
+
+if (isNaN(kgPrice) || isNaN(money)) {
+
+document.getElementById("moneyResult")
+.innerText =
+"Please enter both values";
+
+return;
+
+}
+
+if (kgPrice <= 0) {
+
+document.getElementById("moneyResult")
+.innerText =
+"Kilogram price must be greater than 0";
+
+return;
+
+}
+
+let grams =
+(money / kgPrice) * 1000;
+
+document.getElementById("moneyResult")
+.innerText =
+
+"₹" +
+money +
+" = " +
+grams.toFixed(2) +
+" grams";
+
+}
+
+
+/* AGE */
+
+function setToday() {
+
+let today = new Date();
+
+let year =
+today.getFullYear();
+
+let month =
+String(today.getMonth() + 1)
+.padStart(2,"0");
+
+let day =
+String(today.getDate())
+.padStart(2,"0");
+
+document.getElementById("calculateDate")
+.value =
+year + "-" + month + "-" + day;
+
+}
+
+
+function calculateAge() {
+
+let dob =
+document.getElementById("dateOfBirth").value;
+
+let endDate =
+document.getElementById("calculateDate").value;
+
+if (!dob || !endDate) {
+
+document.getElementById("ageResult")
+.innerText =
+"Please enter both dates";
+
+return;
+
+}
+
+let birth =
+new Date(dob + "T00:00:00");
+
+let end =
+new Date(endDate + "T00:00:00");
+
+if (birth > end) {
+
+document.getElementById("ageResult")
+.innerText =
+"Date of Birth cannot be after Calculate Date";
+
+return;
+
+}
+
+let years =
+end.getFullYear() -
+birth.getFullYear();
+
+let months =
+end.getMonth() -
+birth.getMonth();
+
+let days =
+end.getDate() -
+birth.getDate();
+
+if (days < 0) {
+
+months--;
+
+days +=
+new Date(
+end.getFullYear(),
+end.getMonth(),
+0
+).getDate();
+
+}
+
+if (months < 0) {
+
+years--;
+
+months += 12;
+
+}
+
+let totalMonths =
+years * 12 + months;
+
+let totalDays =
+Math.floor(
+(end - birth) /
+(1000 * 60 * 60 * 24)
+);
+
+document.getElementById("ageResult")
+.innerHTML =
+
+"<b>Years:</b> " + years +
+
+" &nbsp;&nbsp; " +
+
+"<b>Months:</b> " + months +
+
+" &nbsp;&nbsp; " +
+
+"<b>Days:</b> " + days +
+
+"<hr>" +
+
+"<b>Total Months:</b> " +
+totalMonths +
+
+"<br>" +
+
+"<b>Total Days:</b> " +
+totalDays;
+
+}
+
+
+/* NORMAL CALCULATOR */
+
+function calculate(operation) {
+
+let a =
+parseFloat(
+document.getElementById("number1").value
+);
+
+let b =
+parseFloat(
+document.getElementById("number2").value
+);
+
+if (isNaN(a) || isNaN(b)) {
+
+document.getElementById("calculatorResult")
+.innerText =
+"Please enter both numbers";
+
+return;
+
+}
+
+let result;
+
+if (operation === "+") {
+result = a + b;
+}
+
+else if (operation === "-") {
+result = a - b;
+}
+
+else if (operation === "*") {
+result = a * b;
+}
+
+else if (operation === "/") {
+
+if (b === 0) {
+
+document.getElementById("calculatorResult")
+.innerText =
+"Cannot divide by zero";
+
+return;
+
+}
+
+result = a / b;
+}
+
+document.getElementById("calculatorResult")
+.innerText =
+"Result = " + result;
+
+}
+
+
+/* MOBILE CALCULATOR */
+
+let calcExpression = "";
+let calcJustCalculated = false;
+
+function updateDisplay() {
+
+let display =
+document.getElementById("calcDisplay");
+
+display.value =
+calcExpression || "0";
+
+}
+
+
+function calculatorNumber(number) {
+
+if (calcJustCalculated) {
+
+calcExpression = "";
+calcJustCalculated = false;
+
+}
+
+if (number === ".") {
+
+let parts =
+calcExpression.split(/[+\-*/]/);
+
+let currentNumber =
+parts[parts.length - 1];
+
+if (currentNumber.includes(".")) {
+return;
+}
+
+if (
+currentNumber === "" ||
+currentNumber === "-"
+) {
+
+calcExpression += "0.";
+
+return;
+
+}
+
+}
+
+calcExpression += number;
+
+updateDisplay();
+
+}
+
+
+function calculatorOperator(operator) {
+
+if (calcExpression === "") {
+
+if (operator === "-") {
+
+calcExpression = "-";
+updateDisplay();
+
+}
+
+return;
+
+}
+
+let last =
+calcExpression.slice(-1);
+
+if ("+-*/".includes(last)) {
+
+calcExpression =
+calcExpression.slice(0,-1);
+
+}
+
+calcExpression += operator;
+
+calcJustCalculated = false;
+
+updateDisplay();
+
+}
+
+
+function calculatorEqual() {
+
+if (calcExpression === "") {
+return;
+}
+
+let last =
+calcExpression.slice(-1);
+
+if ("+-*/".includes(last)) {
+return;
+}
+
+try {
+
+let safeExpression =
+calcExpression.replace(/×/g,"*");
+
+let result =
+Function(
+'"use strict";return (' +
+safeExpression +
+')'
+)();
+
+if (!Number.isFinite(result)) {
+
+document.getElementById("calcDisplay")
+.value = "Error";
+
+calcExpression = "";
+
+return;
+
+}
+
+result =
+Math.round(result * 100000000) /
+100000000;
+
+calcExpression =
+String(result);
+
+calcJustCalculated = true;
+
+updateDisplay();
+
+}
+
+catch {
+
+document.getElementById("calcDisplay")
+.value = "Error";
+
+calcExpression = "";
+
+}
+
+}
+
+
+function clearCalculator() {
+
+calcExpression = "";
+
+calcJustCalculated = false;
+
+updateDisplay();
+
+}
+
+
+function deleteLast() {
+
+if (calcJustCalculated) {
+
+clearCalculator();
+
+return;
+
+}
+
+calcExpression =
+calcExpression.slice(0,-1);
+
+updateDisplay();
+
+}
+
+
+function calculatorPercent() {
+
+if (calcExpression === "") {
+return;
+}
+
+try {
+
+let lastNumber =
+calcExpression.match(
+/(-?\d+\.?\d*)$/
+);
+
+if (!lastNumber) {
+return;
+}
+
+let value =
+parseFloat(lastNumber[0]);
+
+let percent =
+value / 100;
+
+calcExpression =
+calcExpression.slice(
+0,
+-lastNumber[0].length
+) + percent;
+
+updateDisplay();
+
+}
+
+catch {
+
+document.getElementById("calcDisplay")
+.value = "Error";
+
+}
+
+}
+
+
+/* LOAD SAVED MODE */
+
+window.onload = function() {
+
+if (localStorage.getItem("darkMode")
+=== "true") {
+
+document.body.style.background =
+"#111827";
+
+document.body.style.color =
+"white";
+
+}
+
+};
+
+</script>
 
 </body>
-</html>
+    </html>
