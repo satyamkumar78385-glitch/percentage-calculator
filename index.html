@@ -1,292 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Smart Calculator</title>
 
 <style>
+*{box-sizing:border-box}
 
-* {
-    box-sizing: border-box;
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#eef2ff;
+    color:#111827;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef2ff;
-    color: #111827;
+.header{
+    background:#4f46e5;
+    color:white;
+    text-align:center;
+    padding:18px 10px;
+    position:relative;
 }
 
-.header {
-    background: #4f46e5;
-    color: white;
-    text-align: center;
-    padding: 18px 10px;
-    position: relative;
+.header h1{
+    margin:0;
+    font-size:27px;
+    font-weight:bold;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 27px;
-    font-weight: bold;
+.header p{
+    margin:7px 0 0;
 }
 
-.header p {
-    margin: 7px 0 0;
+.settings-btn{
+    position:absolute;
+    right:12px;
+    top:16px;
+    width:auto;
+    margin:0;
+    padding:9px 12px;
+    background:white;
+    color:black;
+    border-radius:10px;
+    font-size:20px;
 }
 
-.settings-btn {
-    position: absolute;
-    right: 12px;
-    top: 17px;
-    width: auto;
-    margin: 0;
-    padding: 9px 12px;
-    background: white;
-    color: black;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: bold;
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:15px;
 }
 
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 15px;
-}
-
-.card {
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 18px;
-    border: 2px solid black;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+.card{
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:18px;
+    border:2px solid black;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
 .card h2,
-.card h3 {
-    color: black;
-    font-weight: bold;
+.card h3{
+    color:black;
+    font-weight:bold;
 }
 
-.percentage-card {
-    background: #ffd43b;
+.percentage-card{background:#ffd43b}
+.discount-card{background:#ff0000}
+.price-card{background:#6ee7a8}
+.age-card{background:#60a5fa}
+.weight-card{background:#22c55e}
+.normal-card{background:#111;color:white}
+
+.normal-card h2{
+    color:white;
 }
 
-.discount-card {
-    background: #ff0000;
+input,select{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    border-radius:10px;
+    border:2px solid black;
+    font-size:16px;
+    background:white;
+    color:black;
 }
 
-.price-card {
-    background: #6ee7a8;
+button{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    border-radius:10px;
+    border:2px solid black;
+    background:black;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.age-card {
-    background: #60a5fa;
+button:active{
+    transform:scale(.98);
 }
 
-.normal-card {
-    background: #111111;
-    color: white;
+.normal-card button{
+    background:red;
 }
 
-.normal-card h2 {
-    color: white;
-}
-
-input {
-    width: 100%;
-    padding: 13px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: 2px solid black;
-    font-size: 16px;
-    background: white;
-    color: black;
-}
-
-input::placeholder {
-    color: #555;
-}
-
-button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 10px;
-    border-radius: 10px;
-    border: 2px solid black;
-    background: black;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(0.97);
-}
-
-.normal-card button {
-    background: #ff0000;
-    color: white;
-}
-
-.result {
-    margin-top: 15px;
-    padding: 13px;
-    background: white;
-    border: 2px solid black;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 1.8;
-    color: black;
-    font-weight: bold;
+.result{
+    margin-top:15px;
+    padding:13px;
+    background:white;
+    border:2px solid black;
+    border-radius:10px;
+    text-align:center;
+    line-height:1.8;
+    color:black;
+    font-weight:bold;
 }
 
 
 /* MOBILE CALCULATOR */
 
-.mobile-calculator {
-    background: #000000;
-    color: white;
-    padding: 15px;
+.mobile-calculator{
+    background:#000;
+    color:white;
 }
 
-.mobile-calculator h2 {
-    color: white;
-    text-align: center;
+.mobile-calculator h2{
+    color:white;
+    text-align:center;
 }
 
-.calc-display {
-    width: 100%;
-    height: 85px;
-    background: #222222;
-    color: white;
-    border: 2px solid #555;
-    border-radius: 12px;
-    font-size: 32px;
-    text-align: right;
-    padding: 15px;
-    margin-bottom: 15px;
+.calc-display{
+    width:100%;
+    height:80px;
+    background:#222;
+    color:white;
+    border:2px solid #555;
+    border-radius:12px;
+    font-size:32px;
+    text-align:right;
+    padding:12px;
 }
 
-.calc-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+.calc-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
 }
 
-.calc-buttons button {
-    width: 100%;
-    height: 60px;
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: #333333;
-    color: white;
-    font-size: 21px;
+.calc-buttons button{
+    height:60px;
+    margin:0;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:#333;
+    color:white;
+    font-size:21px;
 }
 
-.calc-buttons .operator {
-    background: #ff9500;
-    color: white;
+.calc-buttons .operator{
+    background:#ff9500;
 }
 
-.calc-buttons .clear {
-    background: #ff3b30;
-    color: white;
+.calc-buttons .clear{
+    background:#ff3b30;
 }
 
-.calc-buttons .equal {
-    background: #34c759;
-    color: white;
+.calc-buttons .equal{
+    background:#34c759;
 }
 
-.calc-buttons .zero {
-    grid-column: span 2;
-    border-radius: 30px;
+.calc-buttons .zero{
+    grid-column:span 2;
+    border-radius:30px;
 }
 
 
 /* SETTINGS */
 
-.settings-panel {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 88%;
-    max-width: 370px;
-    height: 100%;
-    background: white;
-    color: black;
-    z-index: 1000;
-    padding: 25px;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.25);
-    overflow-y: auto;
+.settings-panel{
+    display:none;
+    position:fixed;
+    top:0;
+    right:0;
+    width:88%;
+    max-width:370px;
+    height:100%;
+    background:white;
+    color:black;
+    z-index:1000;
+    padding:25px;
+    overflow-y:auto;
+    box-shadow:-5px 0 20px rgba(0,0,0,.25);
 }
 
-.settings-panel h2 {
-    margin-top: 0;
+.settings-panel h2{
+    color:black;
 }
 
-.settings-item {
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 12px;
-    background: #eef2ff;
+.settings-item{
+    padding:10px;
+    margin-top:10px;
+    border-radius:12px;
+    background:#eef2ff;
 }
 
-.share-btn {
-    background: #10b981;
+.about-box{
+    margin-top:15px;
+    padding:15px;
+    border-radius:12px;
+    background:#eef2ff;
+    line-height:1.7;
 }
 
-.rate-btn {
-    background: #8b5cf6;
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:999;
 }
 
-.contact-btn {
-    background: #2563eb;
+.version{
+    text-align:center;
+    margin:18px 0;
+    color:#6b7280;
+    font-size:14px;
+    font-weight:bold;
 }
-
-.reset-btn {
-    background: #f59e0b;
-    color: black;
-}
-
-.close-btn {
-    background: #ef4444;
-}
-
-.about-box {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 12px;
-    background: #eef2ff;
-    color: black;
-    line-height: 1.7;
-}
-
-.version {
-    text-align: center;
-    margin-top: 18px;
-    color: #6b7280;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    z-index: 999;
-}
-
 </style>
 </head>
 
@@ -296,14 +243,11 @@ button:active {
 
 <div class="header">
 
-<button class="settings-btn"
-onclick="openSettings()">⚙️</button>
+<button class="settings-btn" onclick="openSettings()">⚙️</button>
 
 <h1>Smart Calculator</h1>
 
-<p>
-Percentage • Discount • Price • Age • Calculator
-</p>
+<p>Percentage • Discount • Price • Age • Calculator</p>
 
 </div>
 
@@ -324,81 +268,42 @@ id="settingsPanel">
 <h2>⚙️ Settings</h2>
 
 <div class="settings-item">
-
-<button onclick="toggleDarkMode()">
-🌙 Dark Mode
-</button>
-
+<button onclick="darkMode()">🌙 Dark Mode</button>
 </div>
 
 <div class="settings-item">
-
-<button onclick="lightMode()">
-☀️ Light Mode
-</button>
-
+<button onclick="lightMode()">☀️ Light Mode</button>
 </div>
 
 <div class="settings-item">
-
-<button class="share-btn"
-onclick="shareApp()">
-🔗 Share App
-</button>
-
+<button onclick="shareApp()">🔗 Share App</button>
 </div>
 
 <div class="settings-item">
-
-<button class="rate-btn"
-onclick="rateApp()">
-⭐ Rate App
-</button>
-
+<button onclick="rateApp()">⭐ Rate App</button>
 </div>
 
 <div class="settings-item">
-
-<button class="contact-btn"
-onclick="contactDeveloper()">
-📧 Contact Developer
-</button>
-
+<button onclick="contactDeveloper()">📧 Contact Developer</button>
 </div>
 
 <div class="about-box">
 
 <h2>About Us</h2>
 
-<p>
-<strong>Smart Calculator</strong>
-</p>
+<p><b>Smart Calculator</b></p>
 
 <p>
 Developed by
-<strong>Mr. SATYAM KUMAR</strong>
+<b>Mr. SATYAM KUMAR</b>
 </p>
+
+<p><b>Software Developer</b></p>
 
 <p>
-<strong>Software Developer</strong>
+Contact Me:<br>
+<b>satyamkumar78385@gmail.com</b>
 </p>
-
-<p>
-Contact Me:
-<br>
-<strong>satyamkumar78385@gmail.com</strong>
-</p>
-
-</div>
-
-<div class="settings-item">
-
-<button class="reset-btn"
-onclick="resetSettings()">
-
-🔄 Reset Settings
-
-</button>
 
 </div>
 
@@ -407,12 +312,7 @@ Smart Calculator<br>
 Version 1.0.0
 </div>
 
-<button class="close-btn"
-onclick="closeSettings()">
-
-Close Settings
-
-</button>
+<button onclick="closeSettings()">Close Settings</button>
 
 </div>
 
@@ -420,25 +320,28 @@ Close Settings
 <div class="container">
 
 
-<!-- PERCENTAGE -->
+<!-- 1 PERCENTAGE -->
 
 <div class="card percentage-card">
 
 <h2>📊 Percentage Calculator</h2>
 
-<input type="number"
+<input
 id="totalMarks"
+type="number"
 placeholder="Enter Total Marks">
 
-<input type="number"
+<input
 id="obtainedMarks"
+type="number"
 placeholder="Enter Obtained Marks">
 
-<input type="number"
+<input
 id="percentageInput"
+type="number"
 placeholder="Enter Percentage (%)">
 
-<button onclick="calculatePercentage()">
+<button onclick="percentageCalc()">
 Calculate Percentage
 </button>
 
@@ -450,21 +353,23 @@ Result will appear here
 </div>
 
 
-<!-- DISCOUNT -->
+<!-- 2 DISCOUNT -->
 
 <div class="card discount-card">
 
 <h2>🏷️ Discount Calculator</h2>
 
-<input type="number"
+<input
 id="price"
+type="number"
 placeholder="Enter Original Price ₹">
 
-<input type="number"
+<input
 id="discount"
+type="number"
 placeholder="Enter Discount (%)">
 
-<button onclick="calculateDiscount()">
+<button onclick="discountCalc()">
 Calculate Discount
 </button>
 
@@ -476,23 +381,25 @@ Result will appear here
 </div>
 
 
-<!-- PRICE -->
+<!-- 3 PRICE -->
 
 <div class="card price-card">
 
-<h2>🛒 Price per Kilogram</h2>
+<h2>🛒 Price Calculator</h2>
 
-<h3>Calculate Price for Grams</h3>
+<h3>Price for Grams</h3>
 
-<input type="number"
+<input
 id="kgPrice"
+type="number"
 placeholder="Price for 1 Kilogram ₹">
 
-<input type="number"
+<input
 id="grams"
+type="number"
 placeholder="Enter Grams">
 
-<button onclick="calculateGramPrice()">
+<button onclick="gramPrice()">
 Calculate Price
 </button>
 
@@ -502,17 +409,19 @@ Result will appear here
 </div>
 
 
-<h3>Calculate Grams for Money</h3>
+<h3>Grams for Money</h3>
 
-<input type="number"
+<input
 id="kgPrice2"
+type="number"
 placeholder="Price for 1 Kilogram ₹">
 
-<input type="number"
+<input
 id="money"
+type="number"
 placeholder="Enter Amount ₹">
 
-<button onclick="calculateMoneyToGram()">
+<button onclick="moneyGram()">
 Calculate Grams
 </button>
 
@@ -524,23 +433,25 @@ Result will appear here
 </div>
 
 
-<!-- AGE -->
+<!-- 4 AGE -->
 
 <div class="card age-card">
 
 <h2>🎂 Age Calculator</h2>
 
-<input type="date"
-id="dateOfBirth">
+<input
+id="dateOfBirth"
+type="date">
 
-<input type="date"
-id="calculateDate">
+<input
+id="calculateDate"
+type="date">
 
-<button onclick="setToday()">
+<button onclick="todayDate()">
 Use Today's Date
 </button>
 
-<button onclick="calculateAge()">
+<button onclick="ageCalc()">
 Calculate Age
 </button>
 
@@ -552,52 +463,53 @@ Age will appear here
 </div>
 
 
-<!-- NORMAL CALCULATOR -->
+<!-- 5 NORMAL CALCULATOR -->
 
 <div class="card normal-card">
 
 <h2>➕ Normal Calculator</h2>
 
-<input type="number"
+<input
 id="number1"
+type="number"
 placeholder="Enter First Number">
 
-<input type="number"
+<input
 id="number2"
+type="number"
 placeholder="Enter Second Number">
 
-<button onclick="calculate('+')">
+<button onclick="normalCalc('+')">
 Add +
 </button>
 
-<button onclick="calculate('-')">
+<button onclick="normalCalc('-')">
 Subtract −
 </button>
 
-<button onclick="calculate('*')">
+<button onclick="normalCalc('*')">
 Multiply ×
 </button>
 
-<button onclick="calculate('/')">
+<button onclick="normalCalc('/')">
 Divide ÷
 </button>
 
 <div class="result"
-id="calculatorResult">
+id="normalResult">
 Result will appear here
 </div>
 
 </div>
 
 
-<!-- MOBILE STYLE CALCULATOR -->
+<!-- 6 MOBILE CALCULATOR -->
 
 <div class="card mobile-calculator">
 
 <h2>📱 Calculator</h2>
 
 <input
-type="text"
 id="calcDisplay"
 class="calc-display"
 value="0"
@@ -606,97 +518,105 @@ readonly>
 <div class="calc-buttons">
 
 <button class="clear"
-onclick="clearCalculator()">
-C
-</button>
+onclick="clearCalc()">C</button>
 
-<button
-onclick="deleteLast()">
-⌫
-</button>
+<button onclick="backspace()">⌫</button>
 
-<button
-onclick="calculatorPercent()">
-%
-</button>
+<button onclick="percentCalc()">%</button>
 
 <button class="operator"
-onclick="calculatorOperator('/')">
-÷
-</button>
+onclick="operatorCalc('/')">÷</button>
 
-
-<button onclick="calculatorNumber('7')">
-7
-</button>
-
-<button onclick="calculatorNumber('8')">
-8
-</button>
-
-<button onclick="calculatorNumber('9')">
-9
-</button>
+<button onclick="numberCalc('7')">7</button>
+<button onclick="numberCalc('8')">8</button>
+<button onclick="numberCalc('9')">9</button>
 
 <button class="operator"
-onclick="calculatorOperator('*')">
-×
-</button>
+onclick="operatorCalc('*')">×</button>
 
-
-<button onclick="calculatorNumber('4')">
-4
-</button>
-
-<button onclick="calculatorNumber('5')">
-5
-</button>
-
-<button onclick="calculatorNumber('6')">
-6
-</button>
+<button onclick="numberCalc('4')">4</button>
+<button onclick="numberCalc('5')">5</button>
+<button onclick="numberCalc('6')">6</button>
 
 <button class="operator"
-onclick="calculatorOperator('-')">
-−
-</button>
+onclick="operatorCalc('-')">−</button>
 
-
-<button onclick="calculatorNumber('1')">
-1
-</button>
-
-<button onclick="calculatorNumber('2')">
-2
-</button>
-
-<button onclick="calculatorNumber('3')">
-3
-</button>
+<button onclick="numberCalc('1')">1</button>
+<button onclick="numberCalc('2')">2</button>
+<button onclick="numberCalc('3')">3</button>
 
 <button class="operator"
-onclick="calculatorOperator('+')">
-+
-</button>
-
+onclick="operatorCalc('+')">+</button>
 
 <button class="zero"
-onclick="calculatorNumber('0')">
-0
-</button>
+onclick="numberCalc('0')">0</button>
 
-<button onclick="calculatorNumber('.')">
-.
-</button>
+<button onclick="numberCalc('.')">.</button>
 
 <button class="equal"
-onclick="calculatorEqual()">
-=
+onclick="equalCalc()">=</button>
+
+</div>
+
+</div>
+
+
+<!-- 7 WEIGHT PRICE CALCULATOR -->
+
+<div class="card weight-card">
+
+<h2>⚖️ Weight Price Calculator</h2>
+
+<p>
+Enter the price of <b>1 Kilogram</b>.
+Then choose the unit and quantity.
+</p>
+
+<input
+id="weightPrice"
+type="number"
+step="any"
+min="0"
+placeholder="Price of 1 KG ₹">
+
+<input
+id="weightQuantity"
+type="number"
+step="any"
+min="0"
+placeholder="Enter Quantity">
+
+<select id="weightType">
+
+<option value="kg">
+Kilogram (1 KG)
+</option>
+
+<option value="dhara">
+Dhara (1 Dhara = 5 KG)
+</option>
+
+<option value="quintal">
+Quintal (1 Quintal = 100 KG)
+</option>
+
+<option value="ton">
+Ton (1 Ton = 1000 KG)
+</option>
+
+</select>
+
+<button onclick="weightPriceCalc()">
+Calculate Total Price
 </button>
 
+<div class="result"
+id="weightPriceResult">
+Total price will appear here
 </div>
 
 </div>
+
 
 </div>
 
@@ -705,88 +625,63 @@ onclick="calculatorEqual()">
 
 /* SETTINGS */
 
-function openSettings() {
+function openSettings(){
 
 document.getElementById("settingsPanel")
-.style.display = "block";
+.style.display="block";
 
 document.getElementById("overlay")
-.style.display = "block";
+.style.display="block";
 
 }
 
-function closeSettings() {
+function closeSettings(){
 
 document.getElementById("settingsPanel")
-.style.display = "none";
+.style.display="none";
 
 document.getElementById("overlay")
-.style.display = "none";
+.style.display="none";
 
 }
 
+function darkMode(){
 
-/* DARK MODE */
+document.body.style.background="#111827";
 
-function toggleDarkMode() {
-
-document.body.style.background = "#111827";
-
-document.body.style.color = "white";
-
-localStorage.setItem("darkMode","true");
+document.body.style.color="white";
 
 }
 
-function lightMode() {
+function lightMode(){
 
-document.body.style.background = "#eef2ff";
+document.body.style.background="#eef2ff";
 
-document.body.style.color = "#111827";
-
-localStorage.setItem("darkMode","false");
+document.body.style.color="#111827";
 
 }
 
-function resetSettings() {
+function shareApp(){
 
-localStorage.removeItem("darkMode");
-
-document.body.style.background = "#eef2ff";
-
-document.body.style.color = "#111827";
-
-alert("Settings have been reset.");
-
-}
-
-
-/* SHARE */
-
-function shareApp() {
-
-let text =
-"Check out my Smart Calculator app!";
-
-if (navigator.share) {
+if(navigator.share){
 
 navigator.share({
-title: "Smart Calculator",
-text: text
+
+title:"Smart Calculator",
+
+text:"Check out my Smart Calculator app!"
+
 });
 
-} else {
+}else{
 
-alert(text);
-
-}
+alert("Smart Calculator");
 
 }
 
+}
 
-/* RATE */
-
-function rateApp() {
+function rateApp(){
 
 alert(
 "Thank you for supporting Smart Calculator!"
@@ -794,225 +689,188 @@ alert(
 
 }
 
+function contactDeveloper(){
 
-/* CONTACT */
-
-function contactDeveloper() {
-
-window.location.href =
-"mailto:satyamkumar78385@gmail.com?subject=Smart Calculator App";
+location.href=
+"mailto:satyamkumar78385@gmail.com";
 
 }
 
 
 /* PERCENTAGE */
 
-function calculatePercentage() {
+function percentageCalc(){
 
-let total =
-parseFloat(
+let total=parseFloat(
 document.getElementById("totalMarks").value
 );
 
-let obtained =
-parseFloat(
+let obtained=parseFloat(
 document.getElementById("obtainedMarks").value
 );
 
-let percentage =
-parseFloat(
+let percentage=parseFloat(
 document.getElementById("percentageInput").value
 );
 
-let result = "";
+let result="";
 
-if (!isNaN(total) && !isNaN(obtained)) {
+if(!isNaN(total)&&!isNaN(obtained)){
 
-if (total <= 0) {
+if(total<=0){
 
-result =
-"Total Marks must be greater than 0";
-
-}
-
-else if (obtained > total) {
-
-result =
-"Obtained Marks cannot be greater than Total Marks";
+result="Total Marks must be greater than 0";
 
 }
 
-else {
+else if(obtained>total){
 
-let calculated =
-(obtained / total) * 100;
+result="Obtained Marks cannot be greater than Total Marks";
 
-result =
-"Percentage = " +
-calculated.toFixed(2) + "%";
+}
+
+else{
+
+result=
+"Percentage = "+
+((obtained/total)*100).toFixed(2)+"%";
 
 }
 
 }
 
-else if (!isNaN(total) && !isNaN(percentage)) {
+else if(!isNaN(total)&&!isNaN(percentage)){
 
-let marks =
-(total * percentage) / 100;
-
-result =
-"Obtained Marks = " +
-marks.toFixed(2);
+result=
+"Obtained Marks = "+
+((total*percentage)/100).toFixed(2);
 
 }
 
-else if (!isNaN(obtained) && !isNaN(percentage)) {
+else if(!isNaN(obtained)&&!isNaN(percentage)){
 
-let totalMarks =
-(obtained * 100) / percentage;
-
-result =
-"Total Marks = " +
-totalMarks.toFixed(2);
+result=
+"Total Marks = "+
+((obtained*100)/percentage).toFixed(2);
 
 }
 
-else {
+else{
 
-result =
-"Enter any two values to calculate the third";
+result="Enter any two values";
 
 }
 
 document.getElementById("percentageResult")
-.innerText = result;
+.innerText=result;
 
 }
 
 
 /* DISCOUNT */
 
-function calculateDiscount() {
+function discountCalc(){
 
-let price =
-parseFloat(
+let price=parseFloat(
 document.getElementById("price").value
 );
 
-let discount =
-parseFloat(
+let discount=parseFloat(
 document.getElementById("discount").value
 );
 
-if (isNaN(price) || isNaN(discount)) {
+if(isNaN(price)||isNaN(discount)){
 
 document.getElementById("discountResult")
-.innerText =
+.innerText=
 "Please enter both values";
 
 return;
 
 }
 
-let discountAmount =
-(price * discount) / 100;
+let discountAmount=
+(price*discount)/100;
 
-let finalPrice =
-price - discountAmount;
+let finalPrice=
+price-discountAmount;
 
 document.getElementById("discountResult")
-.innerText =
+.innerText=
 
-"Discount = ₹" +
-discountAmount.toFixed(2) +
-
-" | Final Price = ₹" +
+"Discount = ₹"+
+discountAmount.toFixed(2)+
+" | Final Price = ₹"+
 finalPrice.toFixed(2);
 
 }
 
 
-/* GRAM PRICE */
+/* PRICE FOR GRAMS */
 
-function calculateGramPrice() {
+function gramPrice(){
 
-let kgPrice =
-parseFloat(
+let kg=parseFloat(
 document.getElementById("kgPrice").value
 );
 
-let grams =
-parseFloat(
+let grams=parseFloat(
 document.getElementById("grams").value
 );
 
-if (isNaN(kgPrice) || isNaN(grams)) {
+if(isNaN(kg)||isNaN(grams)){
 
 document.getElementById("gramResult")
-.innerText =
+.innerText=
 "Please enter both values";
 
 return;
 
 }
 
-let result =
-(kgPrice / 1000) * grams;
+let price=(kg/1000)*grams;
 
 document.getElementById("gramResult")
-.innerText =
+.innerText=
 
-grams +
-" grams = ₹" +
-result.toFixed(2);
+grams+
+" grams = ₹"+
+price.toFixed(2);
 
 }
 
 
 /* MONEY TO GRAMS */
 
-function calculateMoneyToGram() {
+function moneyGram(){
 
-let kgPrice =
-parseFloat(
+let kg=parseFloat(
 document.getElementById("kgPrice2").value
 );
 
-let money =
-parseFloat(
+let money=parseFloat(
 document.getElementById("money").value
 );
 
-if (isNaN(kgPrice) || isNaN(money)) {
+if(isNaN(kg)||isNaN(money)||kg<=0){
 
 document.getElementById("moneyResult")
-.innerText =
-"Please enter both values";
+.innerText=
+"Please enter valid values";
 
 return;
 
 }
 
-if (kgPrice <= 0) {
+let grams=(money/kg)*1000;
 
 document.getElementById("moneyResult")
-.innerText =
-"Kilogram price must be greater than 0";
+.innerText=
 
-return;
-
-}
-
-let grams =
-(money / kgPrice) * 1000;
-
-document.getElementById("moneyResult")
-.innerText =
-
-"₹" +
-money +
-" = " +
-grams.toFixed(2) +
+"₹"+
+money+
+" = "+
+grams.toFixed(2)+
 " grams";
 
 }
@@ -1020,79 +878,78 @@ grams.toFixed(2) +
 
 /* AGE */
 
-function setToday() {
+function todayDate(){
 
-let today = new Date();
+let d=new Date();
 
-let year =
-today.getFullYear();
+let year=d.getFullYear();
 
-let month =
-String(today.getMonth() + 1)
+let month=
+String(d.getMonth()+1)
 .padStart(2,"0");
 
-let day =
-String(today.getDate())
+let day=
+String(d.getDate())
 .padStart(2,"0");
 
 document.getElementById("calculateDate")
-.value =
-year + "-" + month + "-" + day;
+.value=
+year+"-"+month+"-"+day;
 
 }
 
 
-function calculateAge() {
+function ageCalc(){
 
-let dob =
+let dob=
 document.getElementById("dateOfBirth").value;
 
-let endDate =
+let endDate=
 document.getElementById("calculateDate").value;
 
-if (!dob || !endDate) {
+if(!dob||!endDate){
 
 document.getElementById("ageResult")
-.innerText =
+.innerText=
 "Please enter both dates";
 
 return;
 
 }
 
-let birth =
-new Date(dob + "T00:00:00");
+let birth=
+new Date(dob+"T00:00:00");
 
-let end =
-new Date(endDate + "T00:00:00");
+let end=
+new Date(endDate+"T00:00:00");
 
-if (birth > end) {
+if(birth>end){
 
 document.getElementById("ageResult")
-.innerText =
-"Date of Birth cannot be after Calculate Date";
+.innerText=
+"Invalid dates";
 
 return;
 
 }
 
-let years =
-end.getFullYear() -
+let years=
+end.getFullYear()-
 birth.getFullYear();
 
-let months =
-end.getMonth() -
+let months=
+end.getMonth()-
 birth.getMonth();
 
-let days =
-end.getDate() -
+let days=
+end.getDate()-
 birth.getDate();
 
-if (days < 0) {
+if(days<0){
 
 months--;
 
-days +=
+days+=
 new Date(
 end.getFullYear(),
 end.getMonth(),
@@ -1101,44 +958,37 @@ end.getMonth(),
 
 }
 
-if (months < 0) {
+if(months<0){
 
 years--;
 
-months += 12;
+months+=12;
 
 }
 
-let totalMonths =
-years * 12 + months;
+let totalMonths=
+years*12+months;
 
-let totalDays =
+let totalDays=
 Math.floor(
-(end - birth) /
-(1000 * 60 * 60 * 24)
+(end-birth)/
+(1000*60*60*24)
 );
 
 document.getElementById("ageResult")
-.innerHTML =
+.innerHTML=
 
-"<b>Years:</b> " + years +
-
-" &nbsp;&nbsp; " +
-
-"<b>Months:</b> " + months +
-
-" &nbsp;&nbsp; " +
-
-"<b>Days:</b> " + days +
-
-"<hr>" +
-
-"<b>Total Months:</b> " +
-totalMonths +
-
-"<br>" +
-
-"<b>Total Days:</b> " +
+"<b>Years:</b> "+
+years+
+" &nbsp; <b>Months:</b> "+
+months+
+" &nbsp; <b>Days:</b> "+
+days+
+"<hr>"+
+"<b>Total Months:</b> "+
+totalMonths+
+"<br>"+
+"<b>Total Days:</b> "+
 totalDays;
 
 }
@@ -1146,22 +996,20 @@ totalDays;
 
 /* NORMAL CALCULATOR */
 
-function calculate(operation) {
+function normalCalc(op){
 
-let a =
-parseFloat(
+let a=parseFloat(
 document.getElementById("number1").value
 );
 
-let b =
-parseFloat(
+let b=parseFloat(
 document.getElementById("number2").value
 );
 
-if (isNaN(a) || isNaN(b)) {
+if(isNaN(a)||isNaN(b)){
 
-document.getElementById("calculatorResult")
-.innerText =
+document.getElementById("normalResult")
+.innerText=
 "Please enter both numbers";
 
 return;
@@ -1170,280 +1018,244 @@ return;
 
 let result;
 
-if (operation === "+") {
-result = a + b;
-}
+if(op==="+") result=a+b;
 
-else if (operation === "-") {
-result = a - b;
-}
+if(op==="-") result=a-b;
 
-else if (operation === "*") {
-result = a * b;
-}
+if(op==="*") result=a*b;
 
-else if (operation === "/") {
+if(op==="/"){
 
-if (b === 0) {
+if(b===0){
 
-document.getElementById("calculatorResult")
-.innerText =
+document.getElementById("normalResult")
+.innerText=
 "Cannot divide by zero";
 
 return;
 
 }
 
-result = a / b;
+result=a/b;
+
 }
 
-document.getElementById("calculatorResult")
-.innerText =
-"Result = " + result;
+document.getElementById("normalResult")
+.innerText=
+"Result = "+result;
 
 }
 
 
 /* MOBILE CALCULATOR */
 
-let calcExpression = "";
-let calcJustCalculated = false;
+let expression="";
 
-function updateDisplay() {
+function displayCalc(){
 
-let display =
-document.getElementById("calcDisplay");
-
-display.value =
-calcExpression || "0";
+document.getElementById("calcDisplay")
+.value=
+expression||"0";
 
 }
 
+function numberCalc(n){
 
-function calculatorNumber(number) {
+expression+=n;
 
-if (calcJustCalculated) {
-
-calcExpression = "";
-calcJustCalculated = false;
+displayCalc();
 
 }
 
-if (number === ".") {
+function operatorCalc(op){
 
-let parts =
-calcExpression.split(/[+\-*/]/);
+if(expression==="") return;
 
-let currentNumber =
-parts[parts.length - 1];
+let last=
+expression.slice(-1);
 
-if (currentNumber.includes(".")) {
-return;
-}
+if("+-*/".includes(last)){
 
-if (
-currentNumber === "" ||
-currentNumber === "-"
-) {
-
-calcExpression += "0.";
-
-return;
+expression=
+expression.slice(0,-1);
 
 }
 
-}
+expression+=op;
 
-calcExpression += number;
-
-updateDisplay();
+displayCalc();
 
 }
 
+function clearCalc(){
 
-function calculatorOperator(operator) {
+expression="";
 
-if (calcExpression === "") {
-
-if (operator === "-") {
-
-calcExpression = "-";
-updateDisplay();
+displayCalc();
 
 }
 
-return;
+function backspace(){
+
+expression=
+expression.slice(0,-1);
+
+displayCalc();
 
 }
 
-let last =
-calcExpression.slice(-1);
+function percentCalc(){
 
-if ("+-*/".includes(last)) {
+let match=
+expression.match(/(\d+\.?\d*)$/);
 
-calcExpression =
-calcExpression.slice(0,-1);
+if(!match)return;
+
+let number=
+parseFloat(match[1]);
+
+let percent=
+number/100;
+
+expression=
+expression.slice(
+0,
+-match[1].length
+)+percent;
+
+displayCalc();
 
 }
 
-calcExpression += operator;
+function equalCalc(){
 
-calcJustCalculated = false;
+if(expression==="")return;
 
-updateDisplay();
+let last=
+expression.slice(-1);
 
-}
+if("+-*/".includes(last))return;
 
+try{
 
-function calculatorEqual() {
-
-if (calcExpression === "") {
-return;
-}
-
-let last =
-calcExpression.slice(-1);
-
-if ("+-*/".includes(last)) {
-return;
-}
-
-try {
-
-let safeExpression =
-calcExpression.replace(/×/g,"*");
-
-let result =
+let result=
 Function(
-'"use strict";return (' +
-safeExpression +
+'"use strict";return ('+
+expression+
 ')'
 )();
 
-if (!Number.isFinite(result)) {
+if(!Number.isFinite(result)){
+
+expression="";
 
 document.getElementById("calcDisplay")
-.value = "Error";
-
-calcExpression = "";
+.value="Error";
 
 return;
 
 }
 
-result =
-Math.round(result * 100000000) /
-100000000;
+result=
+Math.round(
+result*100000000
+)/100000000;
 
-calcExpression =
+expression=
 String(result);
 
-calcJustCalculated = true;
-
-updateDisplay();
+displayCalc();
 
 }
 
-catch {
+catch{
+
+expression="";
 
 document.getElementById("calcDisplay")
-.value = "Error";
-
-calcExpression = "";
+.value="Error";
 
 }
 
 }
 
 
-function clearCalculator() {
+/* WEIGHT PRICE CALCULATOR */
 
-calcExpression = "";
+function weightPriceCalc(){
 
-calcJustCalculated = false;
-
-updateDisplay();
-
-}
-
-
-function deleteLast() {
-
-if (calcJustCalculated) {
-
-clearCalculator();
-
-return;
-
-}
-
-calcExpression =
-calcExpression.slice(0,-1);
-
-updateDisplay();
-
-}
-
-
-function calculatorPercent() {
-
-if (calcExpression === "") {
-return;
-}
-
-try {
-
-let lastNumber =
-calcExpression.match(
-/(-?\d+\.?\d*)$/
+let pricePerKg=
+parseFloat(
+document.getElementById("weightPrice")
+.value
 );
 
-if (!lastNumber) {
+let quantity=
+parseFloat(
+document.getElementById("weightQuantity")
+.value
+);
+
+let type=
+document.getElementById("weightType")
+.value;
+
+let resultBox=
+document.getElementById("weightPriceResult");
+
+if(
+isNaN(pricePerKg) ||
+isNaN(quantity) ||
+pricePerKg<0 ||
+quantity<0
+){
+
+resultBox.innerText=
+"Please enter valid values";
+
 return;
-}
-
-let value =
-parseFloat(lastNumber[0]);
-
-let percent =
-value / 100;
-
-calcExpression =
-calcExpression.slice(
-0,
--lastNumber[0].length
-) + percent;
-
-updateDisplay();
 
 }
 
-catch {
+let kg;
 
-document.getElementById("calcDisplay")
-.value = "Error";
+if(type==="kg"){
 
-}
-
-}
-
-
-/* LOAD SAVED MODE */
-
-window.onload = function() {
-
-if (localStorage.getItem("darkMode")
-=== "true") {
-
-document.body.style.background =
-"#111827";
-
-document.body.style.color =
-"white";
+kg=quantity;
 
 }
 
-};
+else if(type==="dhara"){
+
+kg=quantity*5;
+
+}
+
+else if(type==="quintal"){
+
+kg=quantity*100;
+
+}
+
+else if(type==="ton"){
+
+kg=quantity*1000;
+
+}
+
+let total=
+pricePerKg*kg;
+
+resultBox.innerHTML=
+
+"<b>Total Weight:</b> "+
+kg.toFixed(2)+" KG"+
+"<br><br>"+
+
+"<b>Total Price:</b> ₹"+
+total.toFixed(2);
+
+}
 
 </script>
 
