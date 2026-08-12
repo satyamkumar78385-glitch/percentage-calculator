@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Calculator</title>
 
 <style>
@@ -16,68 +16,33 @@ body{
 }
 
 .header{
-    background:#080b14;
-    color:#fff;
-    text-align:center;
-    padding:24px 10px;
-    position:relative;
-    border-bottom:4px solid #4f46e5;
-    box-shadow:0 5px 20px #0006;
-}
-
-.header-title{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:15px;
-}
-
-.profile-circle{
-    width:65px;
-    height:65px;
-    min-width:65px;
-    border-radius:50%;
-    border:3px solid white;
-    background:#111827;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    background:#4f46e5;
     color:white;
-    font-size:12px;
-    font-weight:900;
-    line-height:1.15;
-    box-shadow:0 3px 10px rgba(0,0,0,.6);
-}
-
-.profile-circle span:last-child{
-    color:#facc15;
+    text-align:center;
+    padding:18px 10px;
+    position:relative;
 }
 
 .header h1{
     margin:0;
-    font-size:32px;
-    font-weight:900;
-    letter-spacing:1px;
+    font-size:27px;
+    font-weight:bold;
 }
 
 .header p{
-    margin:8px 0 0;
-    font-size:14px;
-    font-weight:bold;
-    color:#ddd;
+    margin:7px 0 0;
 }
 
 .settings-btn{
     position:absolute;
     right:12px;
-    top:18px;
+    top:16px;
     width:auto;
     margin:0;
-    padding:10px 13px;
+    padding:9px 12px;
     background:white;
-    color:#000;
-    border-radius:12px;
+    color:black;
+    border-radius:10px;
     font-size:20px;
 }
 
@@ -90,19 +55,19 @@ body{
 .card{
     padding:20px;
     margin-bottom:15px;
-    border-radius:20px;
-    border:3px solid #000;
-    box-shadow:0 5px 15px #0003;
+    border-radius:18px;
+    border:2px solid black;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
 .card h2,
 .card h3{
-    color:#000;
+    color:black;
     font-weight:bold;
 }
 
 .percentage-card{background:#ffd43b}
-.discount-card{background:#f00}
+.discount-card{background:#ff0000}
 .price-card{background:#6ee7a8}
 .age-card{background:#60a5fa}
 .weight-card{background:#22c55e}
@@ -111,36 +76,31 @@ body{
 .emi-card{background:#fb7185}
 .unit-card{background:#38bdf8}
 .bank-card{background:#facc15}
-.quantity-card{background:#f97316}
-
-.normal-card{
-    background:#111;
-    color:#fff;
-}
+.normal-card{background:#111;color:white}
 
 .normal-card h2{
-    color:#fff;
+    color:white;
 }
 
 input,select{
     width:100%;
     padding:13px;
     margin-top:10px;
-    border-radius:11px;
-    border:2px solid #000;
+    border-radius:10px;
+    border:2px solid black;
     font-size:16px;
-    background:#fff;
-    color:#000;
+    background:white;
+    color:black;
 }
 
 button{
     width:100%;
     padding:13px;
     margin-top:10px;
-    border-radius:11px;
-    border:2px solid #000;
-    background:#000;
-    color:#fff;
+    border-radius:10px;
+    border:2px solid black;
+    background:black;
+    color:white;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
@@ -157,12 +117,12 @@ button:active{
 .result{
     margin-top:15px;
     padding:13px;
-    background:#fff;
-    border:2px solid #000;
-    border-radius:11px;
+    background:white;
+    border:2px solid black;
+    border-radius:10px;
     text-align:center;
     line-height:1.8;
-    color:#000;
+    color:black;
     font-weight:bold;
 }
 
@@ -170,11 +130,11 @@ button:active{
 
 .mobile-calculator{
     background:#000;
-    color:#fff;
+    color:white;
 }
 
 .mobile-calculator h2{
-    color:#fff;
+    color:white;
     text-align:center;
 }
 
@@ -182,7 +142,7 @@ button:active{
     width:100%;
     height:80px;
     background:#222;
-    color:#fff;
+    color:white;
     border:2px solid #555;
     border-radius:12px;
     font-size:32px;
@@ -204,7 +164,7 @@ button:active{
     border:0;
     border-radius:50%;
     background:#333;
-    color:#fff;
+    color:white;
     font-size:21px;
 }
 
@@ -235,23 +195,30 @@ button:active{
     width:88%;
     max-width:370px;
     height:100%;
-    background:#fff;
-    color:#000;
+    background:white;
+    color:black;
     z-index:1000;
     padding:25px;
     overflow-y:auto;
-    box-shadow:-5px 0 20px #0004;
+    box-shadow:-5px 0 20px rgba(0,0,0,.25);
 }
 
-.settings-item,
-.about-box{
-    padding:15px;
+.settings-panel h2{
+    color:black;
+}
+
+.settings-item{
+    padding:10px;
     margin-top:10px;
     border-radius:12px;
     background:#eef2ff;
 }
 
 .about-box{
+    margin-top:15px;
+    padding:15px;
+    border-radius:12px;
+    background:#eef2ff;
     line-height:1.7;
 }
 
@@ -259,7 +226,7 @@ button:active{
     display:none;
     position:fixed;
     inset:0;
-    background:#0007;
+    background:rgba(0,0,0,.45);
     z-index:999;
 }
 
@@ -271,14 +238,27 @@ button:active{
     font-weight:bold;
 }
 
+/* BANK NOTES */
+
 .note-row{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     padding:10px;
     margin:7px 0;
     background:#f8fafc;
-    border:2px solid #000;
+    border:2px solid black;
     border-radius:10px;
+}
+
+.note-name{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.note-count{
+    font-size:18px;
+    color:#111827;
 }
 </style>
 </head>
@@ -291,20 +271,9 @@ button:active{
 
 <button class="settings-btn" onclick="openSettings()">⚙️</button>
 
-<div class="header-title">
+<h1>Smart Calculator</h1>
 
-<div class="profile-circle">
-    <span>Satyam</span>
-    <span>Kumar</span>
-</div>
-
-<h1>SMART CALCULATOR</h1>
-
-</div>
-
-<p>
-Percentage • Discount • Price • Age • GST • EMI • Units • Bank
-</p>
+<p>Percentage • Discount • Price • Age • GST • EMI • Units • Bank</p>
 
 </div>
 
@@ -319,8 +288,7 @@ onclick="closeSettings()">
 
 <!-- SETTINGS -->
 
-<div class="settings-panel"
-id="settingsPanel">
+<div class="settings-panel" id="settingsPanel">
 
 <h2>⚙️ Settings</h2>
 
@@ -369,9 +337,7 @@ Smart Calculator<br>
 Version 1.0.0
 </div>
 
-<button onclick="closeSettings()">
-Close Settings
-</button>
+<button onclick="closeSettings()">Close Settings</button>
 
 </div>
 
@@ -385,18 +351,15 @@ Close Settings
 
 <h2>📊 Percentage Calculator</h2>
 
-<input
-id="totalMarks"
+<input id="totalMarks"
 type="number"
 placeholder="Enter Total Marks">
 
-<input
-id="obtainedMarks"
+<input id="obtainedMarks"
 type="number"
 placeholder="Enter Obtained Marks">
 
-<input
-id="percentageInput"
+<input id="percentageInput"
 type="number"
 placeholder="Enter Percentage (%)">
 
@@ -404,8 +367,7 @@ placeholder="Enter Percentage (%)">
 Calculate Percentage
 </button>
 
-<div class="result"
-id="percentageResult">
+<div class="result" id="percentageResult">
 Result will appear here
 </div>
 
@@ -418,13 +380,11 @@ Result will appear here
 
 <h2>🏷️ Discount Calculator</h2>
 
-<input
-id="price"
+<input id="price"
 type="number"
 placeholder="Enter Original Price ₹">
 
-<input
-id="discount"
+<input id="discount"
 type="number"
 placeholder="Enter Discount (%)">
 
@@ -432,8 +392,7 @@ placeholder="Enter Discount (%)">
 Calculate Discount
 </button>
 
-<div class="result"
-id="discountResult">
+<div class="result" id="discountResult">
 Result will appear here
 </div>
 
@@ -448,13 +407,11 @@ Result will appear here
 
 <h3>Price for Grams</h3>
 
-<input
-id="kgPrice"
+<input id="kgPrice"
 type="number"
 placeholder="Price for 1 Kilogram ₹">
 
-<input
-id="grams"
+<input id="grams"
 type="number"
 placeholder="Enter Grams">
 
@@ -462,20 +419,18 @@ placeholder="Enter Grams">
 Calculate Price
 </button>
 
-<div class="result"
-id="gramResult">
+<div class="result" id="gramResult">
 Result will appear here
 </div>
 
+
 <h3>Grams for Money</h3>
 
-<input
-id="kgPrice2"
+<input id="kgPrice2"
 type="number"
 placeholder="Price for 1 Kilogram ₹">
 
-<input
-id="money"
+<input id="money"
 type="number"
 placeholder="Enter Amount ₹">
 
@@ -483,8 +438,7 @@ placeholder="Enter Amount ₹">
 Calculate Grams
 </button>
 
-<div class="result"
-id="moneyResult">
+<div class="result" id="moneyResult">
 Result will appear here
 </div>
 
@@ -497,12 +451,10 @@ Result will appear here
 
 <h2>🎂 Age Calculator</h2>
 
-<input
-id="dateOfBirth"
+<input id="dateOfBirth"
 type="date">
 
-<input
-id="calculateDate"
+<input id="calculateDate"
 type="date">
 
 <button onclick="todayDate()">
@@ -513,8 +465,7 @@ Use Today's Date
 Calculate Age
 </button>
 
-<div class="result"
-id="ageResult">
+<div class="result" id="ageResult">
 Age will appear here
 </div>
 
@@ -527,13 +478,11 @@ Age will appear here
 
 <h2>➕ Normal Calculator</h2>
 
-<input
-id="number1"
+<input id="number1"
 type="number"
 placeholder="Enter First Number">
 
-<input
-id="number2"
+<input id="number2"
 type="number"
 placeholder="Enter Second Number">
 
@@ -553,8 +502,7 @@ Multiply ×
 Divide ÷
 </button>
 
-<div class="result"
-id="normalResult">
+<div class="result" id="normalResult">
 Result will appear here
 </div>
 
@@ -627,17 +575,16 @@ onclick="equalCalc()">=</button>
 
 <p>
 Enter the price of <b>1 Kilogram</b>.
+Then choose the unit and quantity.
 </p>
 
-<input
-id="weightPrice"
+<input id="weightPrice"
 type="number"
 step="any"
 min="0"
 placeholder="Price of 1 KG ₹">
 
-<input
-id="weightQuantity"
+<input id="weightQuantity"
 type="number"
 step="any"
 min="0"
@@ -667,8 +614,7 @@ Ton (1 Ton = 1000 KG)
 Calculate Total Price
 </button>
 
-<div class="result"
-id="weightPriceResult">
+<div class="result" id="weightPriceResult">
 Total price will appear here
 </div>
 
@@ -681,8 +627,7 @@ Total price will appear here
 
 <h2>💱 Currency Calculator</h2>
 
-<input
-id="currencyAmount"
+<input id="currencyAmount"
 type="number"
 step="any"
 placeholder="Enter Amount">
@@ -747,8 +692,7 @@ placeholder="Enter Amount">
 💱 Convert Currency
 </button>
 
-<div class="result"
-id="currencyResult">
+<div class="result" id="currencyResult">
 Conversion result will appear here
 </div>
 
@@ -761,8 +705,7 @@ Conversion result will appear here
 
 <h2>🧾 GST Calculator</h2>
 
-<input
-id="gstAmount"
+<input id="gstAmount"
 type="number"
 step="any"
 placeholder="Enter Amount ₹">
@@ -803,8 +746,7 @@ Remove GST from Total Amount
 🧾 Calculate GST
 </button>
 
-<div class="result"
-id="gstResult">
+<div class="result" id="gstResult">
 GST result will appear here
 </div>
 
@@ -817,20 +759,17 @@ GST result will appear here
 
 <h2>🏦 EMI Loan Calculator</h2>
 
-<input
-id="loanAmount"
+<input id="loanAmount"
 type="number"
 step="any"
 placeholder="Loan Amount ₹">
 
-<input
-id="interestRate"
+<input id="interestRate"
 type="number"
 step="any"
 placeholder="Annual Interest Rate (%)">
 
-<input
-id="loanYears"
+<input id="loanYears"
 type="number"
 step="any"
 placeholder="Loan Period (Years)">
@@ -839,8 +778,7 @@ placeholder="Loan Period (Years)">
 🏦 Calculate Monthly EMI
 </button>
 
-<div class="result"
-id="emiResult">
+<div class="result" id="emiResult">
 EMI result will appear here
 </div>
 
@@ -896,8 +834,7 @@ placeholder="Enter Value">
 🔄 Convert
 </button>
 
-<div class="result"
-id="unitResult">
+<div class="result" id="unitResult">
 Conversion result will appear here
 </div>
 
@@ -911,8 +848,10 @@ Conversion result will appear here
 <h2>🏦 🏧 BANK NOTE CALCULATOR</h2>
 
 <p>
-Enter amount to calculate ₹500, ₹200, ₹100,
-₹50, ₹20 और ₹10 notes.
+Enter the amount. Calculator will show how many
+₹500, ₹200, ₹100, ₹50, ₹20 और ₹10 notes would be
+needed if the entire amount were made using that
+one denomination.
 </p>
 
 <input
@@ -926,57 +865,12 @@ placeholder="Enter Amount ₹">
 🏦 Calculate Notes
 </button>
 
-<div class="result"
-id="bankNoteResult">
+<div class="result" id="bankNoteResult">
 Note calculation will appear here
 </div>
 
 </div>
 
-
-<!-- 13 QUANTITY -->
-
-<div class="card quantity-card">
-
-<h2>✏️ Quantity Price Calculator</h2>
-
-<p>
-<b>Example:</b>
-₹10 में 20 Pencil हैं।
-तो ₹5 में कितनी Pencil मिलेंगी?
-</p>
-
-<input
-id="itemPrice"
-type="number"
-step="any"
-min="0"
-placeholder="Price of Items ₹">
-
-<input
-id="itemQuantity"
-type="number"
-step="any"
-min="0"
-placeholder="Quantity at This Price">
-
-<input
-id="customerMoney"
-type="number"
-step="any"
-min="0"
-placeholder="Customer Money ₹">
-
-<button onclick="quantityPriceCalc()">
-🧮 Calculate Quantity
-</button>
-
-<div class="result"
-id="quantityResult">
-Quantity result will appear here
-</div>
-
-</div>
 
 </div>
 
@@ -986,23 +880,37 @@ Quantity result will appear here
 /* SETTINGS */
 
 function openSettings(){
-document.getElementById("settingsPanel").style.display="block";
-document.getElementById("overlay").style.display="block";
+
+document.getElementById("settingsPanel")
+.style.display="block";
+
+document.getElementById("overlay")
+.style.display="block";
+
 }
 
 function closeSettings(){
-document.getElementById("settingsPanel").style.display="none";
-document.getElementById("overlay").style.display="none";
+
+document.getElementById("settingsPanel")
+.style.display="none";
+
+document.getElementById("overlay")
+.style.display="none";
+
 }
 
 function darkMode(){
+
 document.body.style.background="#111827";
 document.body.style.color="white";
+
 }
 
 function lightMode(){
+
 document.body.style.background="#eef2ff";
 document.body.style.color="#111827";
+
 }
 
 function shareApp(){
@@ -1010,8 +918,10 @@ function shareApp(){
 if(navigator.share){
 
 navigator.share({
+
 title:"Smart Calculator",
 text:"Check out my Smart Calculator app!"
+
 });
 
 }else{
@@ -1023,11 +933,18 @@ alert("Smart Calculator");
 }
 
 function rateApp(){
-alert("Thank you for supporting Smart Calculator!");
+
+alert(
+"Thank you for supporting Smart Calculator!"
+);
+
 }
 
 function contactDeveloper(){
-location.href="mailto:satyamkumar78385@gmail.com";
+
+location.href=
+"mailto:satyamkumar78385@gmail.com";
+
 }
 
 
@@ -1035,61 +952,76 @@ location.href="mailto:satyamkumar78385@gmail.com";
 
 function percentageCalc(){
 
-let t=parseFloat(
+let total=parseFloat(
 document.getElementById("totalMarks").value
 );
 
-let o=parseFloat(
+let obtained=parseFloat(
 document.getElementById("obtainedMarks").value
 );
 
-let p=parseFloat(
+let percentage=parseFloat(
 document.getElementById("percentageInput").value
 );
 
-let r="";
+let result="";
 
-if(!isNaN(t)&&!isNaN(o)){
+if(!isNaN(total)&&!isNaN(obtained)){
 
-if(t<=0){
+if(total<=0){
 
-r="Total Marks must be greater than 0";
-
-}
-
-else if(o>t){
-
-r="Obtained Marks cannot be greater than Total Marks";
+result="Total Marks must be greater than 0";
 
 }
 
-else{
+else if(obtained>total){
 
-r="Percentage = "+((o/t)*100).toFixed(2)+"%";
-
-}
-
-}
-
-else if(!isNaN(t)&&!isNaN(p)){
-
-r="Obtained Marks = "+((t*p)/100).toFixed(2);
-
-}
-
-else if(!isNaN(o)&&!isNaN(p)&&p>0){
-
-r="Total Marks = "+((o*100)/p).toFixed(2);
+result="Obtained Marks cannot be greater than Total Marks";
 
 }
 
 else{
 
-r="Enter any two values";
+result=
+"Percentage = "+
+((obtained/total)*100).toFixed(2)+"%";
 
 }
 
-document.getElementById("percentageResult").innerText=r;
+}
+
+else if(!isNaN(total)&&!isNaN(percentage)){
+
+result=
+"Obtained Marks = "+
+((total*percentage)/100).toFixed(2);
+
+}
+
+else if(!isNaN(obtained)&&!isNaN(percentage)){
+
+if(percentage<=0){
+
+result="Percentage must be greater than 0";
+
+}else{
+
+result=
+"Total Marks = "+
+((obtained*100)/percentage).toFixed(2);
+
+}
+
+}
+
+else{
+
+result="Enter any two values";
+
+}
+
+document.getElementById("percentageResult")
+.innerText=result;
 
 }
 
@@ -1098,80 +1030,117 @@ document.getElementById("percentageResult").innerText=r;
 
 function discountCalc(){
 
-let p=parseFloat(
+let price=parseFloat(
 document.getElementById("price").value
 );
 
-let d=parseFloat(
+let discount=parseFloat(
 document.getElementById("discount").value
 );
 
-if(isNaN(p)||isNaN(d)||p<0||d<0||d>100){
+if(isNaN(price)||isNaN(discount)){
 
-document.getElementById("discountResult").innerText=
-"Please enter valid values";
-
-return;
-
-}
-
-let da=p*d/100;
-
-document.getElementById("discountResult").innerText=
-"Discount = ₹"+da.toFixed(2)+
-" | Final Price = ₹"+(p-da).toFixed(2);
-
-}
-
-
-/* PRICE */
-
-function gramPrice(){
-
-let k=parseFloat(
-document.getElementById("kgPrice").value
-);
-
-let g=parseFloat(
-document.getElementById("grams").value
-);
-
-if(isNaN(k)||isNaN(g)){
-
-document.getElementById("gramResult").innerText=
+document.getElementById("discountResult")
+.innerText=
 "Please enter both values";
 
 return;
 
 }
 
-document.getElementById("gramResult").innerText=
-g+" grams = ₹"+((k/1000)*g).toFixed(2);
+if(price<0||discount<0||discount>100){
 
-}
-
-
-function moneyGram(){
-
-let k=parseFloat(
-document.getElementById("kgPrice2").value
-);
-
-let m=parseFloat(
-document.getElementById("money").value
-);
-
-if(isNaN(k)||isNaN(m)||k<=0){
-
-document.getElementById("moneyResult").innerText=
+document.getElementById("discountResult")
+.innerText=
 "Please enter valid values";
 
 return;
 
 }
 
-document.getElementById("moneyResult").innerText=
-"₹"+m+" = "+((m/k)*1000).toFixed(2)+" grams";
+let discountAmount=
+(price*discount)/100;
+
+let finalPrice=
+price-discountAmount;
+
+document.getElementById("discountResult")
+.innerText=
+
+"Discount = ₹"+
+discountAmount.toFixed(2)+
+" | Final Price = ₹"+
+finalPrice.toFixed(2);
+
+}
+
+
+/* PRICE FOR GRAMS */
+
+function gramPrice(){
+
+let kg=parseFloat(
+document.getElementById("kgPrice").value
+);
+
+let grams=parseFloat(
+document.getElementById("grams").value
+);
+
+if(isNaN(kg)||isNaN(grams)){
+
+document.getElementById("gramResult")
+.innerText=
+"Please enter both values";
+
+return;
+
+}
+
+let price=(kg/1000)*grams;
+
+document.getElementById("gramResult")
+.innerText=
+
+grams+
+" grams = ₹"+
+price.toFixed(2);
+
+}
+
+
+/* MONEY TO GRAMS */
+
+function moneyGram(){
+
+let kg=parseFloat(
+document.getElementById("kgPrice2").value
+);
+
+let money=parseFloat(
+document.getElementById("money").value
+);
+
+if(isNaN(kg)||isNaN(money)||kg<=0){
+
+document.getElementById("moneyResult")
+.innerText=
+"Please enter valid values";
+
+return;
+
+}
+
+let grams=(money/kg)*1000;
+
+document.getElementById("moneyResult")
+.innerText=
+
+"₹"+
+money+
+" = "+
+grams.toFixed(2)+
+" grams";
 
 }
 
@@ -1182,76 +1151,114 @@ function todayDate(){
 
 let d=new Date();
 
-document.getElementById("calculateDate").value=
-d.getFullYear()+"-"+
-String(d.getMonth()+1).padStart(2,"0")+"-"+
-String(d.getDate()).padStart(2,"0");
+let year=d.getFullYear();
+
+let month=
+String(d.getMonth()+1)
+.padStart(2,"0");
+
+let day=
+String(d.getDate())
+.padStart(2,"0");
+
+document.getElementById("calculateDate")
+.value=
+year+"-"+month+"-"+day;
 
 }
 
 
 function ageCalc(){
 
-let d=document.getElementById("dateOfBirth").value;
+let dob=
+document.getElementById("dateOfBirth").value;
 
-let e=document.getElementById("calculateDate").value;
+let endDate=
+document.getElementById("calculateDate").value;
 
-if(!d||!e){
+if(!dob||!endDate){
 
-document.getElementById("ageResult").innerText=
+document.getElementById("ageResult")
+.innerText=
 "Please enter both dates";
 
 return;
 
 }
 
-let b=new Date(d+"T00:00:00");
+let birth=
+new Date(dob+"T00:00:00");
 
-let x=new Date(e+"T00:00:00");
+let end=
+new Date(endDate+"T00:00:00");
 
-if(b>x){
+if(birth>end){
 
-document.getElementById("ageResult").innerText=
+document.getElementById("ageResult")
+.innerText=
 "Invalid dates";
 
 return;
 
 }
 
-let y=x.getFullYear()-b.getFullYear();
+let years=
+end.getFullYear()-
+birth.getFullYear();
 
-let m=x.getMonth()-b.getMonth();
+let months=
+end.getMonth()-
+birth.getMonth();
 
-let day=x.getDate()-b.getDate();
+let days=
+end.getDate()-
+birth.getDate();
 
-if(day<0){
+if(days<0){
 
-m--;
+months--;
 
-day+=new Date(
-x.getFullYear(),
-x.getMonth(),
+days+=
+new Date(
+end.getFullYear(),
+end.getMonth(),
 0
 ).getDate();
 
 }
 
-if(m<0){
+if(months<0){
 
-y--;
+years--;
 
-m+=12;
+months+=12;
 
 }
 
-document.getElementById("ageResult").innerHTML=
-"<b>Years:</b> "+y+
-" &nbsp; <b>Months:</b> "+m+
-" &nbsp; <b>Days:</b> "+day+
+let totalMonths=
+years*12+months;
+
+let totalDays=
+Math.floor(
+(end-birth)/
+(1000*60*60*24)
+);
+
+document.getElementById("ageResult")
+.innerHTML=
+
+"<b>Years:</b> "+
+years+
+" &nbsp; <b>Months:</b> "+
+months+
+" &nbsp; <b>Days:</b> "+
+days+
 "<hr>"+
-"<b>Total Months:</b> "+(y*12+m)+
+"<b>Total Months:</b> "+
+totalMonths+
 "<br>"+
-"<b>Total Days:</b> "+Math.floor((x-b)/86400000);
+"<b>Total Days:</b> "+
+totalDays;
 
 }
 
@@ -1270,34 +1277,41 @@ document.getElementById("number2").value
 
 if(isNaN(a)||isNaN(b)){
 
-document.getElementById("normalResult").innerText=
+document.getElementById("normalResult")
+.innerText=
 "Please enter both numbers";
 
 return;
 
 }
 
-if(op==="/"&&b===0){
+let result;
 
-document.getElementById("normalResult").innerText=
+if(op==="+") result=a+b;
+
+if(op==="-") result=a-b;
+
+if(op==="*") result=a*b;
+
+if(op==="/"){
+
+if(b===0){
+
+document.getElementById("normalResult")
+.innerText=
 "Cannot divide by zero";
 
 return;
 
 }
 
-let r;
+result=a/b;
 
-if(op==="+")r=a+b;
+}
 
-if(op==="-")r=a-b;
-
-if(op==="*")r=a*b;
-
-if(op==="/")r=a/b;
-
-document.getElementById("normalResult").innerText=
-"Result = "+r;
+document.getElementById("normalResult")
+.innerText=
+"Result = "+result;
 
 }
 
@@ -1308,14 +1322,17 @@ let expression="";
 
 function displayCalc(){
 
-document.getElementById("calcDisplay").value=
+document.getElementById("calcDisplay")
+.value=
 expression||"0";
 
 }
 
 function numberCalc(n){
 
-if(n==="."&&expression.endsWith("."))return;
+if(n==="." && expression.endsWith(".")){
+return;
+}
 
 expression+=n;
 
@@ -1325,11 +1342,15 @@ displayCalc();
 
 function operatorCalc(op){
 
-if(!expression)return;
+if(expression==="") return;
 
-if("+-*/".includes(expression.slice(-1))){
+let last=
+expression.slice(-1);
 
-expression=expression.slice(0,-1);
+if("+-*/".includes(last)){
+
+expression=
+expression.slice(0,-1);
 
 }
 
@@ -1349,7 +1370,8 @@ displayCalc();
 
 function backspace(){
 
-expression=expression.slice(0,-1);
+expression=
+expression.slice(0,-1);
 
 displayCalc();
 
@@ -1357,13 +1379,22 @@ displayCalc();
 
 function percentCalc(){
 
-let m=expression.match(/(\d+\.?\d*)$/);
+let match=
+expression.match(/(\d+\.?\d*)$/);
 
-if(!m)return;
+if(!match)return;
+
+let number=
+parseFloat(match[1]);
+
+let percent=
+number/100;
 
 expression=
-expression.slice(0,-m[1].length)+
-(parseFloat(m[1])/100);
+expression.slice(
+0,
+-match[1].length
+)+percent;
 
 displayCalc();
 
@@ -1371,22 +1402,40 @@ displayCalc();
 
 function equalCalc(){
 
-if(!expression||
-"+-*/".includes(expression.slice(-1)))return;
+if(expression==="")return;
+
+let last=
+expression.slice(-1);
+
+if("+-*/".includes(last))return;
 
 try{
 
-let r=Function(
+let result=
+Function(
 '"use strict";return ('+
 expression+
 ')'
 )();
 
-if(!Number.isFinite(r))throw 0;
+if(!Number.isFinite(result)){
 
-expression=String(
-Math.round(r*100000000)/100000000
-);
+expression="";
+
+document.getElementById("calcDisplay")
+.value="Error";
+
+return;
+
+}
+
+result=
+Math.round(
+result*100000000
+)/100000000;
+
+expression=
+String(result);
 
 displayCalc();
 
@@ -1396,40 +1445,33 @@ catch{
 
 expression="";
 
-document.getElementById("calcDisplay").value="Error";
+document.getElementById("calcDisplay")
+.value="Error";
 
 }
 
 }
 
 
-/* WEIGHT */
+/* WEIGHT PRICE */
 
 function weightPriceCalc(){
 
-let p=parseFloat(
+let pricePerKg=
+parseFloat(
 document.getElementById("weightPrice").value
 );
 
-let q=parseFloat(
+let quantity=
+parseFloat(
 document.getElementById("weightQuantity").value
 );
 
-let t=document.getElementById("weightType").value;
+let type=
+document.getElementById("weightType").value;
 
-if(isNaN(p)||isNaN(q)||p<0||q<0){
+let resultBox=
+document.getElementById("weightPriceResult");
 
-document.getElementById("weightPriceResult").innerText=
-"Please enter valid values";
-
-return;
-
-}
-
-let kg;
-
-if(t==="kg")kg=q;
-
-else if(t==="dhara")kg=q*5;
-
-else if(t==="quintal")kg=q*100;
+if(
+isNaN(pricePerKg)
