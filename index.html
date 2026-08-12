@@ -71,11 +71,6 @@ body{
 .price-card{background:#6ee7a8}
 .age-card{background:#60a5fa}
 .weight-card{background:#22c55e}
-.currency-card{background:#f59e0b}
-.gst-card{background:#a78bfa}
-.emi-card{background:#fb7185}
-.unit-card{background:#38bdf8}
-.bank-card{background:#facc15}
 .normal-card{background:#111;color:white}
 
 .normal-card h2{
@@ -125,6 +120,7 @@ button:active{
     color:black;
     font-weight:bold;
 }
+
 
 /* MOBILE CALCULATOR */
 
@@ -185,6 +181,7 @@ button:active{
     border-radius:30px;
 }
 
+
 /* SETTINGS */
 
 .settings-panel{
@@ -237,35 +234,10 @@ button:active{
     font-size:14px;
     font-weight:bold;
 }
-
-/* BANK NOTES */
-
-.note-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px;
-    margin:7px 0;
-    background:#f8fafc;
-    border:2px solid black;
-    border-radius:10px;
-}
-
-.note-name{
-    font-size:17px;
-    font-weight:bold;
-}
-
-.note-count{
-    font-size:18px;
-    color:#111827;
-}
 </style>
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <div class="header">
 
@@ -273,22 +245,17 @@ button:active{
 
 <h1>Smart Calculator</h1>
 
-<p>Percentage • Discount • Price • Age • GST • EMI • Units • Bank</p>
+<p>Percentage • Discount • Price • Age • Calculator</p>
 
 </div>
-
-
-<!-- OVERLAY -->
 
 <div class="overlay"
 id="overlay"
 onclick="closeSettings()">
 </div>
 
-
-<!-- SETTINGS -->
-
-<div class="settings-panel" id="settingsPanel">
+<div class="settings-panel"
+id="settingsPanel">
 
 <h2>⚙️ Settings</h2>
 
@@ -345,8 +312,6 @@ Version 1.0.0
 <div class="container">
 
 
-<!-- 1 PERCENTAGE -->
-
 <div class="card percentage-card">
 
 <h2>📊 Percentage Calculator</h2>
@@ -367,14 +332,13 @@ placeholder="Enter Percentage (%)">
 Calculate Percentage
 </button>
 
-<div class="result" id="percentageResult">
+<div class="result"
+id="percentageResult">
 Result will appear here
 </div>
 
 </div>
 
-
-<!-- 2 DISCOUNT -->
 
 <div class="card discount-card">
 
@@ -392,14 +356,13 @@ placeholder="Enter Discount (%)">
 Calculate Discount
 </button>
 
-<div class="result" id="discountResult">
+<div class="result"
+id="discountResult">
 Result will appear here
 </div>
 
 </div>
 
-
-<!-- 3 PRICE -->
 
 <div class="card price-card">
 
@@ -419,7 +382,8 @@ placeholder="Enter Grams">
 Calculate Price
 </button>
 
-<div class="result" id="gramResult">
+<div class="result"
+id="gramResult">
 Result will appear here
 </div>
 
@@ -438,14 +402,13 @@ placeholder="Enter Amount ₹">
 Calculate Grams
 </button>
 
-<div class="result" id="moneyResult">
+<div class="result"
+id="moneyResult">
 Result will appear here
 </div>
 
 </div>
 
-
-<!-- 4 AGE -->
 
 <div class="card age-card">
 
@@ -465,14 +428,13 @@ Use Today's Date
 Calculate Age
 </button>
 
-<div class="result" id="ageResult">
+<div class="result"
+id="ageResult">
 Age will appear here
 </div>
 
 </div>
 
-
-<!-- 5 NORMAL CALCULATOR -->
 
 <div class="card normal-card">
 
@@ -502,14 +464,13 @@ Multiply ×
 Divide ÷
 </button>
 
-<div class="result" id="normalResult">
+<div class="result"
+id="normalResult">
 Result will appear here
 </div>
 
 </div>
 
-
-<!-- 6 MOBILE CALCULATOR -->
 
 <div class="card mobile-calculator">
 
@@ -567,8 +528,6 @@ onclick="equalCalc()">=</button>
 </div>
 
 
-<!-- 7 WEIGHT PRICE -->
-
 <div class="card weight-card">
 
 <h2>⚖️ Weight Price Calculator</h2>
@@ -578,13 +537,15 @@ Enter the price of <b>1 Kilogram</b>.
 Then choose the unit and quantity.
 </p>
 
-<input id="weightPrice"
+<input
+id="weightPrice"
 type="number"
 step="any"
 min="0"
 placeholder="Price of 1 KG ₹">
 
-<input id="weightQuantity"
+<input
+id="weightQuantity"
 type="number"
 step="any"
 min="0"
@@ -614,259 +575,9 @@ Ton (1 Ton = 1000 KG)
 Calculate Total Price
 </button>
 
-<div class="result" id="weightPriceResult">
+<div class="result"
+id="weightPriceResult">
 Total price will appear here
-</div>
-
-</div>
-
-
-<!-- 8 CURRENCY -->
-
-<div class="card currency-card">
-
-<h2>💱 Currency Calculator</h2>
-
-<input id="currencyAmount"
-type="number"
-step="any"
-placeholder="Enter Amount">
-
-<select id="fromCurrency">
-
-<option value="INR">
-🇮🇳 INR - Indian Rupee
-</option>
-
-<option value="USD">
-🇺🇸 USD - US Dollar
-</option>
-
-<option value="EUR">
-🇪🇺 EUR - Euro
-</option>
-
-<option value="GBP">
-🇬🇧 GBP - British Pound
-</option>
-
-<option value="AED">
-🇦🇪 AED - UAE Dirham
-</option>
-
-<option value="JPY">
-🇯🇵 JPY - Japanese Yen
-</option>
-
-</select>
-
-<select id="toCurrency">
-
-<option value="USD">
-🇺🇸 USD - US Dollar
-</option>
-
-<option value="INR">
-🇮🇳 INR - Indian Rupee
-</option>
-
-<option value="EUR">
-🇪🇺 EUR - Euro
-</option>
-
-<option value="GBP">
-🇬🇧 GBP - British Pound
-</option>
-
-<option value="AED">
-🇦🇪 AED - UAE Dirham
-</option>
-
-<option value="JPY">
-🇯🇵 JPY - Japanese Yen
-</option>
-
-</select>
-
-<button onclick="currencyCalc()">
-💱 Convert Currency
-</button>
-
-<div class="result" id="currencyResult">
-Conversion result will appear here
-</div>
-
-</div>
-
-
-<!-- 9 GST -->
-
-<div class="card gst-card">
-
-<h2>🧾 GST Calculator</h2>
-
-<input id="gstAmount"
-type="number"
-step="any"
-placeholder="Enter Amount ₹">
-
-<select id="gstRate">
-
-<option value="5">
-GST 5%
-</option>
-
-<option value="12">
-GST 12%
-</option>
-
-<option value="18" selected>
-GST 18%
-</option>
-
-<option value="28">
-GST 28%
-</option>
-
-</select>
-
-<select id="gstType">
-
-<option value="add">
-Add GST to Amount
-</option>
-
-<option value="remove">
-Remove GST from Total Amount
-</option>
-
-</select>
-
-<button onclick="gstCalc()">
-🧾 Calculate GST
-</button>
-
-<div class="result" id="gstResult">
-GST result will appear here
-</div>
-
-</div>
-
-
-<!-- 10 EMI -->
-
-<div class="card emi-card">
-
-<h2>🏦 EMI Loan Calculator</h2>
-
-<input id="loanAmount"
-type="number"
-step="any"
-placeholder="Loan Amount ₹">
-
-<input id="interestRate"
-type="number"
-step="any"
-placeholder="Annual Interest Rate (%)">
-
-<input id="loanYears"
-type="number"
-step="any"
-placeholder="Loan Period (Years)">
-
-<button onclick="emiCalc()">
-🏦 Calculate Monthly EMI
-</button>
-
-<div class="result" id="emiResult">
-EMI result will appear here
-</div>
-
-</div>
-
-
-<!-- 11 UNIT CONVERTER -->
-
-<div class="card unit-card">
-
-<h2>🔄 Unit Converter</h2>
-
-<select id="unitCategory"
-onchange="changeUnitCategory()">
-
-<option value="weight">
-⚖️ Weight
-</option>
-
-<option value="length">
-📏 Length
-</option>
-
-<option value="volume">
-🧴 Volume
-</option>
-
-<option value="temperature">
-🌡️ Temperature
-</option>
-
-<option value="time">
-⏱️ Time
-</option>
-
-<option value="area">
-🏠 Area
-</option>
-
-</select>
-
-<input
-id="unitValue"
-type="number"
-step="any"
-placeholder="Enter Value">
-
-<select id="unitFrom"></select>
-
-<select id="unitTo"></select>
-
-<button onclick="unitConvert()">
-🔄 Convert
-</button>
-
-<div class="result" id="unitResult">
-Conversion result will appear here
-</div>
-
-</div>
-
-
-<!-- 12 BANK NOTE -->
-
-<div class="card bank-card">
-
-<h2>🏦 🏧 BANK NOTE CALCULATOR</h2>
-
-<p>
-Enter the amount. Calculator will show how many
-₹500, ₹200, ₹100, ₹50, ₹20 और ₹10 notes would be
-needed if the entire amount were made using that
-one denomination.
-</p>
-
-<input
-id="bankAmount"
-type="number"
-min="1"
-step="1"
-placeholder="Enter Amount ₹">
-
-<button onclick="bankNoteCalc()">
-🏦 Calculate Notes
-</button>
-
-<div class="result" id="bankNoteResult">
-Note calculation will appear here
 </div>
 
 </div>
@@ -876,8 +587,6 @@ Note calculation will appear here
 
 
 <script>
-
-/* SETTINGS */
 
 function openSettings(){
 
@@ -948,8 +657,6 @@ location.href=
 }
 
 
-/* PERCENTAGE */
-
 function percentageCalc(){
 
 let total=parseFloat(
@@ -1000,17 +707,9 @@ result=
 
 else if(!isNaN(obtained)&&!isNaN(percentage)){
 
-if(percentage<=0){
-
-result="Percentage must be greater than 0";
-
-}else{
-
 result=
 "Total Marks = "+
 ((obtained*100)/percentage).toFixed(2);
-
-}
 
 }
 
@@ -1025,8 +724,6 @@ document.getElementById("percentageResult")
 
 }
 
-
-/* DISCOUNT */
 
 function discountCalc(){
 
@@ -1048,16 +745,6 @@ return;
 
 }
 
-if(price<0||discount<0||discount>100){
-
-document.getElementById("discountResult")
-.innerText=
-"Please enter valid values";
-
-return;
-
-}
-
 let discountAmount=
 (price*discount)/100;
 
@@ -1074,8 +761,6 @@ finalPrice.toFixed(2);
 
 }
 
-
-/* PRICE FOR GRAMS */
 
 function gramPrice(){
 
@@ -1108,8 +793,6 @@ price.toFixed(2);
 
 }
 
-
-/* MONEY TO GRAMS */
 
 function moneyGram(){
 
@@ -1144,8 +827,6 @@ grams.toFixed(2)+
 
 }
 
-
-/* AGE */
 
 function todayDate(){
 
@@ -1263,8 +944,6 @@ totalDays;
 }
 
 
-/* NORMAL CALCULATOR */
-
 function normalCalc(op){
 
 let a=parseFloat(
@@ -1316,8 +995,6 @@ document.getElementById("normalResult")
 }
 
 
-/* MOBILE CALCULATOR */
-
 let expression="";
 
 function displayCalc(){
@@ -1329,10 +1006,6 @@ expression||"0";
 }
 
 function numberCalc(n){
-
-if(n==="." && expression.endsWith(".")){
-return;
-}
 
 expression+=n;
 
@@ -1453,25 +1126,82 @@ document.getElementById("calcDisplay")
 }
 
 
-/* WEIGHT PRICE */
-
 function weightPriceCalc(){
 
 let pricePerKg=
 parseFloat(
-document.getElementById("weightPrice").value
+document.getElementById("weightPrice")
+.value
 );
 
 let quantity=
 parseFloat(
-document.getElementById("weightQuantity").value
+document.getElementById("weightQuantity")
+.value
 );
 
 let type=
-document.getElementById("weightType").value;
+document.getElementById("weightType")
+.value;
 
 let resultBox=
 document.getElementById("weightPriceResult");
 
 if(
-isNaN(pricePerKg)
+isNaN(pricePerKg) ||
+isNaN(quantity) ||
+pricePerKg<0 ||
+quantity<0
+){
+
+resultBox.innerText=
+"Please enter valid values";
+
+return;
+
+}
+
+let kg;
+
+if(type==="kg"){
+
+kg=quantity;
+
+}
+
+else if(type==="dhara"){
+
+kg=quantity*5;
+
+}
+
+else if(type==="quintal"){
+
+kg=quantity*100;
+
+}
+
+else if(type==="ton"){
+
+kg=quantity*1000;
+
+}
+
+let total=
+pricePerKg*kg;
+
+resultBox.innerHTML=
+
+"<b>Total Weight:</b> "+
+kg.toFixed(2)+" KG"+
+"<br><br>"+
+
+"<b>Total Price:</b> ₹"+
+total.toFixed(2);
+
+}
+
+</script>
+
+</body>
+    </html>
