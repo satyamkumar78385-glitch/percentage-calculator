@@ -7,31 +7,100 @@
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#eef2ff;color:#111827}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#eef2ff;
+    color:#111827;
+}
+
 .header{
- background:#080b14;color:#fff;text-align:center;padding:24px 10px;
- position:relative;border-bottom:4px solid #4f46e5;
- box-shadow:0 5px 20px #0006
+    background:#080b14;
+    color:#fff;
+    text-align:center;
+    padding:24px 10px;
+    position:relative;
+    border-bottom:4px solid #4f46e5;
+    box-shadow:0 5px 20px #0006;
 }
-.header-title{display:flex;align-items:center;justify-content:center;gap:12px}
-.profile-photo{
- width:58px;height:58px;border-radius:50%;object-fit:cover;
- border:3px solid white;box-shadow:0 3px 10px #0008
+
+.header-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
 }
+
+.profile-circle{
+    width:65px;
+    height:65px;
+    min-width:65px;
+    border-radius:50%;
+    border:3px solid white;
+    background:#111827;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:12px;
+    font-weight:900;
+    line-height:1.15;
+    box-shadow:0 3px 10px rgba(0,0,0,.6);
+}
+
+.profile-circle span:last-child{
+    color:#facc15;
+}
+
 .header h1{
- margin:0;font-size:32px;font-weight:900;letter-spacing:1px
+    margin:0;
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:1px;
 }
-.header p{margin:8px 0 0;font-size:14px;font-weight:bold;color:#ddd}
+
+.header p{
+    margin:8px 0 0;
+    font-size:14px;
+    font-weight:bold;
+    color:#ddd;
+}
+
 .settings-btn{
- position:absolute;right:12px;top:18px;width:auto;margin:0;padding:10px 13px;
- background:white;color:#000;border-radius:12px;font-size:20px
+    position:absolute;
+    right:12px;
+    top:18px;
+    width:auto;
+    margin:0;
+    padding:10px 13px;
+    background:white;
+    color:#000;
+    border-radius:12px;
+    font-size:20px;
 }
-.container{max-width:500px;margin:auto;padding:15px}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:15px;
+}
+
 .card{
- padding:20px;margin-bottom:15px;border-radius:20px;border:3px solid #000;
- box-shadow:0 5px 15px #0003
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:20px;
+    border:3px solid #000;
+    box-shadow:0 5px 15px #0003;
 }
-.card h2,.card h3{color:#000;font-weight:bold}
+
+.card h2,
+.card h3{
+    color:#000;
+    font-weight:bold;
+}
+
 .percentage-card{background:#ffd43b}
 .discount-card{background:#f00}
 .price-card{background:#6ee7a8}
@@ -43,523 +112,1324 @@ body{margin:0;font-family:Arial,sans-serif;background:#eef2ff;color:#111827}
 .unit-card{background:#38bdf8}
 .bank-card{background:#facc15}
 .quantity-card{background:#f97316}
-.normal-card{background:#111;color:#fff}
-.normal-card h2{color:#fff}
+
+.normal-card{
+    background:#111;
+    color:#fff;
+}
+
+.normal-card h2{
+    color:#fff;
+}
+
 input,select{
- width:100%;padding:13px;margin-top:10px;border-radius:11px;
- border:2px solid #000;font-size:16px;background:#fff;color:#000
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    border-radius:11px;
+    border:2px solid #000;
+    font-size:16px;
+    background:#fff;
+    color:#000;
 }
+
 button{
- width:100%;padding:13px;margin-top:10px;border-radius:11px;
- border:2px solid #000;background:#000;color:#fff;font-size:16px;
- font-weight:bold
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    border-radius:11px;
+    border:2px solid #000;
+    background:#000;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
-.normal-card button{background:red}
+
+button:active{
+    transform:scale(.98);
+}
+
+.normal-card button{
+    background:red;
+}
+
 .result{
- margin-top:15px;padding:13px;background:#fff;border:2px solid #000;
- border-radius:11px;text-align:center;line-height:1.8;color:#000;font-weight:bold
+    margin-top:15px;
+    padding:13px;
+    background:#fff;
+    border:2px solid #000;
+    border-radius:11px;
+    text-align:center;
+    line-height:1.8;
+    color:#000;
+    font-weight:bold;
 }
 
 /* MOBILE CALCULATOR */
-.mobile-calculator{background:#000;color:#fff}
-.mobile-calculator h2{color:#fff;text-align:center}
+
+.mobile-calculator{
+    background:#000;
+    color:#fff;
+}
+
+.mobile-calculator h2{
+    color:#fff;
+    text-align:center;
+}
+
 .calc-display{
- width:100%;height:80px;background:#222;color:#fff;border:2px solid #555;
- border-radius:12px;font-size:32px;text-align:right;padding:12px
+    width:100%;
+    height:80px;
+    background:#222;
+    color:#fff;
+    border:2px solid #555;
+    border-radius:12px;
+    font-size:32px;
+    text-align:right;
+    padding:12px;
 }
+
 .calc-buttons{
- display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
 }
+
 .calc-buttons button{
- height:60px;margin:0;padding:0;border:0;border-radius:50%;
- background:#333;color:#fff;font-size:21px
+    height:60px;
+    margin:0;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:#333;
+    color:#fff;
+    font-size:21px;
 }
-.calc-buttons .operator{background:#ff9500}
-.calc-buttons .clear{background:#ff3b30}
-.calc-buttons .equal{background:#34c759}
-.calc-buttons .zero{grid-column:span 2;border-radius:30px}
+
+.calc-buttons .operator{
+    background:#ff9500;
+}
+
+.calc-buttons .clear{
+    background:#ff3b30;
+}
+
+.calc-buttons .equal{
+    background:#34c759;
+}
+
+.calc-buttons .zero{
+    grid-column:span 2;
+    border-radius:30px;
+}
 
 /* SETTINGS */
+
 .settings-panel{
- display:none;position:fixed;top:0;right:0;width:88%;max-width:370px;height:100%;
- background:#fff;color:#000;z-index:1000;padding:25px;overflow-y:auto;
- box-shadow:-5px 0 20px #0004
+    display:none;
+    position:fixed;
+    top:0;
+    right:0;
+    width:88%;
+    max-width:370px;
+    height:100%;
+    background:#fff;
+    color:#000;
+    z-index:1000;
+    padding:25px;
+    overflow-y:auto;
+    box-shadow:-5px 0 20px #0004;
 }
-.settings-item,.about-box{
- padding:15px;margin-top:10px;border-radius:12px;background:#eef2ff
+
+.settings-item,
+.about-box{
+    padding:15px;
+    margin-top:10px;
+    border-radius:12px;
+    background:#eef2ff;
 }
-.about-box{line-height:1.7}
+
+.about-box{
+    line-height:1.7;
+}
+
 .overlay{
- display:none;position:fixed;inset:0;background:#0007;z-index:999
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0007;
+    z-index:999;
 }
-.version{text-align:center;margin:18px 0;color:#6b7280;font-size:14px;font-weight:bold}
+
+.version{
+    text-align:center;
+    margin:18px 0;
+    color:#6b7280;
+    font-size:14px;
+    font-weight:bold;
+}
+
 .note-row{
- display:flex;justify-content:space-between;padding:10px;margin:7px 0;
- background:#f8fafc;border:2px solid #000;border-radius:10px
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    margin:7px 0;
+    background:#f8fafc;
+    border:2px solid #000;
+    border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <div class="header">
+
 <button class="settings-btn" onclick="openSettings()">⚙️</button>
 
 <div class="header-title">
-<img src="6132.webp" class="profile-photo" alt="Profile Photo">
+
+<div class="profile-circle">
+    <span>Satyam</span>
+    <span>Kumar</span>
+</div>
+
 <h1>SMART CALCULATOR</h1>
+
 </div>
 
-<p>Percentage • Discount • Price • Age • GST • EMI • Units • Bank</p>
+<p>
+Percentage • Discount • Price • Age • GST • EMI • Units • Bank
+</p>
+
 </div>
 
-<div class="overlay" id="overlay" onclick="closeSettings()"></div>
 
-<div class="settings-panel" id="settingsPanel">
+<!-- OVERLAY -->
+
+<div class="overlay"
+id="overlay"
+onclick="closeSettings()">
+</div>
+
+
+<!-- SETTINGS -->
+
+<div class="settings-panel"
+id="settingsPanel">
+
 <h2>⚙️ Settings</h2>
 
-<div class="settings-item"><button onclick="darkMode()">🌙 Dark Mode</button></div>
-<div class="settings-item"><button onclick="lightMode()">☀️ Light Mode</button></div>
-<div class="settings-item"><button onclick="shareApp()">🔗 Share App</button></div>
-<div class="settings-item"><button onclick="rateApp()">⭐ Rate App</button></div>
-<div class="settings-item"><button onclick="contactDeveloper()">📧 Contact Developer</button></div>
+<div class="settings-item">
+<button onclick="darkMode()">🌙 Dark Mode</button>
+</div>
+
+<div class="settings-item">
+<button onclick="lightMode()">☀️ Light Mode</button>
+</div>
+
+<div class="settings-item">
+<button onclick="shareApp()">🔗 Share App</button>
+</div>
+
+<div class="settings-item">
+<button onclick="rateApp()">⭐ Rate App</button>
+</div>
+
+<div class="settings-item">
+<button onclick="contactDeveloper()">📧 Contact Developer</button>
+</div>
 
 <div class="about-box">
+
 <h2>About Us</h2>
+
 <p><b>Smart Calculator</b></p>
-<p>Developed by <b>Mr. SATYAM KUMAR</b></p>
+
+<p>
+Developed by
+<b>Mr. SATYAM KUMAR</b>
+</p>
+
 <p><b>Software Developer</b></p>
-<p>Contact Me:<br><b>satyamkumar78385@gmail.com</b></p>
+
+<p>
+Contact Me:<br>
+<b>satyamkumar78385@gmail.com</b>
+</p>
+
 </div>
 
-<div class="version">Smart Calculator<br>Version 1.0.0</div>
-<button onclick="closeSettings()">Close Settings</button>
+<div class="version">
+Smart Calculator<br>
+Version 1.0.0
 </div>
+
+<button onclick="closeSettings()">
+Close Settings
+</button>
+
+</div>
+
 
 <div class="container">
 
-<!-- PERCENTAGE -->
+
+<!-- 1 PERCENTAGE -->
+
 <div class="card percentage-card">
+
 <h2>📊 Percentage Calculator</h2>
-<input id="totalMarks" type="number" placeholder="Enter Total Marks">
-<input id="obtainedMarks" type="number" placeholder="Enter Obtained Marks">
-<input id="percentageInput" type="number" placeholder="Enter Percentage (%)">
-<button onclick="percentageCalc()">Calculate Percentage</button>
-<div class="result" id="percentageResult">Result will appear here</div>
+
+<input
+id="totalMarks"
+type="number"
+placeholder="Enter Total Marks">
+
+<input
+id="obtainedMarks"
+type="number"
+placeholder="Enter Obtained Marks">
+
+<input
+id="percentageInput"
+type="number"
+placeholder="Enter Percentage (%)">
+
+<button onclick="percentageCalc()">
+Calculate Percentage
+</button>
+
+<div class="result"
+id="percentageResult">
+Result will appear here
 </div>
 
-<!-- DISCOUNT -->
+</div>
+
+
+<!-- 2 DISCOUNT -->
+
 <div class="card discount-card">
+
 <h2>🏷️ Discount Calculator</h2>
-<input id="price" type="number" placeholder="Enter Original Price ₹">
-<input id="discount" type="number" placeholder="Enter Discount (%)">
-<button onclick="discountCalc()">Calculate Discount</button>
-<div class="result" id="discountResult">Result will appear here</div>
+
+<input
+id="price"
+type="number"
+placeholder="Enter Original Price ₹">
+
+<input
+id="discount"
+type="number"
+placeholder="Enter Discount (%)">
+
+<button onclick="discountCalc()">
+Calculate Discount
+</button>
+
+<div class="result"
+id="discountResult">
+Result will appear here
 </div>
 
-<!-- PRICE -->
+</div>
+
+
+<!-- 3 PRICE -->
+
 <div class="card price-card">
+
 <h2>🛒 Price Calculator</h2>
+
 <h3>Price for Grams</h3>
-<input id="kgPrice" type="number" placeholder="Price for 1 Kilogram ₹">
-<input id="grams" type="number" placeholder="Enter Grams">
-<button onclick="gramPrice()">Calculate Price</button>
-<div class="result" id="gramResult">Result will appear here</div>
+
+<input
+id="kgPrice"
+type="number"
+placeholder="Price for 1 Kilogram ₹">
+
+<input
+id="grams"
+type="number"
+placeholder="Enter Grams">
+
+<button onclick="gramPrice()">
+Calculate Price
+</button>
+
+<div class="result"
+id="gramResult">
+Result will appear here
+</div>
 
 <h3>Grams for Money</h3>
-<input id="kgPrice2" type="number" placeholder="Price for 1 Kilogram ₹">
-<input id="money" type="number" placeholder="Enter Amount ₹">
-<button onclick="moneyGram()">Calculate Grams</button>
-<div class="result" id="moneyResult">Result will appear here</div>
+
+<input
+id="kgPrice2"
+type="number"
+placeholder="Price for 1 Kilogram ₹">
+
+<input
+id="money"
+type="number"
+placeholder="Enter Amount ₹">
+
+<button onclick="moneyGram()">
+Calculate Grams
+</button>
+
+<div class="result"
+id="moneyResult">
+Result will appear here
 </div>
 
-<!-- AGE -->
+</div>
+
+
+<!-- 4 AGE -->
+
 <div class="card age-card">
+
 <h2>🎂 Age Calculator</h2>
-<input id="dateOfBirth" type="date">
-<input id="calculateDate" type="date">
-<button onclick="todayDate()">Use Today's Date</button>
-<button onclick="ageCalc()">Calculate Age</button>
-<div class="result" id="ageResult">Age will appear here</div>
+
+<input
+id="dateOfBirth"
+type="date">
+
+<input
+id="calculateDate"
+type="date">
+
+<button onclick="todayDate()">
+Use Today's Date
+</button>
+
+<button onclick="ageCalc()">
+Calculate Age
+</button>
+
+<div class="result"
+id="ageResult">
+Age will appear here
 </div>
 
-<!-- NORMAL -->
+</div>
+
+
+<!-- 5 NORMAL CALCULATOR -->
+
 <div class="card normal-card">
+
 <h2>➕ Normal Calculator</h2>
-<input id="number1" type="number" placeholder="Enter First Number">
-<input id="number2" type="number" placeholder="Enter Second Number">
-<button onclick="normalCalc('+')">Add +</button>
-<button onclick="normalCalc('-')">Subtract −</button>
-<button onclick="normalCalc('*')">Multiply ×</button>
-<button onclick="normalCalc('/')">Divide ÷</button>
-<div class="result" id="normalResult">Result will appear here</div>
+
+<input
+id="number1"
+type="number"
+placeholder="Enter First Number">
+
+<input
+id="number2"
+type="number"
+placeholder="Enter Second Number">
+
+<button onclick="normalCalc('+')">
+Add +
+</button>
+
+<button onclick="normalCalc('-')">
+Subtract −
+</button>
+
+<button onclick="normalCalc('*')">
+Multiply ×
+</button>
+
+<button onclick="normalCalc('/')">
+Divide ÷
+</button>
+
+<div class="result"
+id="normalResult">
+Result will appear here
 </div>
 
-<!-- MOBILE -->
+</div>
+
+
+<!-- 6 MOBILE CALCULATOR -->
+
 <div class="card mobile-calculator">
+
 <h2>📱 Calculator</h2>
-<input id="calcDisplay" class="calc-display" value="0" readonly>
+
+<input
+id="calcDisplay"
+class="calc-display"
+value="0"
+readonly>
 
 <div class="calc-buttons">
-<button class="clear" onclick="clearCalc()">C</button>
+
+<button class="clear"
+onclick="clearCalc()">C</button>
+
 <button onclick="backspace()">⌫</button>
+
 <button onclick="percentCalc()">%</button>
-<button class="operator" onclick="operatorCalc('/')">÷</button>
+
+<button class="operator"
+onclick="operatorCalc('/')">÷</button>
 
 <button onclick="numberCalc('7')">7</button>
 <button onclick="numberCalc('8')">8</button>
 <button onclick="numberCalc('9')">9</button>
-<button class="operator" onclick="operatorCalc('*')">×</button>
+
+<button class="operator"
+onclick="operatorCalc('*')">×</button>
 
 <button onclick="numberCalc('4')">4</button>
 <button onclick="numberCalc('5')">5</button>
 <button onclick="numberCalc('6')">6</button>
-<button class="operator" onclick="operatorCalc('-')">−</button>
+
+<button class="operator"
+onclick="operatorCalc('-')">−</button>
 
 <button onclick="numberCalc('1')">1</button>
 <button onclick="numberCalc('2')">2</button>
 <button onclick="numberCalc('3')">3</button>
-<button class="operator" onclick="operatorCalc('+')">+</button>
 
-<button class="zero" onclick="numberCalc('0')">0</button>
+<button class="operator"
+onclick="operatorCalc('+')">+</button>
+
+<button class="zero"
+onclick="numberCalc('0')">0</button>
+
 <button onclick="numberCalc('.')">.</button>
-<button class="equal" onclick="equalCalc()">=</button>
-</div>
+
+<button class="equal"
+onclick="equalCalc()">=</button>
+
 </div>
 
-<!-- WEIGHT -->
+</div>
+
+
+<!-- 7 WEIGHT PRICE -->
+
 <div class="card weight-card">
+
 <h2>⚖️ Weight Price Calculator</h2>
-<p>Enter the price of <b>1 Kilogram</b>.</p>
-<input id="weightPrice" type="number" step="any" min="0" placeholder="Price of 1 KG ₹">
-<input id="weightQuantity" type="number" step="any" min="0" placeholder="Enter Quantity">
+
+<p>
+Enter the price of <b>1 Kilogram</b>.
+</p>
+
+<input
+id="weightPrice"
+type="number"
+step="any"
+min="0"
+placeholder="Price of 1 KG ₹">
+
+<input
+id="weightQuantity"
+type="number"
+step="any"
+min="0"
+placeholder="Enter Quantity">
 
 <select id="weightType">
-<option value="kg">Kilogram (1 KG)</option>
-<option value="dhara">Dhara (1 Dhara = 5 KG)</option>
-<option value="quintal">Quintal (1 Quintal = 100 KG)</option>
-<option value="ton">Ton (1 Ton = 1000 KG)</option>
+
+<option value="kg">
+Kilogram (1 KG)
+</option>
+
+<option value="dhara">
+Dhara (1 Dhara = 5 KG)
+</option>
+
+<option value="quintal">
+Quintal (1 Quintal = 100 KG)
+</option>
+
+<option value="ton">
+Ton (1 Ton = 1000 KG)
+</option>
+
 </select>
 
-<button onclick="weightPriceCalc()">Calculate Total Price</button>
-<div class="result" id="weightPriceResult">Total price will appear here</div>
+<button onclick="weightPriceCalc()">
+Calculate Total Price
+</button>
+
+<div class="result"
+id="weightPriceResult">
+Total price will appear here
 </div>
 
-<!-- CURRENCY -->
+</div>
+
+
+<!-- 8 CURRENCY -->
+
 <div class="card currency-card">
+
 <h2>💱 Currency Calculator</h2>
-<input id="currencyAmount" type="number" step="any" placeholder="Enter Amount">
+
+<input
+id="currencyAmount"
+type="number"
+step="any"
+placeholder="Enter Amount">
 
 <select id="fromCurrency">
-<option value="INR">🇮🇳 INR - Indian Rupee</option>
-<option value="USD">🇺🇸 USD - US Dollar</option>
-<option value="EUR">🇪🇺 EUR - Euro</option>
-<option value="GBP">🇬🇧 GBP - British Pound</option>
-<option value="AED">🇦🇪 AED - UAE Dirham</option>
-<option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+
+<option value="INR">
+🇮🇳 INR - Indian Rupee
+</option>
+
+<option value="USD">
+🇺🇸 USD - US Dollar
+</option>
+
+<option value="EUR">
+🇪🇺 EUR - Euro
+</option>
+
+<option value="GBP">
+🇬🇧 GBP - British Pound
+</option>
+
+<option value="AED">
+🇦🇪 AED - UAE Dirham
+</option>
+
+<option value="JPY">
+🇯🇵 JPY - Japanese Yen
+</option>
+
 </select>
 
 <select id="toCurrency">
-<option value="USD">🇺🇸 USD - US Dollar</option>
-<option value="INR">🇮🇳 INR - Indian Rupee</option>
-<option value="EUR">🇪🇺 EUR - Euro</option>
-<option value="GBP">🇬🇧 GBP - British Pound</option>
-<option value="AED">🇦🇪 AED - UAE Dirham</option>
-<option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+
+<option value="USD">
+🇺🇸 USD - US Dollar
+</option>
+
+<option value="INR">
+🇮🇳 INR - Indian Rupee
+</option>
+
+<option value="EUR">
+🇪🇺 EUR - Euro
+</option>
+
+<option value="GBP">
+🇬🇧 GBP - British Pound
+</option>
+
+<option value="AED">
+🇦🇪 AED - UAE Dirham
+</option>
+
+<option value="JPY">
+🇯🇵 JPY - Japanese Yen
+</option>
+
 </select>
 
-<button onclick="currencyCalc()">💱 Convert Currency</button>
-<div class="result" id="currencyResult">Conversion result will appear here</div>
+<button onclick="currencyCalc()">
+💱 Convert Currency
+</button>
+
+<div class="result"
+id="currencyResult">
+Conversion result will appear here
 </div>
 
-<!-- GST -->
+</div>
+
+
+<!-- 9 GST -->
+
 <div class="card gst-card">
+
 <h2>🧾 GST Calculator</h2>
-<input id="gstAmount" type="number" step="any" placeholder="Enter Amount ₹">
+
+<input
+id="gstAmount"
+type="number"
+step="any"
+placeholder="Enter Amount ₹">
 
 <select id="gstRate">
-<option value="5">GST 5%</option>
-<option value="12">GST 12%</option>
-<option value="18" selected>GST 18%</option>
-<option value="28">GST 28%</option>
+
+<option value="5">
+GST 5%
+</option>
+
+<option value="12">
+GST 12%
+</option>
+
+<option value="18" selected>
+GST 18%
+</option>
+
+<option value="28">
+GST 28%
+</option>
+
 </select>
 
 <select id="gstType">
-<option value="add">Add GST to Amount</option>
-<option value="remove">Remove GST from Total Amount</option>
+
+<option value="add">
+Add GST to Amount
+</option>
+
+<option value="remove">
+Remove GST from Total Amount
+</option>
+
 </select>
 
-<button onclick="gstCalc()">🧾 Calculate GST</button>
-<div class="result" id="gstResult">GST result will appear here</div>
+<button onclick="gstCalc()">
+🧾 Calculate GST
+</button>
+
+<div class="result"
+id="gstResult">
+GST result will appear here
 </div>
 
-<!-- EMI -->
+</div>
+
+
+<!-- 10 EMI -->
+
 <div class="card emi-card">
+
 <h2>🏦 EMI Loan Calculator</h2>
-<input id="loanAmount" type="number" step="any" placeholder="Loan Amount ₹">
-<input id="interestRate" type="number" step="any" placeholder="Annual Interest Rate (%)">
-<input id="loanYears" type="number" step="any" placeholder="Loan Period (Years)">
-<button onclick="emiCalc()">🏦 Calculate Monthly EMI</button>
-<div class="result" id="emiResult">EMI result will appear here</div>
+
+<input
+id="loanAmount"
+type="number"
+step="any"
+placeholder="Loan Amount ₹">
+
+<input
+id="interestRate"
+type="number"
+step="any"
+placeholder="Annual Interest Rate (%)">
+
+<input
+id="loanYears"
+type="number"
+step="any"
+placeholder="Loan Period (Years)">
+
+<button onclick="emiCalc()">
+🏦 Calculate Monthly EMI
+</button>
+
+<div class="result"
+id="emiResult">
+EMI result will appear here
 </div>
 
-<!-- UNIT -->
+</div>
+
+
+<!-- 11 UNIT CONVERTER -->
+
 <div class="card unit-card">
+
 <h2>🔄 Unit Converter</h2>
 
-<select id="unitCategory" onchange="changeUnitCategory()">
-<option value="weight">⚖️ Weight</option>
-<option value="length">📏 Length</option>
-<option value="volume">🧴 Volume</option>
-<option value="temperature">🌡️ Temperature</option>
-<option value="time">⏱️ Time</option>
-<option value="area">🏠 Area</option>
+<select id="unitCategory"
+onchange="changeUnitCategory()">
+
+<option value="weight">
+⚖️ Weight
+</option>
+
+<option value="length">
+📏 Length
+</option>
+
+<option value="volume">
+🧴 Volume
+</option>
+
+<option value="temperature">
+🌡️ Temperature
+</option>
+
+<option value="time">
+⏱️ Time
+</option>
+
+<option value="area">
+🏠 Area
+</option>
+
 </select>
 
-<input id="unitValue" type="number" step="any" placeholder="Enter Value">
+<input
+id="unitValue"
+type="number"
+step="any"
+placeholder="Enter Value">
+
 <select id="unitFrom"></select>
+
 <select id="unitTo"></select>
-<button onclick="unitConvert()">🔄 Convert</button>
-<div class="result" id="unitResult">Conversion result will appear here</div>
+
+<button onclick="unitConvert()">
+🔄 Convert
+</button>
+
+<div class="result"
+id="unitResult">
+Conversion result will appear here
 </div>
 
-<!-- BANK -->
+</div>
+
+
+<!-- 12 BANK NOTE -->
+
 <div class="card bank-card">
+
 <h2>🏦 🏧 BANK NOTE CALCULATOR</h2>
-<p>Enter amount to see ₹500, ₹200, ₹100, ₹50, ₹20 और ₹10 notes.</p>
 
-<input id="bankAmount" type="number" min="1" step="1" placeholder="Enter Amount ₹">
-<button onclick="bankNoteCalc()">🏦 Calculate Notes</button>
+<p>
+Enter amount to calculate ₹500, ₹200, ₹100,
+₹50, ₹20 और ₹10 notes.
+</p>
 
-<div class="result" id="bankNoteResult">Note calculation will appear here</div>
+<input
+id="bankAmount"
+type="number"
+min="1"
+step="1"
+placeholder="Enter Amount ₹">
+
+<button onclick="bankNoteCalc()">
+🏦 Calculate Notes
+</button>
+
+<div class="result"
+id="bankNoteResult">
+Note calculation will appear here
 </div>
 
-<!-- QUANTITY -->
+</div>
+
+
+<!-- 13 QUANTITY -->
+
 <div class="card quantity-card">
+
 <h2>✏️ Quantity Price Calculator</h2>
-<p><b>Example:</b> ₹10 में 20 Pencil हैं। तो ₹5 में कितनी Pencil मिलेंगी?</p>
 
-<input id="itemPrice" type="number" step="any" min="0" placeholder="Price of Items ₹">
-<input id="itemQuantity" type="number" step="any" min="0" placeholder="Quantity at This Price">
-<input id="customerMoney" type="number" step="any" min="0" placeholder="Customer Money ₹">
+<p>
+<b>Example:</b>
+₹10 में 20 Pencil हैं।
+तो ₹5 में कितनी Pencil मिलेंगी?
+</p>
 
-<button onclick="quantityPriceCalc()">🧮 Calculate Quantity</button>
-<div class="result" id="quantityResult">Quantity result will appear here</div>
+<input
+id="itemPrice"
+type="number"
+step="any"
+min="0"
+placeholder="Price of Items ₹">
+
+<input
+id="itemQuantity"
+type="number"
+step="any"
+min="0"
+placeholder="Quantity at This Price">
+
+<input
+id="customerMoney"
+type="number"
+step="any"
+min="0"
+placeholder="Customer Money ₹">
+
+<button onclick="quantityPriceCalc()">
+🧮 Calculate Quantity
+</button>
+
+<div class="result"
+id="quantityResult">
+Quantity result will appear here
 </div>
 
 </div>
+
+</div>
+
 
 <script>
 
 /* SETTINGS */
+
 function openSettings(){
-settingsPanel.style.display="block";
-overlay.style.display="block";
+document.getElementById("settingsPanel").style.display="block";
+document.getElementById("overlay").style.display="block";
 }
+
 function closeSettings(){
-settingsPanel.style.display="none";
-overlay.style.display="none";
+document.getElementById("settingsPanel").style.display="none";
+document.getElementById("overlay").style.display="none";
 }
+
 function darkMode(){
 document.body.style.background="#111827";
 document.body.style.color="white";
 }
+
 function lightMode(){
 document.body.style.background="#eef2ff";
 document.body.style.color="#111827";
 }
+
 function shareApp(){
+
 if(navigator.share){
-navigator.share({title:"Smart Calculator",text:"Check out my Smart Calculator app!"});
-}else alert("Smart Calculator");
+
+navigator.share({
+title:"Smart Calculator",
+text:"Check out my Smart Calculator app!"
+});
+
+}else{
+
+alert("Smart Calculator");
+
 }
-function rateApp(){alert("Thank you for supporting Smart Calculator!")}
-function contactDeveloper(){location.href="mailto:satyamkumar78385@gmail.com"}
+
+}
+
+function rateApp(){
+alert("Thank you for supporting Smart Calculator!");
+}
+
+function contactDeveloper(){
+location.href="mailto:satyamkumar78385@gmail.com";
+}
 
 
 /* PERCENTAGE */
+
 function percentageCalc(){
-let t=parseFloat(totalMarks.value),o=parseFloat(obtainedMarks.value),p=parseFloat(percentageInput.value),r="";
+
+let t=parseFloat(
+document.getElementById("totalMarks").value
+);
+
+let o=parseFloat(
+document.getElementById("obtainedMarks").value
+);
+
+let p=parseFloat(
+document.getElementById("percentageInput").value
+);
+
+let r="";
+
 if(!isNaN(t)&&!isNaN(o)){
-if(t<=0)r="Total Marks must be greater than 0";
-else if(o>t)r="Obtained Marks cannot be greater than Total Marks";
-else r="Percentage = "+((o/t)*100).toFixed(2)+"%";
-}else if(!isNaN(t)&&!isNaN(p)){
+
+if(t<=0){
+
+r="Total Marks must be greater than 0";
+
+}
+
+else if(o>t){
+
+r="Obtained Marks cannot be greater than Total Marks";
+
+}
+
+else{
+
+r="Percentage = "+((o/t)*100).toFixed(2)+"%";
+
+}
+
+}
+
+else if(!isNaN(t)&&!isNaN(p)){
+
 r="Obtained Marks = "+((t*p)/100).toFixed(2);
-}else if(!isNaN(o)&&!isNaN(p)&&p>0){
+
+}
+
+else if(!isNaN(o)&&!isNaN(p)&&p>0){
+
 r="Total Marks = "+((o*100)/p).toFixed(2);
-}else r="Enter any two values";
-percentageResult.innerText=r;
+
+}
+
+else{
+
+r="Enter any two values";
+
+}
+
+document.getElementById("percentageResult").innerText=r;
+
 }
 
 
 /* DISCOUNT */
+
 function discountCalc(){
-let p=parseFloat(price.value),d=parseFloat(discount.value);
+
+let p=parseFloat(
+document.getElementById("price").value
+);
+
+let d=parseFloat(
+document.getElementById("discount").value
+);
+
 if(isNaN(p)||isNaN(d)||p<0||d<0||d>100){
-discountResult.innerText="Please enter valid values";return;
+
+document.getElementById("discountResult").innerText=
+"Please enter valid values";
+
+return;
+
 }
+
 let da=p*d/100;
-discountResult.innerText="Discount = ₹"+da.toFixed(2)+" | Final Price = ₹"+(p-da).toFixed(2);
+
+document.getElementById("discountResult").innerText=
+"Discount = ₹"+da.toFixed(2)+
+" | Final Price = ₹"+(p-da).toFixed(2);
+
 }
 
 
 /* PRICE */
+
 function gramPrice(){
-let k=parseFloat(kgPrice.value),g=parseFloat(grams.value);
-if(isNaN(k)||isNaN(g)){gramResult.innerText="Please enter both values";return}
-gramResult.innerText=g+" grams = ₹"+((k/1000)*g).toFixed(2);
+
+let k=parseFloat(
+document.getElementById("kgPrice").value
+);
+
+let g=parseFloat(
+document.getElementById("grams").value
+);
+
+if(isNaN(k)||isNaN(g)){
+
+document.getElementById("gramResult").innerText=
+"Please enter both values";
+
+return;
+
 }
 
+document.getElementById("gramResult").innerText=
+g+" grams = ₹"+((k/1000)*g).toFixed(2);
+
+}
+
+
 function moneyGram(){
-let k=parseFloat(kgPrice2.value),m=parseFloat(money.value);
-if(isNaN(k)||isNaN(m)||k<=0){moneyResult.innerText="Please enter valid values";return}
-moneyResult.innerText="₹"+m+" = "+((m/k)*1000).toFixed(2)+" grams";
+
+let k=parseFloat(
+document.getElementById("kgPrice2").value
+);
+
+let m=parseFloat(
+document.getElementById("money").value
+);
+
+if(isNaN(k)||isNaN(m)||k<=0){
+
+document.getElementById("moneyResult").innerText=
+"Please enter valid values";
+
+return;
+
+}
+
+document.getElementById("moneyResult").innerText=
+"₹"+m+" = "+((m/k)*1000).toFixed(2)+" grams";
+
 }
 
 
 /* AGE */
+
 function todayDate(){
+
 let d=new Date();
-calculateDate.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+
+document.getElementById("calculateDate").value=
+d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
+
 }
+
 
 function ageCalc(){
-let d=dateOfBirth.value,e=calculateDate.value;
-if(!d||!e){ageResult.innerText="Please enter both dates";return}
-let b=new Date(d+"T00:00:00"),x=new Date(e+"T00:00:00");
-if(b>x){ageResult.innerText="Invalid dates";return}
+
+let d=document.getElementById("dateOfBirth").value;
+
+let e=document.getElementById("calculateDate").value;
+
+if(!d||!e){
+
+document.getElementById("ageResult").innerText=
+"Please enter both dates";
+
+return;
+
+}
+
+let b=new Date(d+"T00:00:00");
+
+let x=new Date(e+"T00:00:00");
+
+if(b>x){
+
+document.getElementById("ageResult").innerText=
+"Invalid dates";
+
+return;
+
+}
 
 let y=x.getFullYear()-b.getFullYear();
+
 let m=x.getMonth()-b.getMonth();
+
 let day=x.getDate()-b.getDate();
 
-if(day<0){m--;day+=new Date(x.getFullYear(),x.getMonth(),0).getDate()}
-if(m<0){y--;m+=12}
+if(day<0){
 
-ageResult.innerHTML="<b>Years:</b> "+y+" &nbsp; <b>Months:</b> "+m+" &nbsp; <b>Days:</b> "+day+
-"<hr><b>Total Months:</b> "+(y*12+m)+"<br><b>Total Days:</b> "+Math.floor((x-b)/86400000);
+m--;
+
+day+=new Date(
+x.getFullYear(),
+x.getMonth(),
+0
+).getDate();
+
+}
+
+if(m<0){
+
+y--;
+
+m+=12;
+
+}
+
+document.getElementById("ageResult").innerHTML=
+"<b>Years:</b> "+y+
+" &nbsp; <b>Months:</b> "+m+
+" &nbsp; <b>Days:</b> "+day+
+"<hr>"+
+"<b>Total Months:</b> "+(y*12+m)+
+"<br>"+
+"<b>Total Days:</b> "+Math.floor((x-b)/86400000);
+
 }
 
 
-/* NORMAL */
+/* NORMAL CALCULATOR */
+
 function normalCalc(op){
-let a=parseFloat(number1.value),b=parseFloat(number2.value);
-if(isNaN(a)||isNaN(b)){normalResult.innerText="Please enter both numbers";return}
-if(op==="/"&&b===0){normalResult.innerText="Cannot divide by zero";return}
-let r=op==="+"?a+b:op==="-"?a-b:op==="*"?a*b:a/b;
-normalResult.innerText="Result = "+r;
+
+let a=parseFloat(
+document.getElementById("number1").value
+);
+
+let b=parseFloat(
+document.getElementById("number2").value
+);
+
+if(isNaN(a)||isNaN(b)){
+
+document.getElementById("normalResult").innerText=
+"Please enter both numbers";
+
+return;
+
+}
+
+if(op==="/"&&b===0){
+
+document.getElementById("normalResult").innerText=
+"Cannot divide by zero";
+
+return;
+
+}
+
+let r;
+
+if(op==="+")r=a+b;
+
+if(op==="-")r=a-b;
+
+if(op==="*")r=a*b;
+
+if(op==="/")r=a/b;
+
+document.getElementById("normalResult").innerText=
+"Result = "+r;
+
 }
 
 
-/* MOBILE */
+/* MOBILE CALCULATOR */
+
 let expression="";
-function displayCalc(){calcDisplay.value=expression||"0"}
+
+function displayCalc(){
+
+document.getElementById("calcDisplay").value=
+expression||"0";
+
+}
+
 function numberCalc(n){
+
 if(n==="."&&expression.endsWith("."))return;
-expression+=n;displayCalc();
+
+expression+=n;
+
+displayCalc();
+
 }
+
 function operatorCalc(op){
+
 if(!expression)return;
-if("+-*/".includes(expression.slice(-1)))expression=expression.slice(0,-1);
-expression+=op;displayCalc();
+
+if("+-*/".includes(expression.slice(-1))){
+
+expression=expression.slice(0,-1);
+
 }
-function clearCalc(){expression="";displayCalc()}
-function backspace(){expression=expression.slice(0,-1);displayCalc()}
+
+expression+=op;
+
+displayCalc();
+
+}
+
+function clearCalc(){
+
+expression="";
+
+displayCalc();
+
+}
+
+function backspace(){
+
+expression=expression.slice(0,-1);
+
+displayCalc();
+
+}
+
 function percentCalc(){
+
 let m=expression.match(/(\d+\.?\d*)$/);
+
 if(!m)return;
-expression=expression.slice(0,-m[1].length)+(parseFloat(m[1])/100);
+
+expression=
+expression.slice(0,-m[1].length)+
+(parseFloat(m[1])/100);
+
 displayCalc();
+
 }
+
 function equalCalc(){
-if(!expression||"+-*/".includes(expression.slice(-1)))return;
+
+if(!expression||
+"+-*/".includes(expression.slice(-1)))return;
+
 try{
-let r=Function('"use strict";return ('+expression+')')();
+
+let r=Function(
+'"use strict";return ('+
+expression+
+')'
+)();
+
 if(!Number.isFinite(r))throw 0;
-expression=String(Math.round(r*100000000)/100000000);
+
+expression=String(
+Math.round(r*100000000)/100000000
+);
+
 displayCalc();
-}catch{
-expression="";calcDisplay.value="Error";
+
 }
+
+catch{
+
+expression="";
+
+document.getElementById("calcDisplay").value="Error";
+
+}
+
 }
 
 
 /* WEIGHT */
+
 function weightPriceCalc(){
-let p=parseFloat(weightPrice.value),q=parseFloat(weightQuantity.value),t=weightType.value;
-if(isNaN(p)||isNaN(q)||p<0||q<0){weightPriceResult.innerText="Please enter valid values";return}
-let kg=t==="kg"?q:t==="dhara"?q*5:t==="quintal"?q*100:q*1000;
-weightPriceResult.innerHTML="<b>Total Weight:</b> "+kg.toFixed(2)+" KG<br><br><b>Total Price:</b> ₹"+(p*kg).toFixed(2);
+
+let p=parseFloat(
+document.getElementById("weightPrice").value
+);
+
+let q=parseFloat(
+document.getElementById("weightQuantity").value
+);
+
+let t=document.getElementById("weightType").value;
+
+if(isNaN(p)||isNaN(q)||p<0||q<0){
+
+document.getElementById("weightPriceResult").innerText=
+"Please enter valid values";
+
+return;
+
 }
 
+let kg;
 
-/* CURRENCY */
-const rates={INR:1,USD:.0119,EUR:.0101,GBP:.0088,AED:.0437,JPY:1.77};
+if(t==="kg")kg=q;
 
-function currencyCalc(){
-let a=parseFloat(currencyAmount.value),f=fromCurrency.value,t=toCurrency.value;
-if(isNaN(a)||a<0){currencyResult.innerText="Please enter a valid amount";return}
-let r=(a/rates[f])*rates[t];
-currencyResult.innerHTML="<b>"+a.toFixed(2)+" "+f+"</b><br>=<br><b>"+r.toFixed(2)+" "+t+"</b>";
-}
+else if(t==="dhara")kg=q*5;
 
-
-/* GST */
-function gstCalc(){
-let a=parseFloat(gstAmount.value),r=parseFloat(gstRate.value),type=gstType.value;
-if(isNaN(a)||a<0){gstResult.innerText="Please enter a valid amount";return}
-
-if(type==="add"){
-let g=a*r/100;
-gstResult.innerHTML="<b>Original Amount:</b> ₹"+a.toFixed(2)+"<br><b>GST ("+r+"%):</b> ₹"+g.toFixed(2)+"<br><b>Total:</b> ₹"+(a+g).toFixed(2);
-}else{
-let original=a/(1+r/100),g=a-original;
-gstResult.innerHTML="<b>Total:</b> ₹"+a.toFixed(2)+"<br><b>GST:</b> ₹"+g.toFixed(2)+"<br><b>Before GST:</b> ₹"+original.toFixed(2);
-}
-}
-
-
-/* EMI */
-function emiCalc(){
-let p=parseFloat(loanAmount.value),rate=parseFloat(interestRate.value),y=parseFloat(loanYears.value);
-if(isNaN(p)||isNaN(rate)||isNaN(y)||p<=0||rate<0||y<=0){
-emiResult.innerText="Please enter valid loan details";return;
-}
-let n=y*12,r=rate/1200;
-let emi=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-let total=emi*n;
-emiResult.innerHTML="<b>Monthly EMI:</b> ₹"+emi.toFixed(2)+"<br><b>Total Interest:</b> ₹"+(total-p).toFixed(2)+"<br><b>Total Payment:</b> ₹"+total.toFixed(2)+"<br><b>Period:</b> "+n+" Months";
-}
-
-
-/* UNIT */
-const units={
-weight:{"Kilogram (kg)":1,"Gram (g)":1000,"Milligram (mg)":1000000,"Quintal":.01,"Ton":.001},
-length:{"Meter (m)":1,"Kilometer (km)":.001,"Centimeter (cm)":100,"Millimeter (mm)":1000,"Foot (ft)":3.28084,"Inch (in)":39.37008},
-volume:{"Litre (L)":1,"Millilitre (mL)":1000,"Cubic Meter (m³)":.001,"Cubic Centimeter (cm³)":1000},
-time:{"Second":1,"Minute":1/60,"Hour":1/3600,"Day":1/86400},
-area:{"Square Meter (m²)":1,"Square Kilometer (km²)":.000001,"Square Foot (ft²)":10.7639,"Square Inch (in²)":1550,"Acre":.000247105,"Hectare":.0001}
-};
-
-function changeUnitCategory(){
-let c=unitCategory.value;
-unitFrom.innerHTML="";unitTo.innerHTML="";
-let arr=c==="temperature"?["Celsius (°C)","Fahrenheit (°F)","Kelvin (K)"]:Object.keys(units[c]);
-arr.forEach(u=>{
-unitFrom.add(new Option(u,u));
-unitTo.add(new Option(u,u));
-});
-if(unitTo.options.length>1)unitTo.selectedIndex=1;
-}
-
-function tempConvert(v,f,t){
-let c=f==="Celsius (°C)"?v:f==="Fahrenheit (°F)"?(v-32)*5/9:v-273.15;
-return t==="Celsius (°C)"?c:t==="Fahrenheit (°F)"?c*9/5+32:c+273.15;
-}
-
-function unitConvert(){
-let v=parseFloat(unitValue.value),c=unitCategory.value,f=unitFrom.value,t=unitTo.value;
-if(isNaN(v)){unitResult.innerText="Please enter a valid value";return}
-let r=c==="temperature"?tempConvert(v,f,t):(v/units[c][f])*units[c][t];
-unitResult.innerHTML="<b>"+v+" "+f+"</b><br>=<
+else if(t==="quintal")kg=q*100;
