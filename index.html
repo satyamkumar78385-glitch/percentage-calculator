@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Percentage Calculator</title>
+<title>Satyam Calculator</title>
 
 <style>
 *{
@@ -15,112 +15,320 @@
 body{
     margin:0;
     min-height:100vh;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* TOP BAR */
+.topbar{
+    height:65px;
+    background:white;
+    display:flex;
+    align-items:center;
+    padding:0 16px;
+    box-shadow:0 3px 15px #0001;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.menu-btn{
+    width:45px;
+    height:45px;
+    border:0;
+    background:#eef2ff;
+    color:#4f46e5;
+    border-radius:12px;
+    font-size:24px;
+}
+
+.logo{
+    margin-left:14px;
+    font-size:21px;
+    font-weight:bold;
+}
+
+/* SIDE MENU */
+.menu{
+    position:fixed;
+    top:0;
+    left:-290px;
+    width:270px;
+    height:100%;
+    background:white;
+    z-index:1000;
+    box-shadow:5px 0 25px #0003;
+    transition:.3s;
     padding:20px;
-    background:linear-gradient(135deg,#ff0080,#7928ca,#00c6ff);
 }
 
+.menu.open{
+    left:0;
+}
+
+.menu-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    padding-bottom:15px;
+}
+
+.menu-header h2{
+    margin:0;
+    color:#4f46e5;
+}
+
+.close{
+    border:0;
+    background:#fee2e2;
+    color:#dc2626;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    font-size:20px;
+}
+
+.menu-item{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:0;
+    background:#f5f7ff;
+    border-radius:12px;
+    text-align:left;
+    font-size:16px;
+}
+
+/* OVERLAY */
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0005;
+    z-index:900;
+}
+
+.overlay.show{
+    display:block;
+}
+
+/* MAIN */
 .container{
-    max-width:450px;
+    max-width:470px;
     margin:auto;
+    padding:25px 16px 35px;
 }
 
-.header{
-    text-align:center;
+.welcome{
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
     color:white;
+    padding:25px;
+    border-radius:22px;
     margin-bottom:20px;
+    box-shadow:0 10px 25px #4f46e544;
 }
 
-.header h1{
-    margin:5px;
-    font-size:30px;
+.welcome h1{
+    margin:0 0 7px;
+    font-size:27px;
 }
 
-.header p{
-    margin:5px;
+.welcome p{
+    margin:0;
     opacity:.9;
 }
 
+/* CARD */
 .card{
-    background:rgba(255,255,255,.96);
+    background:white;
     padding:22px;
-    border-radius:25px;
-    box-shadow:0 15px 35px #0004;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 5px 20px #0000000d;
+    border:1px solid #edf0f7;
 }
 
 .card h2{
-    margin-top:0;
-    color:#4c1d95;
+    margin:0 0 18px;
+    font-size:20px;
+}
+
+.label{
+    font-size:13px;
+    color:#6b7280;
+    margin-top:12px;
+    display:block;
 }
 
 input{
     width:100%;
     padding:14px;
-    margin:7px 0;
-    border:2px solid #ddd;
-    border-radius:12px;
-    font-size:16px;
+    margin-top:6px;
+    border:1px solid #dce1eb;
+    border-radius:11px;
     outline:none;
+    font-size:16px;
+    background:#fafbfe;
 }
 
 input:focus{
-    border-color:#7c3aed;
+    border-color:#6366f1;
+    background:white;
 }
 
-button{
+.calculate{
     width:100%;
     padding:14px;
-    margin-top:10px;
+    margin-top:16px;
     border:0;
-    border-radius:12px;
+    border-radius:11px;
     color:white;
     font-size:16px;
     font-weight:bold;
-    cursor:pointer;
-    background:linear-gradient(90deg,#ff0080,#7c3aed);
+    background:#4f46e5;
 }
 
 .clear{
-    background:linear-gradient(90deg,#ff4b2b,#ff416c);
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:0;
+    border-radius:11px;
+    background:#f1f5f9;
+    color:#475569;
+    font-size:15px;
 }
 
 .result{
-    margin-top:15px;
-    padding:18px;
-    border-radius:15px;
+    margin-top:16px;
+    padding:17px;
+    background:#f5f3ff;
+    border-radius:12px;
     text-align:center;
-    background:linear-gradient(135deg,#dbeafe,#f3e8ff);
-    color:#4c1d95;
-    font-size:25px;
+    color:#4f46e5;
+    font-size:21px;
+    font-weight:bold;
+    line-height:1.6;
+}
+
+/* ABOUT */
+.about{
+    display:none;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 5px 20px #0001;
+}
+
+.about h2{
+    color:#4f46e5;
+}
+
+.about p{
+    line-height:1.7;
+    color:#555;
+}
+
+/* CONTACT BOX */
+.contact-box{
+    margin-top:22px;
+    padding:20px;
+    border-radius:18px;
+    background:linear-gradient(
+        135deg,
+        #ff0080,
+        #7c3aed,
+        #00c6ff
+    );
+    color:white;
+    box-shadow:0 10px 25px #7c3aed44;
+}
+
+.contact-box h3{
+    margin:0 0 12px;
+    font-size:21px;
+}
+
+.instagram-box{
+    display:block;
+    margin-top:12px;
+    padding:13px;
+    background:#ffffff22;
+    border:1px solid #ffffff55;
+    border-radius:12px;
+    color:white;
     font-weight:bold;
 }
 
 .footer{
     text-align:center;
-    color:white;
-    margin-top:20px;
-    font-size:14px;
+    color:#777;
+    font-size:13px;
+    margin-top:25px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- TOP BAR -->
+<div class="topbar">
 
-    <div class="header">
-        <h1>🌈 Smart Percentage</h1>
-        <p>Easy • Fast • Accurate</p>
+    <button class="menu-btn" onclick="openMenu()">
+        ☰
+    </button>
+
+    <div class="logo">
+        Calculator
     </div>
 
+</div>
+
+
+<!-- MENU -->
+<div class="menu" id="menu">
+
+    <div class="menu-header">
+        <h2>Menu</h2>
+
+        <button class="close" onclick="closeMenu()">
+            ×
+        </button>
+    </div>
+
+    <button class="menu-item" onclick="showHome()">
+        🏠 Home
+    </button>
+
+    <button class="menu-item" onclick="showAbout()">
+        ℹ️ About
+    </button>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+<div class="container">
+
+<!-- HOME -->
+<div id="home">
+
+    <div class="welcome">
+        <h1>Smart Calculator</h1>
+        <p>Simple • Fast • Accurate</p>
+    </div>
+
+
+    <!-- PERCENTAGE -->
     <div class="card">
 
-        <h2>📚 Marks Percentage</h2>
+        <h2>📊 Percentage Calculator</h2>
 
-        <input
-            id="obtained"
-            type="number"
-            placeholder="Obtained Marks"
-        >
+        <label class="label">
+            Enter Total Marks
+        </label>
 
         <input
             id="total"
@@ -128,65 +336,357 @@ button{
             placeholder="Total Marks"
         >
 
-        <button onclick="calculate()">
-            Calculate Percentage
+        <label class="label">
+            Enter Obtained Marks
+        </label>
+
+        <input
+            id="obtained"
+            type="number"
+            placeholder="Obtained Marks"
+        >
+
+        <label class="label">
+            Enter Percentage
+        </label>
+
+        <input
+            id="percentage"
+            type="number"
+            placeholder="Percentage %"
+        >
+
+        <button class="calculate" onclick="calculatePercentage()">
+            Calculate
         </button>
 
-        <button class="clear" onclick="clearData()">
+        <button class="clear" onclick="clearPercentage()">
             Clear
         </button>
 
-        <div class="result" id="result">
-            0.00%
+        <div class="result" id="percentageResult">
+            Answer will appear here
+        </div>
+
+    </div>
+
+
+    <!-- DISCOUNT -->
+    <div class="card">
+
+        <h2>🏷️ Discount Calculator</h2>
+
+        <label class="label">
+            Original Price
+        </label>
+
+        <input
+            id="price"
+            type="number"
+            placeholder="Enter price ₹"
+        >
+
+        <label class="label">
+            Discount
+        </label>
+
+        <input
+            id="discount"
+            type="number"
+            placeholder="Enter discount %"
+        >
+
+        <button class="calculate" onclick="calculateDiscount()">
+            Calculate Discount
+        </button>
+
+        <button class="clear" onclick="clearDiscount()">
+            Clear
+        </button>
+
+        <div class="result" id="discountResult">
+            ₹0.00
         </div>
 
     </div>
 
     <div class="footer">
-        Made with ❤️ by Satyam Kumar
+        © 2026 Satyam Calculator
     </div>
 
 </div>
 
+
+<!-- ABOUT -->
+<div class="about" id="about">
+
+    <h2>ℹ️ About</h2>
+
+    <p>
+        <b>Mr. Satyam Kumar</b>
+    </p>
+
+    <p>
+        Software Engineer
+    </p>
+
+    <p>
+        This calculator is designed to make
+        everyday calculations simple and fast.
+    </p>
+
+
+    <!-- COLORFUL CONTACT BOX -->
+    <div class="contact-box">
+
+        <h3>📩 Contact Us</h3>
+
+        <div>
+            Connect with us on Instagram
+        </div>
+
+        <div class="instagram-box">
+            📸 Instagram — Satyambind0062
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
 <script>
 
-function calculate(){
+/* MENU */
 
-    let obtained =
-        Number(document.getElementById("obtained").value);
+function openMenu(){
+
+    document.getElementById("menu")
+        .classList.add("open");
+
+    document.getElementById("overlay")
+        .classList.add("show");
+}
+
+function closeMenu(){
+
+    document.getElementById("menu")
+        .classList.remove("open");
+
+    document.getElementById("overlay")
+        .classList.remove("show");
+}
+
+
+/* HOME */
+
+function showHome(){
+
+    document.getElementById("home")
+        .style.display="block";
+
+    document.getElementById("about")
+        .style.display="none";
+
+    closeMenu();
+}
+
+
+/* ABOUT */
+
+function showAbout(){
+
+    document.getElementById("home")
+        .style.display="none";
+
+    document.getElementById("about")
+        .style.display="block";
+
+    closeMenu();
+}
+
+
+/* PERCENTAGE */
+
+function calculatePercentage(){
 
     let total =
         Number(document.getElementById("total").value);
 
-    if(total <= 0 || obtained < 0 || obtained > total){
+    let obtained =
+        Number(document.getElementById("obtained").value);
 
-        document.getElementById("result").innerText =
-        "⚠️ Enter valid marks";
+    let percentage =
+        Number(document.getElementById("percentage").value);
+
+
+    let filled = 0;
+
+    if(total > 0) filled++;
+    if(obtained >= 0 && document.getElementById("obtained").value !== "") filled++;
+    if(percentage >= 0 && document.getElementById("percentage").value !== "") filled++;
+
+
+    if(filled < 2){
+
+        document.getElementById("percentageResult").innerText =
+            "⚠️ Any 2 values enter करें";
 
         return;
     }
 
-    let percentage =
-        (obtained / total) * 100;
 
-    document.getElementById("result").innerText =
-        "🎯 " + percentage.toFixed(2) + "%";
+    /* TOTAL + OBTAINED = PERCENTAGE */
+
+    if(
+        total > 0 &&
+        document.getElementById("obtained").value !== "" &&
+        document.getElementById("percentage").value === ""
+    ){
+
+        if(obtained > total){
+
+            document.getElementById("percentageResult").innerText =
+                "⚠️ Obtained marks cannot exceed total";
+
+            return;
+        }
+
+        let answer =
+            (obtained / total) * 100;
+
+        document.getElementById("percentage").value =
+            answer.toFixed(2);
+
+        document.getElementById("percentageResult").innerText =
+            "🎯 Percentage = " + answer.toFixed(2) + "%";
+
+        return;
+    }
+
+
+    /* TOTAL + PERCENTAGE = OBTAINED */
+
+    if(
+        total > 0 &&
+        document.getElementById("percentage").value !== "" &&
+        document.getElementById("obtained").value === ""
+    ){
+
+        if(percentage > 100){
+
+            document.getElementById("percentageResult").innerText =
+                "⚠️ Percentage cannot exceed 100";
+
+            return;
+        }
+
+        let answer =
+            (total * percentage) / 100;
+
+        document.getElementById("obtained").value =
+            answer.toFixed(2);
+
+        document.getElementById("percentageResult").innerText =
+            "📝 Obtained Marks = " + answer.toFixed(2);
+
+        return;
+    }
+
+
+    /* OBTAINED + PERCENTAGE = TOTAL */
+
+    if(
+        document.getElementById("obtained").value !== "" &&
+        document.getElementById("percentage").value !== "" &&
+        document.getElementById("total").value === ""
+    ){
+
+        if(percentage <= 0 || percentage > 100){
+
+            document.getElementById("percentageResult").innerText =
+                "⚠️ Enter valid percentage";
+
+            return;
+        }
+
+        let answer =
+            (obtained * 100) / percentage;
+
+        document.getElementById("total").value =
+            answer.toFixed(2);
+
+        document.getElementById("percentageResult").innerText =
+            "📚 Total Marks = " + answer.toFixed(2);
+
+        return;
+    }
+
+
+    document.getElementById("percentageResult").innerText =
+        "✅ Calculation complete";
 }
 
 
-function clearData(){
+function clearPercentage(){
 
-    document.getElementById("obtained").value = "";
+    document.getElementById("total").value="";
+    document.getElementById("obtained").value="";
+    document.getElementById("percentage").value="";
 
-    document.getElementById("total").value = "";
+    document.getElementById("percentageResult").innerText =
+        "Answer will appear here";
+}
 
-    document.getElementById("result").innerText =
-    "0.00%";
+
+/* DISCOUNT */
+
+function calculateDiscount(){
+
+    let price =
+        Number(document.getElementById("price").value);
+
+    let discount =
+        Number(document.getElementById("discount").value);
+
+    if(
+        price <= 0 ||
+        discount < 0 ||
+        discount > 100
+    ){
+
+        document.getElementById("discountResult").innerText =
+            "⚠️ Enter valid values";
+
+        return;
+    }
+
+    let discountAmount =
+        (price * discount) / 100;
+
+    let finalPrice =
+        price - discountAmount;
+
+    document.getElementById("discountResult").innerHTML =
+        "🏷️ Discount: ₹" +
+        discountAmount.toFixed(2) +
+        "<br>💰 Final Price: ₹" +
+        finalPrice.toFixed(2);
+}
+
+
+function clearDiscount(){
+
+    document.getElementById("price").value="";
+    document.getElementById("discount").value="";
+
+    document.getElementById("discountResult").innerText =
+        "₹0.00";
 }
 
 </script>
 
 </body>
 </html>
-
 
