@@ -1,692 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Satyam Calculator</title>
+<title>Durga Puja Shayari Generator</title>
 
 <style>
 *{
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#fff3e0,#ffe0b2,#fff8e1);
+    color:#4a1a00;
     min-height:100vh;
-    background:#f4f7fb;
-    color:#172033;
 }
 
-/* TOP BAR */
-.topbar{
-    height:65px;
-    background:white;
-    display:flex;
-    align-items:center;
-    padding:0 16px;
-    box-shadow:0 3px 15px #0001;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.menu-btn{
-    width:45px;
-    height:45px;
-    border:0;
-    background:#eef2ff;
-    color:#4f46e5;
-    border-radius:12px;
-    font-size:24px;
-}
-
-.logo{
-    margin-left:14px;
-    font-size:21px;
-    font-weight:bold;
-}
-
-/* SIDE MENU */
-.menu{
-    position:fixed;
-    top:0;
-    left:-290px;
-    width:270px;
-    height:100%;
-    background:white;
-    z-index:1000;
-    box-shadow:5px 0 25px #0003;
-    transition:.3s;
-    padding:20px;
-}
-
-.menu.open{
-    left:0;
-}
-
-.menu-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #eee;
-    padding-bottom:15px;
-}
-
-.menu-header h2{
-    margin:0;
-    color:#4f46e5;
-}
-
-.close{
-    border:0;
-    background:#fee2e2;
-    color:#dc2626;
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    font-size:20px;
-}
-
-.menu-item{
-    width:100%;
-    padding:15px;
-    margin-top:15px;
-    border:0;
-    background:#f5f7ff;
-    border-radius:12px;
-    text-align:left;
-    font-size:16px;
-}
-
-/* OVERLAY */
-.overlay{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:#0005;
-    z-index:900;
-}
-
-.overlay.show{
-    display:block;
-}
-
-/* MAIN */
-.container{
-    max-width:470px;
-    margin:auto;
-    padding:25px 16px 35px;
-}
-
-.welcome{
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+header{
+    text-align:center;
+    padding:25px 15px;
+    background:linear-gradient(135deg,#d84315,#ff9800);
     color:white;
-    padding:25px;
-    border-radius:22px;
-    margin-bottom:20px;
-    box-shadow:0 10px 25px #4f46e544;
+    border-radius:0 0 25px 25px;
+    box-shadow:0 4px 12px #999;
 }
 
-.welcome h1{
-    margin:0 0 7px;
-    font-size:27px;
+header h1{
+    font-size:28px;
 }
 
-.welcome p{
-    margin:0;
-    opacity:.9;
-}
-
-/* CARD */
-.card{
-    background:white;
-    padding:22px;
-    border-radius:20px;
-    margin-bottom:20px;
-    box-shadow:0 5px 20px #0000000d;
-    border:1px solid #edf0f7;
-}
-
-.card h2{
-    margin:0 0 18px;
-    font-size:20px;
-}
-
-.label{
-    font-size:13px;
-    color:#6b7280;
-    margin-top:12px;
-    display:block;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    margin-top:6px;
-    border:1px solid #dce1eb;
-    border-radius:11px;
-    outline:none;
-    font-size:16px;
-    background:#fafbfe;
-}
-
-input:focus{
-    border-color:#6366f1;
-    background:white;
-}
-
-.calculate{
-    width:100%;
-    padding:14px;
-    margin-top:16px;
-    border:0;
-    border-radius:11px;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    background:#4f46e5;
-}
-
-.clear{
-    width:100%;
-    padding:12px;
+header p{
     margin-top:8px;
-    border:0;
-    border-radius:11px;
-    background:#f1f5f9;
-    color:#475569;
     font-size:15px;
 }
 
-.result{
-    margin-top:16px;
-    padding:17px;
-    background:#f5f3ff;
-    border-radius:12px;
-    text-align:center;
-    color:#4f46e5;
-    font-size:21px;
-    font-weight:bold;
-    line-height:1.6;
+.container{
+    max-width:650px;
+    margin:25px auto;
+    padding:15px;
 }
 
-/* ABOUT */
-.about{
-    display:none;
+.box{
     background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 5px 20px #0001;
-}
-
-.about h2{
-    color:#4f46e5;
-}
-
-.about p{
-    line-height:1.7;
-    color:#555;
-}
-
-/* CONTACT BOX */
-.contact-box{
-    margin-top:22px;
     padding:20px;
+    margin-bottom:18px;
     border-radius:18px;
-    background:linear-gradient(
-        135deg,
-        #ff0080,
-        #7c3aed,
-        #00c6ff
-    );
-    color:white;
-    box-shadow:0 10px 25px #7c3aed44;
+    box-shadow:0 4px 15px #d6c2b0;
 }
 
-.contact-box h3{
-    margin:0 0 12px;
-    font-size:21px;
-}
-
-.instagram-box{
+label{
     display:block;
-    margin-top:12px;
-    padding:13px;
-    background:#ffffff22;
-    border:1px solid #ffffff55;
-    border-radius:12px;
-    color:white;
     font-weight:bold;
+    margin-bottom:8px;
 }
 
-.footer{
+input,select{
+    width:100%;
+    padding:13px;
+    border:2px solid #ff9800;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+    margin-bottom:15px;
+}
+
+button{
+    border:none;
+    padding:13px 18px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:5px 3px;
+}
+
+.generate{
+    width:100%;
+    background:#d84315;
+    color:white;
+    font-size:17px;
+}
+
+.generate:hover{
+    background:#bf360c;
+}
+
+.result{
+    display:none;
+    background:#fff8e1;
+    border:2px dashed #ff9800;
+    border-radius:15px;
+    padding:18px;
+    margin-top:15px;
     text-align:center;
-    color:#777;
-    font-size:13px;
-    margin-top:25px;
+    line-height:1.7;
+    font-size:18px;
+}
+
+.copy{
+    background:#388e3c;
+    color:white;
+}
+
+.whatsapp{
+    background:#25D366;
+    color:white;
+}
+
+.share{
+    background:#1565c0;
+    color:white;
+}
+
+.new{
+    background:#ff9800;
+    color:white;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#7b4a2e;
+    font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-
-    <button class="menu-btn" onclick="openMenu()">
-        ☰
-    </button>
-
-    <div class="logo">
-        Calculator
-    </div>
-
-</div>
-
-
-<!-- MENU -->
-<div class="menu" id="menu">
-
-    <div class="menu-header">
-        <h2>Menu</h2>
-
-        <button class="close" onclick="closeMenu()">
-            ×
-        </button>
-    </div>
-
-    <button class="menu-item" onclick="showHome()">
-        🏠 Home
-    </button>
-
-    <button class="menu-item" onclick="showAbout()">
-        ℹ️ About
-    </button>
-
-</div>
-
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
-
+<header>
+    <h1>🌺 माँ दुर्गा 🌺</h1>
+    <p>Durga Puja Shayari & Wishes Generator</p>
+</header>
 
 <div class="container">
 
-<!-- HOME -->
-<div id="home">
+    <div class="box">
+        <label>👤 अपना नाम लिखें</label>
+        <input type="text" id="name" placeholder="जैसे - Satyam Kumar">
 
-    <div class="welcome">
-        <h1>Smart Calculator</h1>
-        <p>Simple • Fast • Accurate</p>
-    </div>
+        <label>📌 क्या बनाना है?</label>
+        <select id="type">
+            <option value="shayari">🌺 Durga Puja Shayari</option>
+            <option value="wish">🙏 Durga Puja Wish</option>
+            <option value="status">📱 WhatsApp Status</option>
+            <option value="caption">📸 Instagram Caption</option>
+            <option value="title">🎬 YouTube Title</option>
+        </select>
 
-
-    <!-- PERCENTAGE -->
-    <div class="card">
-
-        <h2>📊 Percentage Calculator</h2>
-
-        <label class="label">
-            Enter Total Marks
-        </label>
-
-        <input
-            id="total"
-            type="number"
-            placeholder="Total Marks"
-        >
-
-        <label class="label">
-            Enter Obtained Marks
-        </label>
-
-        <input
-            id="obtained"
-            type="number"
-            placeholder="Obtained Marks"
-        >
-
-        <label class="label">
-            Enter Percentage
-        </label>
-
-        <input
-            id="percentage"
-            type="number"
-            placeholder="Percentage %"
-        >
-
-        <button class="calculate" onclick="calculatePercentage()">
-            Calculate
+        <button class="generate" onclick="generateText()">
+            ✨ अभी Generate करें
         </button>
 
-        <button class="clear" onclick="clearPercentage()">
-            Clear
-        </button>
+        <div class="result" id="result"></div>
 
-        <div class="result" id="percentageResult">
-            Answer will appear here
+        <div style="text-align:center;">
+            <button class="copy" onclick="copyText()">📋 Copy</button>
+            <button class="whatsapp" onclick="whatsapp()">🟢 WhatsApp</button>
+            <button class="share" onclick="shareText()">📤 Share</button>
+            <button class="new" onclick="generateText()">🔄 New</button>
         </div>
-
     </div>
 
-
-    <!-- DISCOUNT -->
-    <div class="card">
-
-        <h2>🏷️ Discount Calculator</h2>
-
-        <label class="label">
-            Original Price
-        </label>
-
-        <input
-            id="price"
-            type="number"
-            placeholder="Enter price ₹"
-        >
-
-        <label class="label">
-            Discount
-        </label>
-
-        <input
-            id="discount"
-            type="number"
-            placeholder="Enter discount %"
-        >
-
-        <button class="calculate" onclick="calculateDiscount()">
-            Calculate Discount
-        </button>
-
-        <button class="clear" onclick="clearDiscount()">
-            Clear
-        </button>
-
-        <div class="result" id="discountResult">
-            ₹0.00
-        </div>
-
-    </div>
-
-    <div class="footer">
-        © 2026 Satyam Calculator
+    <div class="box">
+        <h2>🪔 Durga Puja Special</h2>
+        <p style="margin-top:10px;line-height:1.6;">
+            माँ दुर्गा का आशीर्वाद आपके जीवन में सुख, शांति,
+            सफलता और खुशियाँ लेकर आए। 🌺🙏
+        </p>
     </div>
 
 </div>
 
-
-<!-- ABOUT -->
-<div class="about" id="about">
-
-    <h2>ℹ️ About</h2>
-
-    <p>
-        <b>Mr. Satyam Kumar</b>
-    </p>
-
-    <p>
-        Software Engineer
-    </p>
-
-    <p>
-        This calculator is designed to make
-        everyday calculations simple and fast.
-    </p>
-
-
-    <!-- COLORFUL CONTACT BOX -->
-    <div class="contact-box">
-
-        <h3>📩 Contact Us</h3>
-
-        <div>
-            Connect with us on Instagram
-        </div>
-
-        <div class="instagram-box">
-            📸 Instagram — Satyambind0062
-        </div>
-
-    </div>
-
-</div>
-
-</div>
+<footer>
+    © 2026 Durga Puja Generator | Made with ❤️
+</footer>
 
 
 <script>
 
-/* MENU */
+const data = {
 
-function openMenu(){
+shayari: [
+"🌺 माँ दुर्गा की भक्ति में रंग जाए संसार,\nहर चेहरे पर हो खुशियों की बहार।\nजय माता दी 🙏",
+"🪔 शेरों वाली माता का आशीर्वाद रहे,\nहर कदम पर खुशियों का साथ रहे।\nजय माँ दुर्गा 🌺",
+"🌺 नवरात्रि की पावन बेला आई है,\nमाँ दुर्गा अपने साथ खुशियाँ लाई हैं।\nजय माता दी 🙏"
+],
 
-    document.getElementById("menu")
-        .classList.add("open");
+wish: [
+"🌺 आपको और आपके पूरे परिवार को दुर्गा पूजा की हार्दिक शुभकामनाएँ।\nमाँ दुर्गा आपके जीवन को खुशियों से भर दें। 🙏",
+"🪔 माँ दुर्गा का आशीर्वाद हमेशा आपके साथ रहे।\nआपके जीवन में सुख, शांति और सफलता बनी रहे।\nशुभ दुर्गा पूजा 🌺",
+"🙏 जय माँ दुर्गा!\nयह पावन पर्व आपके जीवन में नई खुशियाँ और नई उम्मीदें लेकर आए। 🌺"
+],
 
-    document.getElementById("overlay")
-        .classList.add("show");
+status: [
+"🌺 माँ दुर्गा का आशीर्वाद, जीवन का सबसे बड़ा सहारा। 🙏\nजय माता दी!",
+"🪔 दिल में भक्ति, चेहरे पर मुस्कान,\nमाँ दुर्गा का नाम ही मेरी पहचान। 🌺",
+"🙏 जहाँ माँ दुर्गा का आशीर्वाद होता है,\nवहाँ डर कैसा! 🌺 जय माता दी!"
+],
+
+caption: [
+"🌺 माँ दुर्गा की भक्ति में रंगा आज का दिन 🙏 #DurgaPuja #JaiMataDi",
+"🪔 भक्ति भी, शक्ति भी और माँ का आशीर्वाद भी 🌺🙏",
+"🌺 माँ के दरबार में जो आता है,\nखाली हाथ नहीं जाता। 🙏 #DurgaPuja"
+],
+
+title: [
+"🌺 Durga Puja Special | जय माँ दुर्गा 🙏 | माता रानी का आशीर्वाद",
+"🪔 Durga Puja 2026 Special | माँ दुर्गा की भक्ति 🌺",
+"🙏 जय माता दी | Durga Puja Special Video | माँ दुर्गा का आशीर्वाद"
+]
+
+};
+
+function generateText(){
+
+    let name = document.getElementById("name").value.trim();
+    let type = document.getElementById("type").value;
+
+    let list = data[type];
+    let text = list[Math.floor(Math.random() * list.length)];
+
+    if(name !== ""){
+        text = "🌺 " + name + " के लिए 🌺\n\n" + text;
+    }
+
+    let result = document.getElementById("result");
+
+    result.innerText = text;
+    result.style.display = "block";
 }
 
-function closeMenu(){
+function copyText(){
 
-    document.getElementById("menu")
-        .classList.remove("open");
+    let text = document.getElementById("result").innerText;
 
-    document.getElementById("overlay")
-        .classList.remove("show");
-}
-
-
-/* HOME */
-
-function showHome(){
-
-    document.getElementById("home")
-        .style.display="block";
-
-    document.getElementById("about")
-        .style.display="none";
-
-    closeMenu();
-}
-
-
-/* ABOUT */
-
-function showAbout(){
-
-    document.getElementById("home")
-        .style.display="none";
-
-    document.getElementById("about")
-        .style.display="block";
-
-    closeMenu();
-}
-
-
-/* PERCENTAGE */
-
-function calculatePercentage(){
-
-    let total =
-        Number(document.getElementById("total").value);
-
-    let obtained =
-        Number(document.getElementById("obtained").value);
-
-    let percentage =
-        Number(document.getElementById("percentage").value);
-
-
-    let filled = 0;
-
-    if(total > 0) filled++;
-    if(obtained >= 0 && document.getElementById("obtained").value !== "") filled++;
-    if(percentage >= 0 && document.getElementById("percentage").value !== "") filled++;
-
-
-    if(filled < 2){
-
-        document.getElementById("percentageResult").innerText =
-            "⚠️ Any 2 values enter करें";
-
+    if(!text){
+        alert("पहले Generate करें!");
         return;
     }
 
+    navigator.clipboard.writeText(text);
 
-    /* TOTAL + OBTAINED = PERCENTAGE */
-
-    if(
-        total > 0 &&
-        document.getElementById("obtained").value !== "" &&
-        document.getElementById("percentage").value === ""
-    ){
-
-        if(obtained > total){
-
-            document.getElementById("percentageResult").innerText =
-                "⚠️ Obtained marks cannot exceed total";
-
-            return;
-        }
-
-        let answer =
-            (obtained / total) * 100;
-
-        document.getElementById("percentage").value =
-            answer.toFixed(2);
-
-        document.getElementById("percentageResult").innerText =
-            "🎯 Percentage = " + answer.toFixed(2) + "%";
-
-        return;
-    }
-
-
-    /* TOTAL + PERCENTAGE = OBTAINED */
-
-    if(
-        total > 0 &&
-        document.getElementById("percentage").value !== "" &&
-        document.getElementById("obtained").value === ""
-    ){
-
-        if(percentage > 100){
-
-            document.getElementById("percentageResult").innerText =
-                "⚠️ Percentage cannot exceed 100";
-
-            return;
-        }
-
-        let answer =
-            (total * percentage) / 100;
-
-        document.getElementById("obtained").value =
-            answer.toFixed(2);
-
-        document.getElementById("percentageResult").innerText =
-            "📝 Obtained Marks = " + answer.toFixed(2);
-
-        return;
-    }
-
-
-    /* OBTAINED + PERCENTAGE = TOTAL */
-
-    if(
-        document.getElementById("obtained").value !== "" &&
-        document.getElementById("percentage").value !== "" &&
-        document.getElementById("total").value === ""
-    ){
-
-        if(percentage <= 0 || percentage > 100){
-
-            document.getElementById("percentageResult").innerText =
-                "⚠️ Enter valid percentage";
-
-            return;
-        }
-
-        let answer =
-            (obtained * 100) / percentage;
-
-        document.getElementById("total").value =
-            answer.toFixed(2);
-
-        document.getElementById("percentageResult").innerText =
-            "📚 Total Marks = " + answer.toFixed(2);
-
-        return;
-    }
-
-
-    document.getElementById("percentageResult").innerText =
-        "✅ Calculation complete";
+    alert("✅ Text Copy हो गया!");
 }
 
+function whatsapp(){
 
-function clearPercentage(){
+    let text = document.getElementById("result").innerText;
 
-    document.getElementById("total").value="";
-    document.getElementById("obtained").value="";
-    document.getElementById("percentage").value="";
-
-    document.getElementById("percentageResult").innerText =
-        "Answer will appear here";
-}
-
-
-/* DISCOUNT */
-
-function calculateDiscount(){
-
-    let price =
-        Number(document.getElementById("price").value);
-
-    let discount =
-        Number(document.getElementById("discount").value);
-
-    if(
-        price <= 0 ||
-        discount < 0 ||
-        discount > 100
-    ){
-
-        document.getElementById("discountResult").innerText =
-            "⚠️ Enter valid values";
-
+    if(!text){
+        alert("पहले Generate करें!");
         return;
     }
 
-    let discountAmount =
-        (price * discount) / 100;
+    let url = "https://wa.me/?text=" + encodeURIComponent(text);
 
-    let finalPrice =
-        price - discountAmount;
-
-    document.getElementById("discountResult").innerHTML =
-        "🏷️ Discount: ₹" +
-        discountAmount.toFixed(2) +
-        "<br>💰 Final Price: ₹" +
-        finalPrice.toFixed(2);
+    window.open(url,"_blank");
 }
 
+function shareText(){
 
-function clearDiscount(){
+    let text = document.getElementById("result").innerText;
 
-    document.getElementById("price").value="";
-    document.getElementById("discount").value="";
+    if(!text){
+        alert("पहले Generate करें!");
+        return;
+    }
 
-    document.getElementById("discountResult").innerText =
-        "₹0.00";
+    if(navigator.share){
+
+        navigator.share({
+            title:"Durga Puja Wishes",
+            text:text
+        });
+
+    }else{
+
+        navigator.clipboard.writeText(text);
+        alert("✅ Text Copy हो गया, अब कहीं भी Share कर सकते हैं!");
+
+    }
 }
 
 </script>
 
 </body>
 </html>
-
