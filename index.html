@@ -1,290 +1,721 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Durga Puja Shayari Generator</title>
+
+<title>Name Style Generator</title>
 
 <style>
+
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#fff3e0,#ffe0b2,#fff8e1);
-    color:#4a1a00;
-    min-height:100vh;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#050505,#101b2d,#050505);
+    color:white;
 }
 
 header{
     text-align:center;
     padding:25px 15px;
-    background:linear-gradient(135deg,#d84315,#ff9800);
-    color:white;
-    border-radius:0 0 25px 25px;
-    box-shadow:0 4px 12px #999;
 }
 
 header h1{
-    font-size:28px;
+    margin:0;
+    font-size:30px;
+    color:#00d9ff;
 }
 
 header p{
-    margin-top:8px;
-    font-size:15px;
+    color:#aaa;
 }
 
 .container{
-    max-width:650px;
-    margin:25px auto;
+    max-width:900px;
+    margin:auto;
     padding:15px;
 }
 
-.box{
-    background:white;
+.input-box{
+    background:#111c2d;
     padding:20px;
-    margin-bottom:18px;
-    border-radius:18px;
-    box-shadow:0 4px 15px #d6c2b0;
+    border-radius:15px;
+    box-shadow:0 0 20px #000;
 }
 
-label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-input,select{
+input{
     width:100%;
-    padding:13px;
-    border:2px solid #ff9800;
-    border-radius:10px;
-    font-size:16px;
-    outline:none;
-    margin-bottom:15px;
-}
-
-button{
+    padding:15px;
     border:none;
-    padding:13px 18px;
     border-radius:10px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-    margin:5px 3px;
+    outline:none;
+    font-size:18px;
 }
 
 .generate{
     width:100%;
-    background:#d84315;
+    margin-top:12px;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:#009dff;
     color:white;
-    font-size:17px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 .generate:hover{
-    background:#bf360c;
+    background:#007acc;
 }
 
-.result{
-    display:none;
-    background:#fff8e1;
-    border:2px dashed #ff9800;
-    border-radius:15px;
+.style-box{
+    background:#111c2d;
+    margin:12px 0;
     padding:18px;
-    margin-top:15px;
-    text-align:center;
-    line-height:1.7;
-    font-size:18px;
+    border-radius:14px;
+    border-left:4px solid #00d9ff;
+}
+
+.style-number{
+    color:#00d9ff;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.name{
+    font-size:25px;
+    word-break:break-word;
+    margin-bottom:14px;
 }
 
 .copy{
-    background:#388e3c;
+    padding:9px 17px;
+    border:0;
+    border-radius:8px;
+    background:#00c878;
     color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.whatsapp{
-    background:#25D366;
-    color:white;
+.copy:hover{
+    background:#009c5d;
 }
 
-.share{
-    background:#1565c0;
-    color:white;
+
+/* =========================
+   STYLE 1 - 20
+========================= */
+
+.s1{
+    font-weight:bold;
+    letter-spacing:3px;
 }
 
-.new{
-    background:#ff9800;
-    color:white;
+.s2{
+    font-weight:bold;
+    text-transform:uppercase;
+    text-shadow:0 0 10px #00eaff;
 }
+
+.s3{
+    font-style:italic;
+    font-family:cursive;
+}
+
+.s4{
+    font-family:Georgia,serif;
+    letter-spacing:4px;
+}
+
+.s5{
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+.s6{
+    font-family:"Courier New",monospace;
+    letter-spacing:2px;
+}
+
+.s7{
+    font-weight:bold;
+    text-shadow:2px 2px 0 #ff006e;
+}
+
+.s8{
+    font-style:italic;
+    text-shadow:0 0 8px #9d00ff;
+}
+
+.s9{
+    font-weight:bold;
+    letter-spacing:6px;
+}
+
+.s10{
+    font-family:Georgia,serif;
+    font-weight:bold;
+    text-shadow:3px 3px 0 #555;
+}
+
+.s11{
+    background:linear-gradient(90deg,#00eaff,#ff00c8);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:bold;
+}
+
+.s12{
+    background:linear-gradient(90deg,#ffdd00,#ff6600);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    font-weight:bold;
+}
+
+.s13{
+    color:#00ff88;
+    text-shadow:0 0 12px #00ff88;
+    font-weight:bold;
+}
+
+.s14{
+    color:#ff3b81;
+    text-shadow:0 0 12px #ff0066;
+    font-weight:bold;
+}
+
+.s15{
+    color:#ffd700;
+    text-shadow:2px 2px 5px #000;
+    font-weight:bold;
+}
+
+.s16{
+    font-family:cursive;
+    font-style:italic;
+    font-weight:bold;
+    transform:skewX(-8deg);
+}
+
+.s17{
+    border:2px solid #00d9ff;
+    padding:8px 15px;
+    display:inline-block;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.s18{
+    background:#000;
+    padding:8px 15px;
+    display:inline-block;
+    border-radius:8px;
+    color:#fff;
+    box-shadow:0 0 15px #00d9ff;
+}
+
+.s19{
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.s20{
+    font-family:Georgia,serif;
+    font-size:30px;
+    font-style:italic;
+    font-weight:bold;
+    text-shadow:0 0 8px #ffffff;
+}
+
+
+/* =========================
+   STYLE 21 - 30
+========================= */
+
+.s21{
+    font-size:28px;
+    font-weight:bold;
+    font-style:italic;
+    color:#00eaff;
+    text-shadow:2px 2px 5px #000;
+}
+
+.s22{
+    font-size:28px;
+    font-weight:bold;
+    font-style:italic;
+    letter-spacing:3px;
+    color:#ff4d4d;
+}
+
+.s23{
+    font-family:Georgia,serif;
+    font-size:29px;
+    font-weight:bold;
+    font-style:italic;
+    text-decoration:underline;
+}
+
+.s24{
+    font-size:27px;
+    font-weight:bold;
+    font-style:italic;
+    color:#b86cff;
+    text-shadow:0 0 12px #8c00ff;
+}
+
+.s25{
+    font-size:27px;
+    font-weight:bold;
+    font-style:italic;
+    color:#00ff9d;
+    letter-spacing:2px;
+}
+
+.s26{
+    font-size:29px;
+    font-weight:bold;
+    font-style:italic;
+    color:#ffd700;
+    text-shadow:3px 3px 5px #222;
+}
+
+.s27{
+    font-size:28px;
+    font-weight:bold;
+    font-style:italic;
+    border-bottom:3px solid #ff1493;
+    display:inline-block;
+}
+
+.s28{
+    font-size:27px;
+    font-weight:bold;
+    font-style:italic;
+    background:linear-gradient(90deg,#ff0080,#00eaff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.s29{
+    font-size:28px;
+    font-weight:bold;
+    font-style:italic;
+    letter-spacing:5px;
+    text-shadow:0 0 10px #ffffff;
+}
+
+.s30{
+    font-size:30px;
+    font-weight:bold;
+    font-style:italic;
+    color:white;
+    text-shadow:
+        2px 2px 0 #ff0066,
+        4px 4px 0 #009dff;
+}
+
+
+/* =========================
+   LAST 9 UNICODE STYLES
+========================= */
+
+.unicode{
+    font-size:25px;
+    font-weight:bold;
+    line-height:1.6;
+}
+
+
+/* =========================
+   EXTRA TITLE
+========================= */
+
+.extra-title{
+    text-align:center;
+    margin:30px 0 15px;
+    color:#00d9ff;
+}
+
+.extra-title h2{
+    margin:0;
+    font-size:23px;
+}
+
+.extra-title p{
+    color:#aaa;
+    font-size:14px;
+}
+
 
 footer{
     text-align:center;
-    padding:20px;
-    color:#7b4a2e;
-    font-size:14px;
+    padding:25px;
+    color:#777;
 }
+
 </style>
 </head>
 
 <body>
 
+
 <header>
-    <h1>🌺 माँ दुर्गा 🌺</h1>
-    <p>Durga Puja Shayari & Wishes Generator</p>
+
+    <h1>✨ Name Style Generator</h1>
+
+    <p>
+        Apna naam likhiye aur stylish design paaiye
+    </p>
+
 </header>
+
 
 <div class="container">
 
-    <div class="box">
-        <label>👤 अपना नाम लिखें</label>
-        <input type="text" id="name" placeholder="जैसे - Satyam Kumar">
+    <div class="input-box">
 
-        <label>📌 क्या बनाना है?</label>
-        <select id="type">
-            <option value="shayari">🌺 Durga Puja Shayari</option>
-            <option value="wish">🙏 Durga Puja Wish</option>
-            <option value="status">📱 WhatsApp Status</option>
-            <option value="caption">📸 Instagram Caption</option>
-            <option value="title">🎬 YouTube Title</option>
-        </select>
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="Apna naam likhe..."
+            oninput="generateNames()"
+        >
 
-        <button class="generate" onclick="generateText()">
-            ✨ अभी Generate करें
+        <button
+            class="generate"
+            onclick="generateNames()">
+
+            ✨ Generate Name
+
         </button>
 
-        <div class="result" id="result"></div>
-
-        <div style="text-align:center;">
-            <button class="copy" onclick="copyText()">📋 Copy</button>
-            <button class="whatsapp" onclick="whatsapp()">🟢 WhatsApp</button>
-            <button class="share" onclick="shareText()">📤 Share</button>
-            <button class="new" onclick="generateText()">🔄 New</button>
-        </div>
     </div>
 
-    <div class="box">
-        <h2>🪔 Durga Puja Special</h2>
-        <p style="margin-top:10px;line-height:1.6;">
-            माँ दुर्गा का आशीर्वाद आपके जीवन में सुख, शांति,
-            सफलता और खुशियाँ लेकर आए। 🌺🙏
-        </p>
-    </div>
+
+    <div id="styles"></div>
 
 </div>
 
+
 <footer>
-    © 2026 Durga Puja Generator | Made with ❤️
+
+    Made with ❤️ by Satyam Kumar
+
 </footer>
 
 
 <script>
 
-const data = {
 
-shayari: [
-"🌺 माँ दुर्गा की भक्ति में रंग जाए संसार,\nहर चेहरे पर हो खुशियों की बहार।\nजय माता दी 🙏",
-"🪔 शेरों वाली माता का आशीर्वाद रहे,\nहर कदम पर खुशियों का साथ रहे।\nजय माँ दुर्गा 🌺",
-"🌺 नवरात्रि की पावन बेला आई है,\nमाँ दुर्गा अपने साथ खुशियाँ लाई हैं।\nजय माता दी 🙏"
-],
+/* =========================
+   30 DESIGN CLASSES
+========================= */
 
-wish: [
-"🌺 आपको और आपके पूरे परिवार को दुर्गा पूजा की हार्दिक शुभकामनाएँ।\nमाँ दुर्गा आपके जीवन को खुशियों से भर दें। 🙏",
-"🪔 माँ दुर्गा का आशीर्वाद हमेशा आपके साथ रहे।\nआपके जीवन में सुख, शांति और सफलता बनी रहे।\nशुभ दुर्गा पूजा 🌺",
-"🙏 जय माँ दुर्गा!\nयह पावन पर्व आपके जीवन में नई खुशियाँ और नई उम्मीदें लेकर आए। 🌺"
-],
+const styleClasses = [
 
-status: [
-"🌺 माँ दुर्गा का आशीर्वाद, जीवन का सबसे बड़ा सहारा। 🙏\nजय माता दी!",
-"🪔 दिल में भक्ति, चेहरे पर मुस्कान,\nमाँ दुर्गा का नाम ही मेरी पहचान। 🌺",
-"🙏 जहाँ माँ दुर्गा का आशीर्वाद होता है,\nवहाँ डर कैसा! 🌺 जय माता दी!"
-],
+    "s1","s2","s3","s4","s5",
+    "s6","s7","s8","s9","s10",
+    "s11","s12","s13","s14","s15",
+    "s16","s17","s18","s19","s20",
+    "s21","s22","s23","s24","s25",
+    "s26","s27","s28","s29","s30"
 
-caption: [
-"🌺 माँ दुर्गा की भक्ति में रंगा आज का दिन 🙏 #DurgaPuja #JaiMataDi",
-"🪔 भक्ति भी, शक्ति भी और माँ का आशीर्वाद भी 🌺🙏",
-"🌺 माँ के दरबार में जो आता है,\nखाली हाथ नहीं जाता। 🙏 #DurgaPuja"
-],
+];
 
-title: [
-"🌺 Durga Puja Special | जय माँ दुर्गा 🙏 | माता रानी का आशीर्वाद",
-"🪔 Durga Puja 2026 Special | माँ दुर्गा की भक्ति 🌺",
-"🙏 जय माता दी | Durga Puja Special Video | माँ दुर्गा का आशीर्वाद"
-]
 
-};
+/* =========================
+   DECORATIONS
+========================= */
 
-function generateText(){
+const decorations = [
 
-    let name = document.getElementById("name").value.trim();
-    let type = document.getElementById("type").value;
+    "",
+    "★ ",
+    "『 ",
+    "【 ",
+    "꧁ ",
+    "✦ ",
+    "⚡ ",
+    "ツ ",
+    "亗 ",
+    "彡 ",
+    "✧ ",
+    "༺ ",
+    "♛ ",
+    "♡ ",
+    "☯ ",
+    "✪ ",
+    "➤ ",
+    "〆 ",
+    "乂 ",
+    "♕ ",
+    "✰ ",
+    "⚜ ",
+    "☘ ",
+    "✵ ",
+    "❖ ",
+    "♚ ",
+    "☠ ",
+    "✯ ",
+    "★彡 ",
+    "༒ "
 
-    let list = data[type];
-    let text = list[Math.floor(Math.random() * list.length)];
+];
 
-    if(name !== ""){
-        text = "🌺 " + name + " के लिए 🌺\n\n" + text;
-    }
 
-    let result = document.getElementById("result");
+/* =========================
+   9 UNICODE NAME STYLES
+========================= */
 
-    result.innerText = text;
-    result.style.display = "block";
+function unicodeStyles(name){
+
+    return [
+
+        "𝓢𝓪𝓽𝔂𝓪𝓶 " + name.replace(/^Satyam /i,""),
+
+        "𝑺𝒂𝒕𝒚𝒂𝒎 " + name.replace(/^Satyam /i,""),
+
+        "𝗦𝗔𝗧𝗬𝗔𝗠 " + name.replace(/^Satyam /i,""),
+
+        "𝙎𝘼𝙏𝙔𝘼𝙈 " + name.replace(/^Satyam /i,""),
+
+        "𝕊𝕒𝕥𝕪𝕒𝕞 " + name.replace(/^Satyam /i,""),
+
+        "𝔖𝔞𝔱𝔶𝔞𝔪 " + name.replace(/^Satyam /i,""),
+
+        "Ｓａｔｙａｍ " + name.replace(/^Satyam /i,""),
+
+        "🅢🅐🅣🅨🅐🅜 " + name.replace(/^Satyam /i,""),
+
+        "Ⓢⓐⓣⓨⓐⓜ " + name.replace(/^Satyam /i,"")
+
+    ];
+
 }
 
-function copyText(){
 
-    let text = document.getElementById("result").innerText;
+/* =========================
+   GENERATE
+========================= */
 
-    if(!text){
-        alert("पहले Generate करें!");
+function generateNames(){
+
+    let name =
+        document
+        .getElementById("nameInput")
+        .value
+        .trim();
+
+
+    let container =
+        document.getElementById("styles");
+
+
+    if(name === ""){
+
+        container.innerHTML =
+        "<p style='text-align:center;color:#aaa;'>Pehle apna naam likhiye 👆</p>";
+
         return;
+
     }
 
-    navigator.clipboard.writeText(text);
 
-    alert("✅ Text Copy हो गया!");
+    let html = "";
+
+
+    /* =========================
+       STYLE 1 - 30
+    ========================= */
+
+    for(let i=0; i<30; i++){
+
+        let styledName =
+            decorations[i] + name;
+
+
+        html += `
+
+        <div class="style-box">
+
+            <div class="style-number">
+                STYLE ${i+1}
+            </div>
+
+            <div
+                class="name ${styleClasses[i]}"
+                id="normal${i}">
+
+                ${escapeHTML(styledName)}
+
+            </div>
+
+            <button
+                class="copy"
+                onclick="copyName('normal${i}')">
+
+                📋 Copy
+
+            </button>
+
+        </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       INSTAGRAM / WHATSAPP
+       TITLE
+    ========================= */
+
+    let unicode =
+        unicodeStyles(name);
+
+
+    html += `
+
+        <div class="extra-title">
+
+            <h2>
+                📱 Instagram WhatsApp Stylish Name
+            </h2>
+
+            <p>
+                Copy karke apne profile ya bio me use karein
+            </p>
+
+        </div>
+
+    `;
+
+
+    /* =========================
+       STYLE 31 - 39
+    ========================= */
+
+    for(let i=0; i<unicode.length; i++){
+
+        html += `
+
+        <div class="style-box">
+
+            <div class="style-number">
+
+                STYLE ${i + 31}
+
+            </div>
+
+
+            <div
+                class="name unicode"
+                id="unicode${i}">
+
+                ${escapeHTML(unicode[i])}
+
+            </div>
+
+
+            <button
+                class="copy"
+                onclick="copyName('unicode${i}')">
+
+                📋 Copy
+
+            </button>
+
+        </div>
+
+        `;
+
+    }
+
+
+    container.innerHTML = html;
+
 }
 
-function whatsapp(){
 
-    let text = document.getElementById("result").innerText;
+/* =========================
+   COPY
+========================= */
 
-    if(!text){
-        alert("पहले Generate करें!");
-        return;
-    }
+function copyName(id){
 
-    let url = "https://wa.me/?text=" + encodeURIComponent(text);
+    let text =
+        document
+        .getElementById(id)
+        .innerText;
 
-    window.open(url,"_blank");
-}
 
-function shareText(){
+    if(navigator.clipboard){
 
-    let text = document.getElementById("result").innerText;
+        navigator.clipboard
+        .writeText(text)
+        .then(function(){
 
-    if(!text){
-        alert("पहले Generate करें!");
-        return;
-    }
+            alert("Name copied! ✅");
 
-    if(navigator.share){
-
-        navigator.share({
-            title:"Durga Puja Wishes",
-            text:text
         });
 
     }else{
 
-        navigator.clipboard.writeText(text);
-        alert("✅ Text Copy हो गया, अब कहीं भी Share कर सकते हैं!");
+        let area =
+            document.createElement("textarea");
+
+        area.value = text;
+
+        document.body.appendChild(area);
+
+        area.select();
+
+        document.execCommand("copy");
+
+        area.remove();
+
+        alert("Name copied! ✅");
 
     }
+
 }
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   DEFAULT NAME
+========================= */
+
+document
+    .getElementById("nameInput")
+    .value = "Satyam Kumar";
+
+
+generateNames();
 
 </script>
 
