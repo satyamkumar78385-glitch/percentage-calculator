@@ -1,723 +1,162 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Name Style Generator</title>
-
+<title>Shayari World</title>
 <style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#050505,#101b2d,#050505);
-    color:white;
-}
-
-header{
-    text-align:center;
-    padding:25px 15px;
-}
-
-header h1{
-    margin:0;
-    font-size:30px;
-    color:#00d9ff;
-}
-
-header p{
-    color:#aaa;
-}
-
-.container{
-    max-width:900px;
-    margin:auto;
-    padding:15px;
-}
-
-.input-box{
-    background:#111c2d;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 20px #000;
-}
-
-input{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    outline:none;
-    font-size:18px;
-}
-
-.generate{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border:0;
-    border-radius:10px;
-    background:#009dff;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.generate:hover{
-    background:#007acc;
-}
-
-.style-box{
-    background:#111c2d;
-    margin:12px 0;
-    padding:18px;
-    border-radius:14px;
-    border-left:4px solid #00d9ff;
-}
-
-.style-number{
-    color:#00d9ff;
-    font-size:13px;
-    margin-bottom:10px;
-}
-
-.name{
-    font-size:25px;
-    word-break:break-word;
-    margin-bottom:14px;
-}
-
-.copy{
-    padding:9px 17px;
-    border:0;
-    border-radius:8px;
-    background:#00c878;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.copy:hover{
-    background:#009c5d;
-}
-
-
-/* =========================
-   STYLE 1 - 20
-========================= */
-
-.s1{
-    font-weight:bold;
-    letter-spacing:3px;
-}
-
-.s2{
-    font-weight:bold;
-    text-transform:uppercase;
-    text-shadow:0 0 10px #00eaff;
-}
-
-.s3{
-    font-style:italic;
-    font-family:cursive;
-}
-
-.s4{
-    font-family:Georgia,serif;
-    letter-spacing:4px;
-}
-
-.s5{
-    font-weight:bold;
-    text-decoration:underline;
-}
-
-.s6{
-    font-family:"Courier New",monospace;
-    letter-spacing:2px;
-}
-
-.s7{
-    font-weight:bold;
-    text-shadow:2px 2px 0 #ff006e;
-}
-
-.s8{
-    font-style:italic;
-    text-shadow:0 0 8px #9d00ff;
-}
-
-.s9{
-    font-weight:bold;
-    letter-spacing:6px;
-}
-
-.s10{
-    font-family:Georgia,serif;
-    font-weight:bold;
-    text-shadow:3px 3px 0 #555;
-}
-
-.s11{
-    background:linear-gradient(90deg,#00eaff,#ff00c8);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-weight:bold;
-}
-
-.s12{
-    background:linear-gradient(90deg,#ffdd00,#ff6600);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-weight:bold;
-}
-
-.s13{
-    color:#00ff88;
-    text-shadow:0 0 12px #00ff88;
-    font-weight:bold;
-}
-
-.s14{
-    color:#ff3b81;
-    text-shadow:0 0 12px #ff0066;
-    font-weight:bold;
-}
-
-.s15{
-    color:#ffd700;
-    text-shadow:2px 2px 5px #000;
-    font-weight:bold;
-}
-
-.s16{
-    font-family:cursive;
-    font-style:italic;
-    font-weight:bold;
-    transform:skewX(-8deg);
-}
-
-.s17{
-    border:2px solid #00d9ff;
-    padding:8px 15px;
-    display:inline-block;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-.s18{
-    background:#000;
-    padding:8px 15px;
-    display:inline-block;
-    border-radius:8px;
-    color:#fff;
-    box-shadow:0 0 15px #00d9ff;
-}
-
-.s19{
-    font-size:28px;
-    font-weight:bold;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-.s20{
-    font-family:Georgia,serif;
-    font-size:30px;
-    font-style:italic;
-    font-weight:bold;
-    text-shadow:0 0 8px #ffffff;
-}
-
-
-/* =========================
-   STYLE 21 - 30
-========================= */
-
-.s21{
-    font-size:28px;
-    font-weight:bold;
-    font-style:italic;
-    color:#00eaff;
-    text-shadow:2px 2px 5px #000;
-}
-
-.s22{
-    font-size:28px;
-    font-weight:bold;
-    font-style:italic;
-    letter-spacing:3px;
-    color:#ff4d4d;
-}
-
-.s23{
-    font-family:Georgia,serif;
-    font-size:29px;
-    font-weight:bold;
-    font-style:italic;
-    text-decoration:underline;
-}
-
-.s24{
-    font-size:27px;
-    font-weight:bold;
-    font-style:italic;
-    color:#b86cff;
-    text-shadow:0 0 12px #8c00ff;
-}
-
-.s25{
-    font-size:27px;
-    font-weight:bold;
-    font-style:italic;
-    color:#00ff9d;
-    letter-spacing:2px;
-}
-
-.s26{
-    font-size:29px;
-    font-weight:bold;
-    font-style:italic;
-    color:#ffd700;
-    text-shadow:3px 3px 5px #222;
-}
-
-.s27{
-    font-size:28px;
-    font-weight:bold;
-    font-style:italic;
-    border-bottom:3px solid #ff1493;
-    display:inline-block;
-}
-
-.s28{
-    font-size:27px;
-    font-weight:bold;
-    font-style:italic;
-    background:linear-gradient(90deg,#ff0080,#00eaff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.s29{
-    font-size:28px;
-    font-weight:bold;
-    font-style:italic;
-    letter-spacing:5px;
-    text-shadow:0 0 10px #ffffff;
-}
-
-.s30{
-    font-size:30px;
-    font-weight:bold;
-    font-style:italic;
-    color:white;
-    text-shadow:
-        2px 2px 0 #ff0066,
-        4px 4px 0 #009dff;
-}
-
-
-/* =========================
-   LAST 9 UNICODE STYLES
-========================= */
-
-.unicode{
-    font-size:25px;
-    font-weight:bold;
-    line-height:1.6;
-}
-
-
-/* =========================
-   EXTRA TITLE
-========================= */
-
-.extra-title{
-    text-align:center;
-    margin:30px 0 15px;
-    color:#00d9ff;
-}
-
-.extra-title h2{
-    margin:0;
-    font-size:23px;
-}
-
-.extra-title p{
-    color:#aaa;
-    font-size:14px;
-}
-
-
-footer{
-    text-align:center;
-    padding:25px;
-    color:#777;
-}
-
+*{box-sizing:border-box}
+body{margin:0;background:#111;color:white;font-family:Arial,sans-serif}
+header{background:#e50936;text-align:center;padding:20px}
+header h1{margin:0}
+header p{margin:8px 0 0}
+main{max-width:700px;margin:auto;padding:14px}
+input{width:100%;padding:13px;border-radius:9px;border:1px solid #555;background:#222;color:white;font-size:16px}
+.categories{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+button{border:0;border-radius:8px;padding:10px;background:#333;color:white;cursor:pointer}
+button.active,.red{background:#e50936}
+.card{background:#202020;border:1px solid #383838;border-radius:12px;padding:15px;margin:12px 0}
+.card h3{color:#ff5474;margin-top:0}
+.card p{white-space:pre-line;line-height:1.8}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+footer{text-align:center;padding:20px;color:#aaa}
 </style>
 </head>
-
 <body>
-
-
 <header>
-
-    <h1>✨ Name Style Generator</h1>
-
-    <p>
-        Apna naam likhiye aur stylish design paaiye
-    </p>
-
+<h1>❤️ Shayari World</h1>
+<p>दिल से लिखी, दिल तक पहुँची ✨</p>
 </header>
-
-
-<div class="container">
-
-    <div class="input-box">
-
-        <input
-            type="text"
-            id="nameInput"
-            placeholder="Apna naam likhe..."
-            oninput="generateNames()"
-        >
-
-        <button
-            class="generate"
-            onclick="generateNames()">
-
-            ✨ Generate Name
-
-        </button>
-
-    </div>
-
-
-    <div id="styles"></div>
-
-</div>
-
-
-<footer>
-
-    Made with ❤️ by Satyam Kumar
-
-</footer>
-
-
+<main>
+<input id="search" placeholder="🔍 शायरी खोजें..." oninput="render()">
+<div class="categories" id="categories"></div>
+<div id="list"></div>
+</main>
+<footer>Made with ❤️ | Shayari World</footer>
 <script>
+const data={
+"😎 Attitude":[
+"अपनी पहचान खुद बनानी है,\nभीड़ में नहीं, अलग नज़र आनी है।",
+"हमारी खामोशी को कमजोरी मत समझना,\nहमारा वक्त भी आएगा।",
+"अंदाज़ अपना सबसे अलग रखते हैं,\nतभी तो अपनी पहचान रखते हैं।",
+"मंज़िल अपनी, रास्ते अपने,\nसपने अपने, इरादे अपने।",
+"हम खुद पर भरोसा रखते हैं,\nइसलिए मुश्किलों से नहीं डरते।",
+"नाम छोटा हो सकता है,\nलेकिन सपने बड़े हैं।",
+"दूसरों की नकल नहीं करते,\nहम अपना अंदाज़ खुद बनाते हैं।",
+"वक्त बदलता है, हालात बदलते हैं,\nमेहनत से दिन बदलते हैं।",
+"अपनी कीमत खुद पहचानो,\nदुनिया तो कीमत लगाती रहेगी।",
+"शोर नहीं, काम से पहचान बनानी है,\nहमें अपनी मंज़िल खुद पानी है।"
+],
+"❤️ Love":[
+"तेरी मुस्कान प्यारी लगती है,\nतेरी हर बात न्यारी लगती है।",
+"दिल की हर धड़कन में तेरा नाम है,\nमेरे लिए तू सबसे खास है।",
+"तेरी खुशी मेरी दुआ बन जाए,\nतेरी मुस्कान मेरी वजह बन जाए।",
+"तुम पास रहो या दूर,\nदिल में रहोगे जरूर।",
+"तेरी बातें दिल को छू जाती हैं,\nतेरी यादें मुस्कान लाती हैं।",
+"मोहब्बत सच्चे एहसास का नाम है,\nदिल का रिश्ता सबसे खास है।",
+"एक प्यारी सी मुस्कान तुम्हारी,\nदिन बना देती है हमारी।",
+"तुमसे बात हो जाए तो अच्छा लगता है,\nहर लम्हा खास लगता है।",
+"तुम्हारी खुशी में मेरी खुशी है,\nयही प्यार की खूबसूरती है।",
+"दिल से जो रिश्ता बनता है,\nवह वक्त के साथ गहरा होता है।"
+],
+"💔 Sad":[
+"कुछ बातें अधूरी रह जाती हैं,\nकुछ यादें दिल में रह जाती हैं।",
+"हर मुस्कान खुशी की निशानी नहीं,\nहर खामोशी परेशानी नहीं।",
+"वक्त के साथ सब बदल जाता है,\nकभी अपना भी पराया हो जाता है।",
+"यादें कभी-कभी बहुत सताती हैं,\nपुरानी बातें फिर याद आती हैं।",
+"हर किसी को अपना समझना ठीक नहीं,\nहर मुस्कान के पीछे खुशी नहीं।",
+"कुछ रिश्ते नाम के रह जाते हैं,\nकुछ लोग याद बनकर रह जाते हैं।",
+"खामोशी भी बहुत कुछ कहती है,\nबस समझने वाली नज़र चाहिए।",
+"दिल की बात हर कोई समझ नहीं पाता,\nहर अपना साथ निभा नहीं पाता।",
+"बीता हुआ कल लौटकर नहीं आता,\nपर यादों का सिलसिला जाता नहीं।",
+"जो मिला उसकी कदर करना सीखो,\nहर पल खुशी से जीना सीखो।"
+],
+"🎯 Motivation":[
+"सपने देखो और मेहनत करो,\nअपने कल को बेहतर करो।",
+"हार से कभी घबराना नहीं,\nकोशिश करना छोड़ना नहीं।",
+"धीरे चलो मगर चलते रहो,\nअपने लक्ष्य की ओर बढ़ते रहो।",
+"मेहनत का फल जरूर मिलता है,\nसच्चे इरादों को रास्ता मिलता है।",
+"आज की मेहनत कल की पहचान है,\nहौसला ही असली उड़ान है।",
+"मुश्किलें रास्ता रोकेंगी जरूर,\nहिम्मत से मंज़िल मिलेगी जरूर।",
+"अपनी गलतियों से सीखते रहो,\nहर दिन बेहतर बनते रहो।",
+"सफलता एक दिन में नहीं मिलती,\nलगन से हर मंज़िल मिलती।",
+"लक्ष्य पर अपना ध्यान रखो,\nमेहनत पर विश्वास रखो।",
+"खुद पर विश्वास बनाए रखना,\nअपने सपनों को सच बनाना।"
+],
+"🤝 Friendship":[
+"दोस्ती का रिश्ता खास होता है,\nहर दोस्त दिल के पास होता है।",
+"सच्चा दोस्त वही कहलाता है,\nमुश्किल में साथ निभाता है।",
+"दोस्ती में ना कोई हिसाब हो,\nबस दिल से दिल का साथ हो।",
+"दोस्तों के साथ हर पल सुहाना,\nउनके बिना अधूरा जमाना।",
+"हँसी-मजाक और प्यारी बातें,\nदोस्ती की यादगार सौगातें।",
+"अच्छे दोस्त किस्मत से मिलते हैं,\nदिल के करीब हमेशा रहते हैं।",
+"दोस्ती भरोसे का नाम है,\nयह रिश्ता सबसे खास है।",
+"रास्ते अलग हों तो क्या हुआ,\nदोस्ती का रिश्ता कम नहीं हुआ।",
+"दोस्त वो जो हौसला बढ़ाए,\nमुश्किल वक्त में रास्ता दिखाए।",
+"दोस्ती में सच्चाई जरूरी है,\nदिल से निभाना जरूरी है।"
+]
+};
 
+let selected="सभी";
+const cats=document.getElementById("categories");
 
-/* =========================
-   30 DESIGN CLASSES
-========================= */
-
-const styleClasses = [
-
-    "s1","s2","s3","s4","s5",
-    "s6","s7","s8","s9","s10",
-    "s11","s12","s13","s14","s15",
-    "s16","s17","s18","s19","s20",
-    "s21","s22","s23","s24","s25",
-    "s26","s27","s28","s29","s30"
-
-];
-
-
-/* =========================
-   DECORATIONS
-========================= */
-
-const decorations = [
-
-    "",
-    "★ ",
-    "『 ",
-    "【 ",
-    "꧁ ",
-    "✦ ",
-    "⚡ ",
-    "ツ ",
-    "亗 ",
-    "彡 ",
-    "✧ ",
-    "༺ ",
-    "♛ ",
-    "♡ ",
-    "☯ ",
-    "✪ ",
-    "➤ ",
-    "〆 ",
-    "乂 ",
-    "♕ ",
-    "✰ ",
-    "⚜ ",
-    "☘ ",
-    "✵ ",
-    "❖ ",
-    "♚ ",
-    "☠ ",
-    "✯ ",
-    "★彡 ",
-    "༒ "
-
-];
-
-
-/* =========================
-   9 UNICODE NAME STYLES
-========================= */
-
-function unicodeStyles(name){
-
-    return [
-
-        "𝓢𝓪𝓽𝔂𝓪𝓶 " + name.replace(/^Satyam /i,""),
-
-        "𝑺𝒂𝒕𝒚𝒂𝒎 " + name.replace(/^Satyam /i,""),
-
-        "𝗦𝗔𝗧𝗬𝗔𝗠 " + name.replace(/^Satyam /i,""),
-
-        "𝙎𝘼𝙏𝙔𝘼𝙈 " + name.replace(/^Satyam /i,""),
-
-        "𝕊𝕒𝕥𝕪𝕒𝕞 " + name.replace(/^Satyam /i,""),
-
-        "𝔖𝔞𝔱𝔶𝔞𝔪 " + name.replace(/^Satyam /i,""),
-
-        "Ｓａｔｙａｍ " + name.replace(/^Satyam /i,""),
-
-        "🅢🅐🅣🅨🅐🅜 " + name.replace(/^Satyam /i,""),
-
-        "Ⓢⓐⓣⓨⓐⓜ " + name.replace(/^Satyam /i,"")
-
-    ];
-
+function makeCategories(){
+ cats.innerHTML="";
+ ["सभी",...Object.keys(data)].forEach(name=>{
+  const b=document.createElement("button");
+  b.textContent=name;
+  b.className=selected===name?"active":"";
+  b.onclick=()=>{selected=name;makeCategories();render()};
+  cats.appendChild(b);
+ });
 }
 
-
-/* =========================
-   GENERATE
-========================= */
-
-function generateNames(){
-
-    let name =
-        document
-        .getElementById("nameInput")
-        .value
-        .trim();
-
-
-    let container =
-        document.getElementById("styles");
-
-
-    if(name === ""){
-
-        container.innerHTML =
-        "<p style='text-align:center;color:#aaa;'>Pehle apna naam likhiye 👆</p>";
-
-        return;
-
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=document.getElementById("list");
+ list.innerHTML="";
+ let count=0;
+ Object.entries(data).forEach(([cat,items])=>{
+  if(selected!=="सभी"&&selected!==cat)return;
+  items.forEach((s,i)=>{
+   if(!s.toLowerCase().includes(q)&&!cat.toLowerCase().includes(q))return;
+   count++;
+   const card=document.createElement("div");
+   card.className="card";
+   const h=document.createElement("h3");
+   h.textContent=cat+" Shayari #"+(i+1);
+   const p=document.createElement("p");
+   p.textContent=s;
+   const actions=document.createElement("div");
+   actions.className="actions";
+   const copy=document.createElement("button");
+   copy.className="red";
+   copy.textContent="📋 Copy";
+   copy.onclick=async()=>{
+    try{await navigator.clipboard.writeText(s)}
+    catch(e){
+     const t=document.createElement("textarea");
+     t.value=s;document.body.appendChild(t);t.select();
+     document.execCommand("copy");t.remove();
     }
-
-
-    let html = "";
-
-
-    /* =========================
-       STYLE 1 - 30
-    ========================= */
-
-    for(let i=0; i<30; i++){
-
-        let styledName =
-            decorations[i] + name;
-
-
-        html += `
-
-        <div class="style-box">
-
-            <div class="style-number">
-                STYLE ${i+1}
-            </div>
-
-            <div
-                class="name ${styleClasses[i]}"
-                id="normal${i}">
-
-                ${escapeHTML(styledName)}
-
-            </div>
-
-            <button
-                class="copy"
-                onclick="copyName('normal${i}')">
-
-                📋 Copy
-
-            </button>
-
-        </div>
-
-        `;
-
-    }
-
-
-    /* =========================
-       INSTAGRAM / WHATSAPP
-       TITLE
-    ========================= */
-
-    let unicode =
-        unicodeStyles(name);
-
-
-    html += `
-
-        <div class="extra-title">
-
-            <h2>
-                📱 Instagram WhatsApp Stylish Name
-            </h2>
-
-            <p>
-                Copy karke apne profile ya bio me use karein
-            </p>
-
-        </div>
-
-    `;
-
-
-    /* =========================
-       STYLE 31 - 39
-    ========================= */
-
-    for(let i=0; i<unicode.length; i++){
-
-        html += `
-
-        <div class="style-box">
-
-            <div class="style-number">
-
-                STYLE ${i + 31}
-
-            </div>
-
-
-            <div
-                class="name unicode"
-                id="unicode${i}">
-
-                ${escapeHTML(unicode[i])}
-
-            </div>
-
-
-            <button
-                class="copy"
-                onclick="copyName('unicode${i}')">
-
-                📋 Copy
-
-            </button>
-
-        </div>
-
-        `;
-
-    }
-
-
-    container.innerHTML = html;
-
+    copy.textContent="✅ Copied";
+   };
+   const share=document.createElement("button");
+   share.textContent="📤 Share";
+   share.onclick=()=>{
+    if(navigator.share)navigator.share({text:s}).catch(()=>{});
+    else window.open("https://wa.me/?text="+encodeURIComponent(s));
+   };
+   actions.append(copy,share);
+   card.append(h,p,actions);
+   list.appendChild(card);
+  });
+ });
+ if(!count)list.textContent="कोई शायरी नहीं मिली।";
 }
-
-
-/* =========================
-   COPY
-========================= */
-
-function copyName(id){
-
-    let text =
-        document
-        .getElementById(id)
-        .innerText;
-
-
-    if(navigator.clipboard){
-
-        navigator.clipboard
-        .writeText(text)
-        .then(function(){
-
-            alert("Name copied! ✅");
-
-        });
-
-    }else{
-
-        let area =
-            document.createElement("textarea");
-
-        area.value = text;
-
-        document.body.appendChild(area);
-
-        area.select();
-
-        document.execCommand("copy");
-
-        area.remove();
-
-        alert("Name copied! ✅");
-
-    }
-
-}
-
-
-/* =========================
-   SECURITY
-========================= */
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-   DEFAULT NAME
-========================= */
-
-document
-    .getElementById("nameInput")
-    .value = "Satyam Kumar";
-
-
-generateNames();
-
+makeCategories();
+render();
 </script>
-
 </body>
 </html>
