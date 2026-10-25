@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +9,8 @@
 :root{--bg:#0b1020;--panel:#151e32;--text:#f5f7ff;--muted:#aab5ca;--border:#293650;--input:#0d1629}
 body.light{--bg:#f2f5fb;--panel:#fff;--text:#172033;--muted:#58657a;--border:#d9e0ec;--input:#f6f8fc}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;transition:.2s}
-header{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
 .logo{font-size:21px;font-weight:bold;color:#58a6ff}
 button,input,select{font:inherit}
 button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;background:#3478f6;color:white}
@@ -17,7 +18,7 @@ button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;background:#3
 .menuitems{display:none;position:absolute;right:0;top:43px;background:var(--panel);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:5;padding:6px}
 .menuitems button{display:block;width:100%;margin:3px 0;text-align:left}
 main{max-width:1000px;margin:auto;padding:18px}
-.hero{padding:24px 4px 15px}
+.hero{padding:20px 4px 15px}
 .hero h1{font-size:32px;margin:5px 0 10px}
 .hero p,.muted{color:var(--muted);line-height:1.5}
 .search{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--input);color:var(--text);margin:10px 0 20px}
@@ -27,22 +28,30 @@ main{max-width:1000px;margin:auto;padding:18px}
 .c1{background:#245bd8}.c2{background:#b74476}.c3{background:#168b83}.c4{background:#a65d18}.c5{background:#7052c9}.c6{background:#2773a9}
 .panel{display:none;background:var(--panel);border:1px solid var(--border);padding:18px;border-radius:15px;margin-top:20px}
 .panel.active{display:block}
-.panel h2{margin-top:0}
 .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
 label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 input,select{width:100%;padding:12px;border-radius:9px;border:1px solid var(--border);background:var(--input);color:var(--text);margin-bottom:12px}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 .result{margin-top:14px;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:14px;line-height:1.7;overflow-wrap:anywhere}
 .note{font-size:12px;color:var(--muted)}
-.bankgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bankitem{padding:12px;border:1px solid var(--border);border-radius:10px}
 footer{text-align:center;padding:25px;color:var(--muted)}
+
+/* About full-screen page */
+#aboutPage{display:none;position:fixed;inset:0;z-index:99999;overflow-y:auto;padding:22px;background:var(--bg);color:var(--text)}
+#aboutPage.open{display:block}
+#aboutPage h1{color:#58a6ff;margin-top:28px}
+#aboutPage p,#aboutPage li{line-height:1.8;color:var(--muted)}
+#aboutPage .about-content{max-width:650px;margin:0 auto}
+#aboutPage ol{padding-left:25px}
 @media(max-width:450px){main{padding:12px}.hero h1{font-size:27px}.tile{padding:13px 10px}}
 </style>
 </head>
 <body>
 <header>
-  <div><div class="logo">🧮 Satyam Calculator</div><small class="muted">Smart tools for Everyday</small></div>
+  <div>
+    <div class="logo">🧮 Satyam Calculator</div>
+    <small class="muted">Smart tools for Everyday</small>
+  </div>
   <div class="menu">
     <button onclick="toggleMenu()">⋮</button>
     <div class="menuitems" id="menuitems">
@@ -52,13 +61,16 @@ footer{text-align:center;padding:25px;color:var(--muted)}
     </div>
   </div>
 </header>
-<main>
+
+<main id="homePage">
 <section class="hero">
   <p>SMART CALCULATOR TOOLS</p>
   <h1>Calculate Anything</h1>
   <p>All your everyday calculations in one place.</p>
 </section>
+
 <input class="search" id="search" placeholder="🔍 Search calculator..." oninput="searchTools()">
+
 <div class="grid" id="tiles">
   <button class="tile c1" data-name="Percentage" onclick="openTool('percentage')"><span>📊</span>1. Percentage</button>
   <button class="tile c2" data-name="Discount" onclick="openTool('discount')"><span>🏷️</span>2. Discount</button>
@@ -80,28 +92,42 @@ footer{text-align:center;padding:25px;color:var(--muted)}
   <button class="tile c6" data-name="Average Calculator" onclick="openTool('average')"><span>📝</span>18. Average</button>
   <button class="tile c1" data-name="Ratio Calculator" onclick="openTool('ratio')"><span>🔢</span>19. Ratio</button>
 </div>
-<div class="panel" id="about">
-<h2>About Satyam Calculator</h2>
-<p>Mr. Satyam Kumar</p>
-<p>Satyam Calculator is a simple all-in-one website for everyday calculations. It contains 19 useful calculators.</p>
-<ol>
-<li>Percentage</li><li>Discount</li><li>Dukaan Bill</li><li>Ghar Kharch</li>
-<li>Weight → Price</li><li>Money → Weight</li><li>Age Calculator</li>
-<li>Maths Calculator</li><li>Bank Money Calculator</li><li>Profit & Loss</li>
-<li>GST Calculator</li><li>EMI Calculator</li><li>Simple Interest</li>
-<li>Unit Converter</li><li>Age in Days</li><li>Electricity Bill</li>
-<li>Savings Calculator</li><li>Average Calculator</li><li>Ratio Calculator</li>
-</ol>
-<button onclick="closePanels()">Back to calculators</button>
-</div>
+
 <div id="workspace"></div>
 </main>
+
 <footer>© 2026 Satyam Calculator · Made for everyday use</footer>
+
+<!-- About is outside main, so it opens as a full-screen page -->
+<div id="aboutPage">
+  <button onclick="closeAbout()">← Back</button>
+  <div class="about-content">
+    <h1>About Satyam Calculator</h1>
+    <h2>Mr. Satyam Kumar</h2>
+    <p>Software Engineer</p>
+    <hr>
+    <h3>🧮 Satyam Calculator</h3>
+    <p>A simple all-in-one website for everyday calculations.</p>
+    <h3>Our 19 Calculators</h3>
+    <ol>
+      <li>Percentage</li><li>Discount</li><li>Dukaan Bill</li>
+      <li>Ghar Kharch</li><li>Weight → Price</li><li>Money → Weight</li>
+      <li>Age Calculator</li><li>Maths Calculator</li>
+      <li>Bank Money Calculator</li><li>Profit &amp; Loss</li>
+      <li>GST Calculator</li><li>EMI Calculator</li>
+      <li>Simple Interest</li><li>Unit Converter</li><li>Age in Days</li>
+      <li>Electricity Bill</li><li>Savings</li><li>Average</li><li>Ratio</li>
+    </ol>
+    <h3>Contact Us</h3>
+    <p>Instagram: Satyambind0062</p>
+  </div>
+</div>
+
 <script>
+
 function toggleMenu() {
   const menu = document.getElementById("menuitems");
-  menu.style.display =
-    menu.style.display === "block" ? "none" : "block";
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
 function setTheme(theme) {
@@ -109,258 +135,310 @@ function setTheme(theme) {
   document.getElementById("menuitems").style.display = "none";
 }
 
-function closePanels() {
-  document.querySelectorAll(".panel").forEach(p =>
-    p.classList.remove("active")
-  );
-  document.getElementById("workspace").innerHTML = "";
-  document.getElementById("about").classList.remove("active");
-}
-
 function showAbout() {
+  document.getElementById("menuitems").style.display = "none";
   closePanels();
-
-  const workspace = document.getElementById("workspace");
-
-  workspace.innerHTML = `
-    <div class="about-page">
-      <button class="back-btn" onclick="showHome()">
-        ← Back
-      </button>
-
-      <h1>About Us</h1>
-      <h2>Mr. Satyam Kumar</h2>
-      <p>Software Engineer</p>
-
-      <hr>
-
-      <h3>🧮 Satyam Calculator</h3>
-      <p>Smart Tools for Everyday</p>
-
-      <h3>Contact Us</h3>
-      <p>Instagram: Satyambind0062</p>
-
-      <p>© 2026 Satyam Calculator</p>
-    </div>
-  `;
-
-  document.body.classList.add("about-open");
+  document.getElementById("aboutPage").classList.add("open");
   window.scrollTo(0, 0);
 }
 
-function showHome() {
-  document.body.classList.remove("about-open");
-  closePanels();
+function closeAbout() {
+  document.getElementById("aboutPage").classList.remove("open");
   window.scrollTo(0, 0);
 }
 
+function searchTools() {
+  const q = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll("#tiles .tile").forEach(tile => {
+    tile.style.display = tile.dataset.name.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+function closePanels() {
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.getElementById("workspace").innerHTML = "";
+}
+
+function num(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function safe(s) {
+  return String(s).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[ch]));
+}
 
 const tools = {
   percentage: {
     title: "Percentage Calculator",
     fields: [
-      ["total", "Total Marks"],
-      ["obtained", "Obtained Marks"],
-      ["percent", "Percentage (%)"]
+      {id:"obtained",label:"Obtained Marks",placeholder:"450"},
+      {id:"total",label:"Total Marks",placeholder:"500"}
     ],
-    run: v => {
-      let t = num(v.total), o = num(v.obtained), p = num(v.percent);
-      if (v.total !== "" && v.obtained !== "" && t > 0)
-        return `Percentage: ${(o / t * 100).toFixed(2)}%`;
-      if (v.total !== "" && v.percent !== "" && t > 0)
-        return `Obtained Marks: ${(t * p / 100).toFixed(2)}`;
-      if (v.obtained !== "" && v.percent !== "" && p > 0)
-        return `Total Marks: ${(o * 100 / p).toFixed(2)}`;
-      return "Koi bhi 2 values enter karo.";
+    run:v => {
+      const total=num(v.total);
+      if(total<=0) return "Total marks must be greater than zero.";
+      return `Percentage: ${(num(v.obtained)/total*100).toFixed(2)}%`;
     }
   },
   discount: {
     title: "Discount Calculator",
-    fields: [["price", "Original Price"], ["rate", "Discount (%)"]],
-    run: v => {
-      const d = num(v.price) * num(v.rate) / 100;
-      return `Discount: ₹${d.toFixed(2)}<br>Final Price: ₹${(num(v.price)-d).toFixed(2)}`;
+    fields: [
+      {id:"price",label:"Original Price (₹)",placeholder:"1000"},
+      {id:"discount",label:"Discount (%)",placeholder:"20"}
+    ],
+    run:v => {
+      const p=num(v.price),d=num(v.discount);
+      if(p<0||d<0||d>100) return "Enter a valid price and discount (0–100%).";
+      return `Discount: ₹${(p*d/100).toFixed(2)}<br>Final Price: ₹${(p-p*d/100).toFixed(2)}`;
     }
   },
   bill: {
     title: "Dukaan Bill",
-    fields: [["item", "Item Name", "text"], ["qty", "Quantity"], ["rate", "Price per item"]],
-    run: v => `Item: ${safe(v.item)}<br>Total Bill: ₹${(num(v.qty)*num(v.rate)).toFixed(2)}`
+    fields: [
+      {id:"qty",label:"Quantity",placeholder:"5"},
+      {id:"price",label:"Price per Item (₹)",placeholder:"20"}
+    ],
+    run:v => `Total Bill: ₹${(num(v.qty)*num(v.price)).toFixed(2)}`
   },
   expense: {
     title: "Ghar Kharch",
-    fields: [["food", "Food Expense"], ["rent", "House Rent"], ["bill", "Electricity Bill"], ["other", "Other Expenses"]],
-    run: v => `Total Household Expenses: ₹${["food","rent","bill","other"].reduce((s,k)=>s+num(v[k]),0).toFixed(2)}`
+    fields: [
+      {id:"income",label:"Monthly Income (₹)",placeholder:"20000"},
+      {id:"expense",label:"Monthly Expenses (₹)",placeholder:"12000"}
+    ],
+    run:v => `Remaining Money: ₹${(num(v.income)-num(v.expense)).toFixed(2)}`
   },
   weightprice: {
-    title: "Weight → Price",
-    fields: [["price", "Price per 1 kg (₹)"], ["grams", "Weight in grams"]],
-    run: v => `Price: ₹${(num(v.price)*num(v.grams)/1000).toFixed(2)}`
+    title: "Weight to Price",
+    fields: [
+      {id:"weight",label:"Weight (kg)",placeholder:"2"},
+      {id:"rate",label:"Price per kg (₹)",placeholder:"50"}
+    ],
+    run:v => `Total Price: ₹${(num(v.weight)*num(v.rate)).toFixed(2)}`
   },
   moneyweight: {
-    title: "Money → Weight",
-    fields: [["price", "Price per 1 kg (₹)"], ["money", "Money paid (₹)"]],
-    run: v => num(v.price)>0 ? `Weight: ${(num(v.money)/num(v.price)*1000).toFixed(2)} grams` : "Price per kg zero se zyada hona chahiye."
+    title: "Money to Weight",
+    fields: [
+      {id:"money",label:"Money (₹)",placeholder:"100"},
+      {id:"rate",label:"Price per kg (₹)",placeholder:"50"}
+    ],
+    run:v => {
+      const r=num(v.rate);
+      if(r<=0) return "Price per kg must be greater than zero.";
+      return `Weight: ${(num(v.money)/r).toFixed(3)} kg`;
+    }
   },
   age: {
     title: "Age Calculator",
-    fields: [["birth", "Date of Birth", "date"], ["until", "Calculate Until", "date"]],
-    run: v => {
-      if(!v.birth || !v.until) return "Dono dates select karo.";
-      const b = new Date(v.birth), e = new Date(v.until);
-      if(e < b) return "Calculate-until date, birth date ke baad honi chahiye.";
-      let y=e.getFullYear()-b.getFullYear(), m=e.getMonth()-b.getMonth(), d=e.getDate()-b.getDate();
-      if(d<0){m--;d+=new Date(e.getFullYear(),e.getMonth(),0).getDate();}
+    fields: [{id:"birth",label:"Date of Birth",type:"date"}],
+    run:v => {
+      if(!v.birth) return "Please select your date of birth.";
+      const b=new Date(v.birth+"T00:00:00"), now=new Date();
+      if(b>now) return "Date of birth cannot be in the future.";
+      let y=now.getFullYear()-b.getFullYear();
+      let m=now.getMonth()-b.getMonth();
+      let d=now.getDate()-b.getDate();
+      if(d<0){m--;d+=new Date(now.getFullYear(),now.getMonth(),0).getDate();}
       if(m<0){y--;m+=12;}
       return `Age: ${y} years, ${m} months, ${d} days`;
     }
   },
   maths: {
     title: "Maths Calculator",
-    fields: [["a", "First Number"], ["b", "Second Number"]],
-    run: v => {
-      const a=num(v.a), b=num(v.b);
-      return `Addition: ${a+b}<br>Subtraction: ${a-b}<br>Multiplication: ${a*b}<br>Division: ${b===0?"Not possible":a/b}`;
+    fields: [
+      {id:"a",label:"First Number",placeholder:"10"},
+      {id:"op",label:"Operation (+, -, *, /)",placeholder:"+"},
+      {id:"b",label:"Second Number",placeholder:"5"}
+    ],
+    run:v => {
+      const a=num(v.a),b=num(v.b);
+      switch(v.op.trim()){
+        case "+": return `Answer: ${a+b}`;
+        case "-": return `Answer: ${a-b}`;
+        case "*": return `Answer: ${a*b}`;
+        case "/": return b===0?"Cannot divide by zero.":`Answer: ${a/b}`;
+        default: return "Use +, -, * or / as the operation.";
+      }
     }
   },
   bank: {
-    title: "Bank Money Calculator",
-    fields: [["money", "Enter Total Money (₹)"]],
-    run: v => {
-      let n=Math.max(0,Math.floor(num(v.money))), original=n;
-      let html=`Total Money: ₹${original}<div class="bankgrid">`;
-      [500,200,100,50,20,10,5,2,1].forEach(d=>{
-        html+=`<div class="bankitem">₹${d} notes/coins<br><b>${Math.floor(n/d)}</b> (if all in ₹${d})</div>`;
+    title: "Bank Note Calculator",
+    fields: [{id:"amount",label:"Enter Total Money (₹)",placeholder:"2780"}],
+    run:v => {
+      let rem=Math.floor(num(v.amount));
+      if(rem<0) return "Please enter a non-negative amount.";
+      const notes=[500,200,100,50,20,10];
+      let html="<h3>Note Details</h3>";
+      notes.forEach(n=>{
+        const count=Math.floor(rem/n);
+        rem%=n;
+        html+=`<p>₹${n} notes: <b>${count}</b> — ₹${count*n}</p>`;
       });
-      return html+"</div><p class='note'>Har denomination ka count alag-alag dikhaya gaya hai, total notes ka combined breakdown nahi.</p>";
+      return html+`<hr><b>Remaining amount: ₹${rem}</b>`;
     }
   },
   profit: {
     title: "Profit & Loss",
-    fields: [["cost", "Cost Price (₹)"], ["sell", "Selling Price (₹)"]],
-    run: v => {
+    fields: [
+      {id:"cost",label:"Cost Price (₹)",placeholder:"500"},
+      {id:"sell",label:"Selling Price (₹)",placeholder:"650"}
+    ],
+    run:v => {
       const diff=num(v.sell)-num(v.cost);
-      return diff>0 ? `Profit: ₹${diff.toFixed(2)}<br>Profit %: ${num(v.cost)>0?(diff/num(v.cost)*100).toFixed(2):"—"}%` : diff<0 ? `Loss: ₹${(-diff).toFixed(2)}<br>Loss %: ${num(v.cost)>0?(-diff/num(v.cost)*100).toFixed(2):"—"}%` : "No profit, no loss.";
+      if(diff>0) return `Profit: ₹${diff.toFixed(2)}<br>Profit %: ${num(v.cost)>0?(diff/num(v.cost)*100).toFixed(2):"N/A"}%`;
+      if(diff<0) return `Loss: ₹${(-diff).toFixed(2)}<br>Loss %: ${num(v.cost)>0?(-diff/num(v.cost)*100).toFixed(2):"N/A"}%`;
+      return "No profit, no loss.";
     }
   },
   gst: {
     title: "GST Calculator",
-    fields: [["amount", "Amount before GST (₹)"], ["rate", "GST (%)"]],
-    run: v => `GST Amount: ₹${(num(v.amount)*num(v.rate)/100).toFixed(2)}<br>Total with GST: ₹${(num(v.amount)*(1+num(v.rate)/100)).toFixed(2)}`
+    fields: [
+      {id:"amount",label:"Base Amount (₹)",placeholder:"1000"},
+      {id:"gst",label:"GST Rate (%)",placeholder:"18"}
+    ],
+    run:v => {
+      const a=num(v.amount),g=num(v.gst);
+      return `GST Amount: ₹${(a*g/100).toFixed(2)}<br>Total with GST: ₹${(a+a*g/100).toFixed(2)}`;
+    }
   },
   emi: {
     title: "EMI Calculator",
-    fields: [["loan", "Loan Amount (₹)"], ["rate", "Annual Interest (%)"], ["years", "Years"]],
-    run: v => {
-      const P=num(v.loan), r=num(v.rate)/1200, n=num(v.years)*12;
-      if(P<=0||n<=0) return "Loan aur duration enter karo.";
-      const emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-      return `Monthly EMI: ₹${emi.toFixed(2)}<br>Total Payment: ₹${(emi*n).toFixed(2)}<br>Total Interest: ₹${(emi*n-P).toFixed(2)}`;
+    fields: [
+      {id:"principal",label:"Loan Amount (₹)",placeholder:"100000"},
+      {id:"rate",label:"Annual Interest (%)",placeholder:"10"},
+      {id:"years",label:"Loan Period (Years)",placeholder:"2"}
+    ],
+    run:v => {
+      const p=num(v.principal),r=num(v.rate)/1200,n=num(v.years)*12;
+      if(p<=0||n<=0||num(v.rate)<0) return "Enter valid loan details.";
+      const emi=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+      return `Monthly EMI: ₹${emi.toFixed(2)}<br>Total Payment: ₹${(emi*n).toFixed(2)}`;
     }
   },
   interest: {
     title: "Simple Interest",
-    fields: [["p", "Principal (₹)"], ["r", "Annual Interest (%)"], ["t", "Time (years)"]],
-    run: v => {
+    fields: [
+      {id:"p",label:"Principal (₹)",placeholder:"10000"},
+      {id:"r",label:"Annual Rate (%)",placeholder:"5"},
+      {id:"t",label:"Time (Years)",placeholder:"2"}
+    ],
+    run:v => {
       const si=num(v.p)*num(v.r)*num(v.t)/100;
       return `Simple Interest: ₹${si.toFixed(2)}<br>Total Amount: ₹${(num(v.p)+si).toFixed(2)}`;
     }
   },
   unit: {
     title: "Unit Converter",
-    fields: [["value", "Enter Value"], ["from", "Convert From", "select", ["Meters","Kilometers","Centimeters","Kilograms","Grams"]], ["to", "Convert To", "select", ["Meters","Kilometers","Centimeters","Kilograms","Grams"]]],
-    run: v => {
-      const factors={Meters:1,Kilometers:1000,Centimeters:.01,Kilograms:1,Grams:.001};
-      const lengths=["Meters","Kilometers","Centimeters"].includes(v.from);
-      const lengths2=["Meters","Kilometers","Centimeters"].includes(v.to);
-      if(lengths!==lengths2) return "Length aur weight ko aapas mein convert nahi kar sakte.";
-      return `Converted Value: ${(num(v.value)*factors[v.from]/factors[v.to]).toFixed(4)} ${v.to}`;
+    fields: [
+      {id:"value",label:"Value",placeholder:"1"},
+      {id:"from",label:"From Unit (m, km, cm, kg, g)",placeholder:"km"},
+      {id:"to",label:"To Unit (m, km, cm, kg, g)",placeholder:"m"}
+    ],
+    run:v => {
+      const factors={m:{group:"length",f:1},km:{group:"length",f:1000},cm:{group:"length",f:.01},mm:{group:"length",f:.001},kg:{group:"weight",f:1},g:{group:"weight",f:.001},mg:{group:"weight",f:.000001}};
+      const a=factors[v.from.trim().toLowerCase()],b=factors[v.to.trim().toLowerCase()];
+      if(!a||!b||a.group!==b.group) return "Use compatible units: m, km, cm, mm or kg, g, mg.";
+      return `Result: ${(num(v.value)*a.f/b.f).toLocaleString("en-IN",{maximumFractionDigits:6})} ${v.to}`;
     }
   },
   agedays: {
     title: "Age in Days",
-    fields: [["birth", "Date of Birth", "date"], ["until", "Calculate Until", "date"]],
-    run: v => {
-      if(!v.birth||!v.until) return "Dono dates select karo.";
-      const days=Math.floor((new Date(v.until)-new Date(v.birth))/86400000);
-      return days<0?"Dates sahi order mein select karo.":`Total: ${days} days<br>Approx. weeks: ${(days/7).toFixed(1)}<br>Approx. years: ${(days/365.2425).toFixed(2)}`;
+    fields: [{id:"birth",label:"Date of Birth",type:"date"}],
+    run:v => {
+      if(!v.birth) return "Please select your date of birth.";
+      const days=Math.floor((new Date().setHours(0,0,0,0)-new Date(v.birth+"T00:00:00").getTime())/86400000);
+      if(days<0) return "Date cannot be in the future.";
+      return `Total Age: ${days.toLocaleString("en-IN")} days`;
     }
   },
   electric: {
     title: "Electricity Bill",
-    fields: [["units", "Units Used"], ["rate", "Price per Unit (₹)"], ["fixed", "Fixed Charge (₹)"]],
-    run: v => `Estimated Electricity Bill: ₹${(num(v.units)*num(v.rate)+num(v.fixed)).toFixed(2)}`
+    fields: [
+      {id:"units",label:"Units Used",placeholder:"100"},
+      {id:"rate",label:"Rate per Unit (₹)",placeholder:"6"}
+    ],
+    run:v => `Estimated Bill: ₹${(num(v.units)*num(v.rate)).toFixed(2)}`
   },
   savings: {
     title: "Savings Calculator",
-    fields: [["monthly", "Monthly Savings (₹)"], ["months", "Number of Months"]],
-    run: v => `Total Savings: ₹${(num(v.monthly)*num(v.months)).toFixed(2)}`
+    fields: [
+      {id:"monthly",label:"Monthly Savings (₹)",placeholder:"1000"},
+      {id:"months",label:"Number of Months",placeholder:"12"}
+    ],
+    run:v => `Total Savings: ₹${(num(v.monthly)*num(v.months)).toFixed(2)}`
   },
   average: {
     title: "Average Calculator",
-    fields: [["numbers", "Numbers (comma separated)", "text"]],
-    run: v => {
-      const arr=v.numbers.split(",").map(x=>Number(x.trim()));
-      if(!v.numbers.trim()||arr.some(x=>!Number.isFinite(x))) return "Example: 10, 20, 30";
-      return `Count: ${arr.length}<br>Average: ${(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2)}`;
+    fields: [
+      {id:"numbers",label:"Numbers (comma separated)",placeholder:"10,20,30"}
+    ],
+    run:v => {
+      const parts=v.numbers.split(",").map(s=>s.trim());
+      if(!parts.length||parts.some(s=>s===""||!Number.isFinite(Number(s)))) return "Enter numbers separated by commas.";
+      const arr=parts.map(Number);
+      return `Average: ${(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2)}`;
     }
   },
   ratio: {
     title: "Ratio Calculator",
-    fields: [["a", "First Number"], ["b", "Second Number"]],
-    run: v => {
+    fields: [
+      {id:"a",label:"First Number",placeholder:"20"},
+      {id:"b",label:"Second Number",placeholder:"30"}
+    ],
+    run:v => {
       let a=Math.abs(num(v.a)),b=Math.abs(num(v.b));
-      if(a===0&&b===0) return "Dono values zero nahi ho sakti.";
-      let x=a,y=b;while(y){let t=x%y;x=y;y=t;}
-      return `Simplified Ratio: ${a/x} : ${b/x}`;
+      if(a===0&&b===0) return "Both numbers cannot be zero.";
+      let x=a,y=b;
+      while(y){const t=x%y;x=y;y=t;}
+      return `Simplified Ratio: ${a/x}:${b/x}`;
     }
   }
 };
 
-function num(value) {
-  const n=Number(value);
-  return value===""||!Number.isFinite(n)?0:n;
-}
-function safe(s) {
-  return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
 function openTool(id) {
+  if(!tools[id]) return;
   closePanels();
-  const t=tools[id];
-  const area=document.getElementById("workspace");
+  const tool=tools[id];
+  const workspace=document.getElementById("workspace");
   const panel=document.createElement("section");
   panel.className="panel active";
-  panel.id="currentTool";
-  panel.innerHTML=`<h2>${t.title}</h2><div class="fields" id="fields"></div><div class="actions"><button id="calculateBtn">Calculate</button><button id="clearBtn" type="button">Clear</button><button id="backBtn" type="button">Back</button></div><div class="result" id="result" aria-live="polite">Result yahan dikhega.</div>`;
-  area.appendChild(panel);
-  const fields=panel.querySelector("#fields");
-  t.fields.forEach(f=>{
-    const wrap=document.createElement("div");
-    const label=document.createElement("label");
-    label.textContent=f[1];
-    const input=document.createElement(f[2]==="select"?"select":"input");
-    input.id="f_"+f[0];
-    if(f[2]==="select"){
-      f[3].forEach(opt=>{
-        const o=document.createElement("option");o.value=opt;o.textContent=opt;input.appendChild(o);
-      });
-    } else input.type=f[2]==="date"?"date":f[2]==="text"?"text":"number";
-    input.placeholder=f[2]==="text"?"Enter here":"Enter value";
-    if(input.type==="number") input.step="any";
-    wrap.appendChild(label);wrap.appendChild(input);fields.appendChild(wrap);
+
+  let html=`<h2>${safe(tool.title)}</h2><div class="fields">`;
+  tool.fields.forEach(f=>{
+    html+=`<div><label for="field_${f.id}">${safe(f.label)}</label>
+      <input id="field_${f.id}" data-field="${safe(f.id)}" type="${f.type||"number"}" placeholder="${safe(f.placeholder||"")}" ${f.type==="date"?"max=\""+new Date().toISOString().slice(0,10)+"\"":""}></div>`;
   });
-  panel.querySelector("#calculateBtn").onclick=()=>{
+  html+=`</div><div class="actions">
+    <button type="button" id="calculateBtn">Calculate</button>
+    <button type="button" id="clearBtn">Clear</button>
+    <button type="button" id="backBtn">Back</button>
+    </div><div class="result" id="toolResult" hidden></div>`;
+  panel.innerHTML=html;
+  workspace.appendChild(panel);
+
+  panel.querySelector("#calculateBtn").addEventListener("click",()=>{
     const values={};
-    t.fields.forEach(f=>values[f[0]]=panel.querySelector("#f_"+f[0]).value);
-    panel.querySelector("#result").innerHTML=t.run(values);
-  };
-  panel.querySelector("#clearBtn").onclick=()=>{
-    fields.querySelectorAll("input").forEach(i=>i.value="");
-    panel.querySelector("#result").textContent="Result yahan dikhega.";
-  };
-  panel.querySelector("#backBtn").onclick=closePanels;
+    panel.querySelectorAll("[data-field]").forEach(input=>values[input.dataset.field]=input.value);
+    const result=panel.querySelector("#toolResult");
+    result.innerHTML=tool.run(values);
+    result.hidden=false;
+  });
+  panel.querySelector("#clearBtn").addEventListener("click",()=>{
+    panel.querySelectorAll("[data-field]").forEach(input=>input.value="");
+    const result=panel.querySelector("#toolResult");
+    result.innerHTML="";
+    result.hidden=true;
+  });
+  panel.querySelector("#backBtn").addEventListener("click",()=>{
+    closePanels();
+    window.scrollTo(0,0);
+  });
   panel.scrollIntoView({behavior:"smooth",block:"start"});
 }
+
 </script>
 </body>
 </html>
