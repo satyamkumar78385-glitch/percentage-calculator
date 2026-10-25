@@ -1,162 +1,342 @@
-
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shayari World</title>
+<title>Satyam Calculator</title>
 <style>
+:root{--bg:#0b1020;--panel:#151e32;--text:#f5f7ff;--muted:#aab5ca;--border:#293650;--input:#0d1629}
+body.light{--bg:#f2f5fb;--panel:#fff;--text:#172033;--muted:#58657a;--border:#d9e0ec;--input:#f6f8fc}
 *{box-sizing:border-box}
-body{margin:0;background:#111;color:white;font-family:Arial,sans-serif}
-header{background:#e50936;text-align:center;padding:20px}
-header h1{margin:0}
-header p{margin:8px 0 0}
-main{max-width:700px;margin:auto;padding:14px}
-input{width:100%;padding:13px;border-radius:9px;border:1px solid #555;background:#222;color:white;font-size:16px}
-.categories{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
-button{border:0;border-radius:8px;padding:10px;background:#333;color:white;cursor:pointer}
-button.active,.red{background:#e50936}
-.card{background:#202020;border:1px solid #383838;border-radius:12px;padding:15px;margin:12px 0}
-.card h3{color:#ff5474;margin-top:0}
-.card p{white-space:pre-line;line-height:1.8}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;transition:.2s}
+header{padding:18px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:21px;font-weight:bold;color:#58a6ff}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;background:#3478f6;color:white}
+.menu{position:relative}
+.menuitems{display:none;position:absolute;right:0;top:43px;background:var(--panel);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:5;padding:6px}
+.menuitems button{display:block;width:100%;margin:3px 0;text-align:left}
+main{max-width:1000px;margin:auto;padding:18px}
+.hero{padding:24px 4px 15px}
+.hero h1{font-size:32px;margin:5px 0 10px}
+.hero p,.muted{color:var(--muted);line-height:1.5}
+.search{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--input);color:var(--text);margin:10px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.tile{padding:17px 12px;border-radius:13px;min-height:90px;color:white;text-align:left;font-weight:bold}
+.tile span{display:block;font-size:25px;margin-bottom:9px}
+.c1{background:#245bd8}.c2{background:#b74476}.c3{background:#168b83}.c4{background:#a65d18}.c5{background:#7052c9}.c6{background:#2773a9}
+.panel{display:none;background:var(--panel);border:1px solid var(--border);padding:18px;border-radius:15px;margin-top:20px}
+.panel.active{display:block}
+.panel h2{margin-top:0}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;padding:12px;border-radius:9px;border:1px solid var(--border);background:var(--input);color:var(--text);margin-bottom:12px}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
-footer{text-align:center;padding:20px;color:#aaa}
+.result{margin-top:14px;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:14px;line-height:1.7;overflow-wrap:anywhere}
+.note{font-size:12px;color:var(--muted)}
+.bankgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bankitem{padding:12px;border:1px solid var(--border);border-radius:10px}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media(max-width:450px){main{padding:12px}.hero h1{font-size:27px}.tile{padding:13px 10px}}
 </style>
 </head>
 <body>
 <header>
-<h1>❤️ Shayari World</h1>
-<p>दिल से लिखी, दिल तक पहुँची ✨</p>
+  <div><div class="logo">🧮 Satyam Calculator</div><small class="muted">Smart tools for Everyday</small></div>
+  <div class="menu">
+    <button onclick="toggleMenu()">⋮</button>
+    <div class="menuitems" id="menuitems">
+      <button onclick="showAbout()">About</button>
+      <button onclick="setTheme('dark')">Dark Mode</button>
+      <button onclick="setTheme('light')">Light Mode</button>
+    </div>
+  </div>
 </header>
 <main>
-<input id="search" placeholder="🔍 शायरी खोजें..." oninput="render()">
-<div class="categories" id="categories"></div>
-<div id="list"></div>
+<section class="hero">
+  <p>SMART CALCULATOR TOOLS</p>
+  <h1>Calculate Anything</h1>
+  <p>All your everyday calculations in one place.</p>
+</section>
+<input class="search" id="search" placeholder="🔍 Search calculator..." oninput="searchTools()">
+<div class="grid" id="tiles">
+  <button class="tile c1" data-name="Percentage" onclick="openTool('percentage')"><span>📊</span>1. Percentage</button>
+  <button class="tile c2" data-name="Discount" onclick="openTool('discount')"><span>🏷️</span>2. Discount</button>
+  <button class="tile c3" data-name="Dukaan Bill" onclick="openTool('bill')"><span>🛒</span>3. Dukaan Bill</button>
+  <button class="tile c4" data-name="Ghar Kharch" onclick="openTool('expense')"><span>🏠</span>4. Ghar Kharch</button>
+  <button class="tile c5" data-name="Weight Price" onclick="openTool('weightprice')"><span>⚖️</span>5. Weight → Price</button>
+  <button class="tile c6" data-name="Money Weight" onclick="openTool('moneyweight')"><span>💰</span>6. Money → Weight</button>
+  <button class="tile c1" data-name="Age Calculator" onclick="openTool('age')"><span>🎂</span>7. Age Calculator</button>
+  <button class="tile c2" data-name="Maths Calculator" onclick="openTool('maths')"><span>➗</span>8. Maths Calculator</button>
+  <button class="tile c3" data-name="Bank Money" onclick="openTool('bank')"><span>💵</span>9. Bank Money</button>
+  <button class="tile c4" data-name="Profit Loss" onclick="openTool('profit')"><span>📈</span>10. Profit & Loss</button>
+  <button class="tile c5" data-name="GST Calculator" onclick="openTool('gst')"><span>🧾</span>11. GST Calculator</button>
+  <button class="tile c6" data-name="EMI Calculator" onclick="openTool('emi')"><span>🏦</span>12. EMI Calculator</button>
+  <button class="tile c1" data-name="Simple Interest" onclick="openTool('interest')"><span>💳</span>13. Simple Interest</button>
+  <button class="tile c2" data-name="Unit Converter" onclick="openTool('unit')"><span>📏</span>14. Unit Converter</button>
+  <button class="tile c3" data-name="Age in Days" onclick="openTool('agedays')"><span>📅</span>15. Age in Days</button>
+  <button class="tile c4" data-name="Electricity Bill" onclick="openTool('electric')"><span>💡</span>16. Electricity Bill</button>
+  <button class="tile c5" data-name="Savings Calculator" onclick="openTool('savings')"><span>🐷</span>17. Savings</button>
+  <button class="tile c6" data-name="Average Calculator" onclick="openTool('average')"><span>📝</span>18. Average</button>
+  <button class="tile c1" data-name="Ratio Calculator" onclick="openTool('ratio')"><span>🔢</span>19. Ratio</button>
+</div>
+<div class="panel" id="about">
+<h2>About Satyam Calculator</h2>
+<p>Mr. Satyam Kumar</p>
+<p>Satyam Calculator is a simple all-in-one website for everyday calculations. It contains 19 useful calculators.</p>
+<ol>
+<li>Percentage</li><li>Discount</li><li>Dukaan Bill</li><li>Ghar Kharch</li>
+<li>Weight → Price</li><li>Money → Weight</li><li>Age Calculator</li>
+<li>Maths Calculator</li><li>Bank Money Calculator</li><li>Profit & Loss</li>
+<li>GST Calculator</li><li>EMI Calculator</li><li>Simple Interest</li>
+<li>Unit Converter</li><li>Age in Days</li><li>Electricity Bill</li>
+<li>Savings Calculator</li><li>Average Calculator</li><li>Ratio Calculator</li>
+</ol>
+<button onclick="closePanels()">Back to calculators</button>
+</div>
+<div id="workspace"></div>
 </main>
-<footer>Made with ❤️ | Shayari World</footer>
+<footer>© 2026 Satyam Calculator · Made for everyday use</footer>
 <script>
-const data={
-"😎 Attitude":[
-"अपनी पहचान खुद बनानी है,\nभीड़ में नहीं, अलग नज़र आनी है।",
-"हमारी खामोशी को कमजोरी मत समझना,\nहमारा वक्त भी आएगा।",
-"अंदाज़ अपना सबसे अलग रखते हैं,\nतभी तो अपनी पहचान रखते हैं।",
-"मंज़िल अपनी, रास्ते अपने,\nसपने अपने, इरादे अपने।",
-"हम खुद पर भरोसा रखते हैं,\nइसलिए मुश्किलों से नहीं डरते।",
-"नाम छोटा हो सकता है,\nलेकिन सपने बड़े हैं।",
-"दूसरों की नकल नहीं करते,\nहम अपना अंदाज़ खुद बनाते हैं।",
-"वक्त बदलता है, हालात बदलते हैं,\nमेहनत से दिन बदलते हैं।",
-"अपनी कीमत खुद पहचानो,\nदुनिया तो कीमत लगाती रहेगी।",
-"शोर नहीं, काम से पहचान बनानी है,\nहमें अपनी मंज़िल खुद पानी है।"
-],
-"❤️ Love":[
-"तेरी मुस्कान प्यारी लगती है,\nतेरी हर बात न्यारी लगती है।",
-"दिल की हर धड़कन में तेरा नाम है,\nमेरे लिए तू सबसे खास है।",
-"तेरी खुशी मेरी दुआ बन जाए,\nतेरी मुस्कान मेरी वजह बन जाए।",
-"तुम पास रहो या दूर,\nदिल में रहोगे जरूर।",
-"तेरी बातें दिल को छू जाती हैं,\nतेरी यादें मुस्कान लाती हैं।",
-"मोहब्बत सच्चे एहसास का नाम है,\nदिल का रिश्ता सबसे खास है।",
-"एक प्यारी सी मुस्कान तुम्हारी,\nदिन बना देती है हमारी।",
-"तुमसे बात हो जाए तो अच्छा लगता है,\nहर लम्हा खास लगता है।",
-"तुम्हारी खुशी में मेरी खुशी है,\nयही प्यार की खूबसूरती है।",
-"दिल से जो रिश्ता बनता है,\nवह वक्त के साथ गहरा होता है।"
-],
-"💔 Sad":[
-"कुछ बातें अधूरी रह जाती हैं,\nकुछ यादें दिल में रह जाती हैं।",
-"हर मुस्कान खुशी की निशानी नहीं,\nहर खामोशी परेशानी नहीं।",
-"वक्त के साथ सब बदल जाता है,\nकभी अपना भी पराया हो जाता है।",
-"यादें कभी-कभी बहुत सताती हैं,\nपुरानी बातें फिर याद आती हैं।",
-"हर किसी को अपना समझना ठीक नहीं,\nहर मुस्कान के पीछे खुशी नहीं।",
-"कुछ रिश्ते नाम के रह जाते हैं,\nकुछ लोग याद बनकर रह जाते हैं।",
-"खामोशी भी बहुत कुछ कहती है,\nबस समझने वाली नज़र चाहिए।",
-"दिल की बात हर कोई समझ नहीं पाता,\nहर अपना साथ निभा नहीं पाता।",
-"बीता हुआ कल लौटकर नहीं आता,\nपर यादों का सिलसिला जाता नहीं।",
-"जो मिला उसकी कदर करना सीखो,\nहर पल खुशी से जीना सीखो।"
-],
-"🎯 Motivation":[
-"सपने देखो और मेहनत करो,\nअपने कल को बेहतर करो।",
-"हार से कभी घबराना नहीं,\nकोशिश करना छोड़ना नहीं।",
-"धीरे चलो मगर चलते रहो,\nअपने लक्ष्य की ओर बढ़ते रहो।",
-"मेहनत का फल जरूर मिलता है,\nसच्चे इरादों को रास्ता मिलता है।",
-"आज की मेहनत कल की पहचान है,\nहौसला ही असली उड़ान है।",
-"मुश्किलें रास्ता रोकेंगी जरूर,\nहिम्मत से मंज़िल मिलेगी जरूर।",
-"अपनी गलतियों से सीखते रहो,\nहर दिन बेहतर बनते रहो।",
-"सफलता एक दिन में नहीं मिलती,\nलगन से हर मंज़िल मिलती।",
-"लक्ष्य पर अपना ध्यान रखो,\nमेहनत पर विश्वास रखो।",
-"खुद पर विश्वास बनाए रखना,\nअपने सपनों को सच बनाना।"
-],
-"🤝 Friendship":[
-"दोस्ती का रिश्ता खास होता है,\nहर दोस्त दिल के पास होता है।",
-"सच्चा दोस्त वही कहलाता है,\nमुश्किल में साथ निभाता है।",
-"दोस्ती में ना कोई हिसाब हो,\nबस दिल से दिल का साथ हो।",
-"दोस्तों के साथ हर पल सुहाना,\nउनके बिना अधूरा जमाना।",
-"हँसी-मजाक और प्यारी बातें,\nदोस्ती की यादगार सौगातें।",
-"अच्छे दोस्त किस्मत से मिलते हैं,\nदिल के करीब हमेशा रहते हैं।",
-"दोस्ती भरोसे का नाम है,\nयह रिश्ता सबसे खास है।",
-"रास्ते अलग हों तो क्या हुआ,\nदोस्ती का रिश्ता कम नहीं हुआ।",
-"दोस्त वो जो हौसला बढ़ाए,\nमुश्किल वक्त में रास्ता दिखाए।",
-"दोस्ती में सच्चाई जरूरी है,\nदिल से निभाना जरूरी है।"
-]
+function toggleMenu() {
+  const menu = document.getElementById("menuitems");
+  menu.style.display =
+    menu.style.display === "block" ? "none" : "block";
+}
+
+function setTheme(theme) {
+  document.body.classList.toggle("light", theme === "light");
+  document.getElementById("menuitems").style.display = "none";
+}
+
+function closePanels() {
+  document.querySelectorAll(".panel").forEach(p =>
+    p.classList.remove("active")
+  );
+  document.getElementById("workspace").innerHTML = "";
+  document.getElementById("about").classList.remove("active");
+}
+
+function showAbout() {
+  closePanels();
+  document.getElementById("about").classList.add("active");
+  document.getElementById("menuitems").style.display = "none";
+}
+
+function searchTools() {
+  const q = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".tile").forEach(tile => {
+    tile.style.display =
+      tile.dataset.name.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+const tools = {
+  percentage: {
+    title: "Percentage Calculator",
+    fields: [
+      ["total", "Total Marks"],
+      ["obtained", "Obtained Marks"],
+      ["percent", "Percentage (%)"]
+    ],
+    run: v => {
+      let t = num(v.total), o = num(v.obtained), p = num(v.percent);
+      if (v.total !== "" && v.obtained !== "" && t > 0)
+        return `Percentage: ${(o / t * 100).toFixed(2)}%`;
+      if (v.total !== "" && v.percent !== "" && t > 0)
+        return `Obtained Marks: ${(t * p / 100).toFixed(2)}`;
+      if (v.obtained !== "" && v.percent !== "" && p > 0)
+        return `Total Marks: ${(o * 100 / p).toFixed(2)}`;
+      return "Koi bhi 2 values enter karo.";
+    }
+  },
+  discount: {
+    title: "Discount Calculator",
+    fields: [["price", "Original Price"], ["rate", "Discount (%)"]],
+    run: v => {
+      const d = num(v.price) * num(v.rate) / 100;
+      return `Discount: ₹${d.toFixed(2)}<br>Final Price: ₹${(num(v.price)-d).toFixed(2)}`;
+    }
+  },
+  bill: {
+    title: "Dukaan Bill",
+    fields: [["item", "Item Name", "text"], ["qty", "Quantity"], ["rate", "Price per item"]],
+    run: v => `Item: ${safe(v.item)}<br>Total Bill: ₹${(num(v.qty)*num(v.rate)).toFixed(2)}`
+  },
+  expense: {
+    title: "Ghar Kharch",
+    fields: [["food", "Food Expense"], ["rent", "House Rent"], ["bill", "Electricity Bill"], ["other", "Other Expenses"]],
+    run: v => `Total Household Expenses: ₹${["food","rent","bill","other"].reduce((s,k)=>s+num(v[k]),0).toFixed(2)}`
+  },
+  weightprice: {
+    title: "Weight → Price",
+    fields: [["price", "Price per 1 kg (₹)"], ["grams", "Weight in grams"]],
+    run: v => `Price: ₹${(num(v.price)*num(v.grams)/1000).toFixed(2)}`
+  },
+  moneyweight: {
+    title: "Money → Weight",
+    fields: [["price", "Price per 1 kg (₹)"], ["money", "Money paid (₹)"]],
+    run: v => num(v.price)>0 ? `Weight: ${(num(v.money)/num(v.price)*1000).toFixed(2)} grams` : "Price per kg zero se zyada hona chahiye."
+  },
+  age: {
+    title: "Age Calculator",
+    fields: [["birth", "Date of Birth", "date"], ["until", "Calculate Until", "date"]],
+    run: v => {
+      if(!v.birth || !v.until) return "Dono dates select karo.";
+      const b = new Date(v.birth), e = new Date(v.until);
+      if(e < b) return "Calculate-until date, birth date ke baad honi chahiye.";
+      let y=e.getFullYear()-b.getFullYear(), m=e.getMonth()-b.getMonth(), d=e.getDate()-b.getDate();
+      if(d<0){m--;d+=new Date(e.getFullYear(),e.getMonth(),0).getDate();}
+      if(m<0){y--;m+=12;}
+      return `Age: ${y} years, ${m} months, ${d} days`;
+    }
+  },
+  maths: {
+    title: "Maths Calculator",
+    fields: [["a", "First Number"], ["b", "Second Number"]],
+    run: v => {
+      const a=num(v.a), b=num(v.b);
+      return `Addition: ${a+b}<br>Subtraction: ${a-b}<br>Multiplication: ${a*b}<br>Division: ${b===0?"Not possible":a/b}`;
+    }
+  },
+  bank: {
+    title: "Bank Money Calculator",
+    fields: [["money", "Enter Total Money (₹)"]],
+    run: v => {
+      let n=Math.max(0,Math.floor(num(v.money))), original=n;
+      let html=`Total Money: ₹${original}<div class="bankgrid">`;
+      [500,200,100,50,20,10,5,2,1].forEach(d=>{
+        html+=`<div class="bankitem">₹${d} notes/coins<br><b>${Math.floor(n/d)}</b> (if all in ₹${d})</div>`;
+      });
+      return html+"</div><p class='note'>Har denomination ka count alag-alag dikhaya gaya hai, total notes ka combined breakdown nahi.</p>";
+    }
+  },
+  profit: {
+    title: "Profit & Loss",
+    fields: [["cost", "Cost Price (₹)"], ["sell", "Selling Price (₹)"]],
+    run: v => {
+      const diff=num(v.sell)-num(v.cost);
+      return diff>0 ? `Profit: ₹${diff.toFixed(2)}<br>Profit %: ${num(v.cost)>0?(diff/num(v.cost)*100).toFixed(2):"—"}%` : diff<0 ? `Loss: ₹${(-diff).toFixed(2)}<br>Loss %: ${num(v.cost)>0?(-diff/num(v.cost)*100).toFixed(2):"—"}%` : "No profit, no loss.";
+    }
+  },
+  gst: {
+    title: "GST Calculator",
+    fields: [["amount", "Amount before GST (₹)"], ["rate", "GST (%)"]],
+    run: v => `GST Amount: ₹${(num(v.amount)*num(v.rate)/100).toFixed(2)}<br>Total with GST: ₹${(num(v.amount)*(1+num(v.rate)/100)).toFixed(2)}`
+  },
+  emi: {
+    title: "EMI Calculator",
+    fields: [["loan", "Loan Amount (₹)"], ["rate", "Annual Interest (%)"], ["years", "Years"]],
+    run: v => {
+      const P=num(v.loan), r=num(v.rate)/1200, n=num(v.years)*12;
+      if(P<=0||n<=0) return "Loan aur duration enter karo.";
+      const emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+      return `Monthly EMI: ₹${emi.toFixed(2)}<br>Total Payment: ₹${(emi*n).toFixed(2)}<br>Total Interest: ₹${(emi*n-P).toFixed(2)}`;
+    }
+  },
+  interest: {
+    title: "Simple Interest",
+    fields: [["p", "Principal (₹)"], ["r", "Annual Interest (%)"], ["t", "Time (years)"]],
+    run: v => {
+      const si=num(v.p)*num(v.r)*num(v.t)/100;
+      return `Simple Interest: ₹${si.toFixed(2)}<br>Total Amount: ₹${(num(v.p)+si).toFixed(2)}`;
+    }
+  },
+  unit: {
+    title: "Unit Converter",
+    fields: [["value", "Enter Value"], ["from", "Convert From", "select", ["Meters","Kilometers","Centimeters","Kilograms","Grams"]], ["to", "Convert To", "select", ["Meters","Kilometers","Centimeters","Kilograms","Grams"]]],
+    run: v => {
+      const factors={Meters:1,Kilometers:1000,Centimeters:.01,Kilograms:1,Grams:.001};
+      const lengths=["Meters","Kilometers","Centimeters"].includes(v.from);
+      const lengths2=["Meters","Kilometers","Centimeters"].includes(v.to);
+      if(lengths!==lengths2) return "Length aur weight ko aapas mein convert nahi kar sakte.";
+      return `Converted Value: ${(num(v.value)*factors[v.from]/factors[v.to]).toFixed(4)} ${v.to}`;
+    }
+  },
+  agedays: {
+    title: "Age in Days",
+    fields: [["birth", "Date of Birth", "date"], ["until", "Calculate Until", "date"]],
+    run: v => {
+      if(!v.birth||!v.until) return "Dono dates select karo.";
+      const days=Math.floor((new Date(v.until)-new Date(v.birth))/86400000);
+      return days<0?"Dates sahi order mein select karo.":`Total: ${days} days<br>Approx. weeks: ${(days/7).toFixed(1)}<br>Approx. years: ${(days/365.2425).toFixed(2)}`;
+    }
+  },
+  electric: {
+    title: "Electricity Bill",
+    fields: [["units", "Units Used"], ["rate", "Price per Unit (₹)"], ["fixed", "Fixed Charge (₹)"]],
+    run: v => `Estimated Electricity Bill: ₹${(num(v.units)*num(v.rate)+num(v.fixed)).toFixed(2)}`
+  },
+  savings: {
+    title: "Savings Calculator",
+    fields: [["monthly", "Monthly Savings (₹)"], ["months", "Number of Months"]],
+    run: v => `Total Savings: ₹${(num(v.monthly)*num(v.months)).toFixed(2)}`
+  },
+  average: {
+    title: "Average Calculator",
+    fields: [["numbers", "Numbers (comma separated)", "text"]],
+    run: v => {
+      const arr=v.numbers.split(",").map(x=>Number(x.trim()));
+      if(!v.numbers.trim()||arr.some(x=>!Number.isFinite(x))) return "Example: 10, 20, 30";
+      return `Count: ${arr.length}<br>Average: ${(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2)}`;
+    }
+  },
+  ratio: {
+    title: "Ratio Calculator",
+    fields: [["a", "First Number"], ["b", "Second Number"]],
+    run: v => {
+      let a=Math.abs(num(v.a)),b=Math.abs(num(v.b));
+      if(a===0&&b===0) return "Dono values zero nahi ho sakti.";
+      let x=a,y=b;while(y){let t=x%y;x=y;y=t;}
+      return `Simplified Ratio: ${a/x} : ${b/x}`;
+    }
+  }
 };
 
-let selected="सभी";
-const cats=document.getElementById("categories");
-
-function makeCategories(){
- cats.innerHTML="";
- ["सभी",...Object.keys(data)].forEach(name=>{
-  const b=document.createElement("button");
-  b.textContent=name;
-  b.className=selected===name?"active":"";
-  b.onclick=()=>{selected=name;makeCategories();render()};
-  cats.appendChild(b);
- });
+function num(value) {
+  const n=Number(value);
+  return value===""||!Number.isFinite(n)?0:n;
 }
-
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=document.getElementById("list");
- list.innerHTML="";
- let count=0;
- Object.entries(data).forEach(([cat,items])=>{
-  if(selected!=="सभी"&&selected!==cat)return;
-  items.forEach((s,i)=>{
-   if(!s.toLowerCase().includes(q)&&!cat.toLowerCase().includes(q))return;
-   count++;
-   const card=document.createElement("div");
-   card.className="card";
-   const h=document.createElement("h3");
-   h.textContent=cat+" Shayari #"+(i+1);
-   const p=document.createElement("p");
-   p.textContent=s;
-   const actions=document.createElement("div");
-   actions.className="actions";
-   const copy=document.createElement("button");
-   copy.className="red";
-   copy.textContent="📋 Copy";
-   copy.onclick=async()=>{
-    try{await navigator.clipboard.writeText(s)}
-    catch(e){
-     const t=document.createElement("textarea");
-     t.value=s;document.body.appendChild(t);t.select();
-     document.execCommand("copy");t.remove();
-    }
-    copy.textContent="✅ Copied";
-   };
-   const share=document.createElement("button");
-   share.textContent="📤 Share";
-   share.onclick=()=>{
-    if(navigator.share)navigator.share({text:s}).catch(()=>{});
-    else window.open("https://wa.me/?text="+encodeURIComponent(s));
-   };
-   actions.append(copy,share);
-   card.append(h,p,actions);
-   list.appendChild(card);
+function safe(s) {
+  return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function openTool(id) {
+  closePanels();
+  const t=tools[id];
+  const area=document.getElementById("workspace");
+  const panel=document.createElement("section");
+  panel.className="panel active";
+  panel.id="currentTool";
+  panel.innerHTML=`<h2>${t.title}</h2><div class="fields" id="fields"></div><div class="actions"><button id="calculateBtn">Calculate</button><button id="clearBtn" type="button">Clear</button><button id="backBtn" type="button">Back</button></div><div class="result" id="result" aria-live="polite">Result yahan dikhega.</div>`;
+  area.appendChild(panel);
+  const fields=panel.querySelector("#fields");
+  t.fields.forEach(f=>{
+    const wrap=document.createElement("div");
+    const label=document.createElement("label");
+    label.textContent=f[1];
+    const input=document.createElement(f[2]==="select"?"select":"input");
+    input.id="f_"+f[0];
+    if(f[2]==="select"){
+      f[3].forEach(opt=>{
+        const o=document.createElement("option");o.value=opt;o.textContent=opt;input.appendChild(o);
+      });
+    } else input.type=f[2]==="date"?"date":f[2]==="text"?"text":"number";
+    input.placeholder=f[2]==="text"?"Enter here":"Enter value";
+    if(input.type==="number") input.step="any";
+    wrap.appendChild(label);wrap.appendChild(input);fields.appendChild(wrap);
   });
- });
- if(!count)list.textContent="कोई शायरी नहीं मिली।";
+  panel.querySelector("#calculateBtn").onclick=()=>{
+    const values={};
+    t.fields.forEach(f=>values[f[0]]=panel.querySelector("#f_"+f[0]).value);
+    panel.querySelector("#result").innerHTML=t.run(values);
+  };
+  panel.querySelector("#clearBtn").onclick=()=>{
+    fields.querySelectorAll("input").forEach(i=>i.value="");
+    panel.querySelector("#result").textContent="Result yahan dikhega.";
+  };
+  panel.querySelector("#backBtn").onclick=closePanels;
+  panel.scrollIntoView({behavior:"smooth",block:"start"});
 }
-makeCategories();
-render();
 </script>
 </body>
 </html>
