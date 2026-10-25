@@ -5,169 +5,436 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Satyam Calculator</title>
-<style>
-:root{--bg:#0b1020;--panel:#151e32;--text:#f5f7ff;--muted:#aab5ca;--border:#293650;--input:#0d1629}
-body.light{--bg:#f2f5fb;--panel:#fff;--text:#172033;--muted:#58657a;--border:#d9e0ec;--input:#f6f8fc}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
-.logo{font-size:21px;font-weight:bold;color:#58a6ff}
-button,input,select{font:inherit}
-button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;background:#3478f6;color:white}
-.menu{position:relative}
-.menuitems{display:none;position:absolute;right:0;top:43px;background:var(--panel);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:5;padding:6px}
-.menuitems button{display:block;width:100%;margin:3px 0;text-align:left}
-main{max-width:1000px;margin:auto;padding:18px}
-.hero{padding:20px 4px 15px}
-.hero h1{font-size:32px;margin:5px 0 10px}
-.hero p,.muted{color:var(--muted);line-height:1.5}
-.search{width:100%;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--input);color:var(--text);margin:10px 0 20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
-.tile{padding:17px 12px;border-radius:13px;min-height:90px;color:white;text-align:left;font-weight:bold}
-.tile span{display:block;font-size:25px;margin-bottom:9px}
-.c1{background:#245bd8}.c2{background:#b74476}.c3{background:#168b83}.c4{background:#a65d18}.c5{background:#7052c9}.c6{background:#2773a9}
-.panel{display:none;background:var(--panel);border:1px solid var(--border);padding:18px;border-radius:15px;margin-top:20px}
-.panel.active{display:block}
-.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
-label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
-input,select{width:100%;padding:12px;border-radius:9px;border:1px solid var(--border);background:var(--input);color:var(--text);margin-bottom:12px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.result{margin-top:14px;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:14px;line-height:1.7;overflow-wrap:anywhere}
-.note{font-size:12px;color:var(--muted)}
-footer{text-align:center;padding:25px;color:var(--muted)}
 
-/* About full-screen page */
-#aboutPage{display:none;position:fixed;inset:0;z-index:99999;overflow-y:auto;padding:22px;background:var(--bg);color:var(--text)}
-#aboutPage.open{display:block}
-#aboutPage h1{color:#58a6ff;margin-top:28px}
-#aboutPage p,#aboutPage li{line-height:1.8;color:var(--muted)}
-#aboutPage .about-content{max-width:650px;margin:0 auto}
-#aboutPage ol{padding-left:25px}
-@media(max-width:450px){main{padding:12px}.hero h1{font-size:27px}.tile{padding:13px 10px}}
+<style>
+:root {
+  --bg: #f1f5f9;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #dbe3ef;
+  --primary: #2563eb;
+  --input: #ffffff;
+}
+body.dark {
+  --bg: #0b1220;
+  --panel: #111c2e;
+  --text: #f8fafc;
+  --muted: #a8b5c8;
+  --border: #29374c;
+  --primary: #3b82f6;
+  --input: #0b1220;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  transition: background .2s, color .2s;
+}
+header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-row {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand {
+  flex: 1;
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--primary);
+}
+.icon-btn {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-size: 17px;
+}
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
+.intro h1 { margin-bottom: 5px; }
+.intro p { color: var(--muted); }
+.search {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--input);
+  color: var(--text);
+  font-size: 16px;
+  margin: 12px 0 18px;
+}
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.tool {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 16px 10px;
+  min-height: 105px;
+  cursor: pointer;
+  text-align: left;
+}
+.tool:hover { border-color: var(--primary); }
+.tool .emoji { font-size: 27px; display: block; margin-bottom: 8px; }
+.tool strong { font-size: 14px; }
+.tool small { display: block; color: var(--muted); margin-top: 5px; }
+.panel {
+  display: none;
+  margin-top: 22px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+}
+.panel.active { display: block; }
+.panel h2 { margin-top: 0; }
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+.fields label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.fields input, .fields select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--input);
+  color: var(--text);
+  border-radius: 9px;
+  font-size: 16px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 16px;
+}
+.actions button, .primary-btn {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+.actions .secondary {
+  background: #64748b;
+}
+.result {
+  margin-top: 18px;
+  padding: 15px;
+  background: rgba(37,99,235,.08);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+.result:empty { display: none; }
+.menu {
+  display: none;
+  position: fixed;
+  right: 15px;
+  top: 62px;
+  z-index: 500;
+  width: 200px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--panel);
+  box-shadow: 0 10px 35px #0002;
+}
+.menu.show { display: block; }
+.menu button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.menu button:hover { background: var(--bg); }
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 12px;
+  font-size: 13px;
+}
+
+/* Full-screen About page */
+#aboutPage {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+#aboutPage.open { display: block; }
+.about-back {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+.about-content {
+  max-width: 650px;
+  margin: 18px auto;
+  line-height: 1.75;
+}
+.about-hero {
+  text-align: center;
+  padding: 24px 10px;
+}
+.about-logo {
+  width: 82px;
+  height: 82px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  border-radius: 22px;
+  font-size: 42px;
+}
+.about-hero h1 { color: var(--primary); }
+.about-tagline { color: var(--primary); font-weight: bold; }
+.about-card, .about-developer {
+  margin: 15px 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+}
+.about-card h2, .about-developer h2 { color: var(--primary); }
+.about-feature {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-feature:last-child { border-bottom: none; }
+.about-feature h3 { margin-bottom: 3px; }
+.about-feature p { margin-top: 0; }
+.about-developer { text-align: center; }
+.developer-avatar {
+  width: 75px;
+  height: 75px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 25px;
+  font-weight: bold;
+}
+.about-developer a { color: var(--primary); overflow-wrap: anywhere; }
+.about-footer { text-align: center; padding: 25px 10px; color: var(--muted); }
+.about-footer h3 { color: #ef4444; }
+
+@media(max-width: 600px) {
+  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fields { grid-template-columns: 1fr; }
+  main { padding: 13px; }
+  .brand { font-size: 18px; }
+  .about-card, .about-developer { padding: 15px; }
+}
 </style>
 </head>
+
 <body>
 <header>
-  <div>
-    <div class="logo">🧮 Satyam Calculator</div>
-    <small class="muted">Smart tools for Everyday</small>
-  </div>
-  <div class="menu">
-    <button onclick="toggleMenu()">⋮</button>
-    <div class="menuitems" id="menuitems">
-      <button onclick="showAbout()">About</button>
-      <button onclick="setTheme('dark')">Dark Mode</button>
-      <button onclick="setTheme('light')">Light Mode</button>
-    </div>
+  <div class="header-row">
+    <button class="icon-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <div class="brand">🧮 Satyam Calculator</div>
+    <button class="icon-btn" onclick="setTheme()" aria-label="Change theme">🌙</button>
   </div>
 </header>
 
-<main id="homePage">
-<section class="hero">
-  <p>SMART CALCULATOR TOOLS</p>
-  <h1>Calculate Anything</h1>
-  <p>All your everyday calculations in one place.</p>
-</section>
-
-<input class="search" id="search" placeholder="🔍 Search calculator..." oninput="searchTools()">
-
-<div class="grid" id="tiles">
-  <button class="tile c1" data-name="Percentage" onclick="openTool('percentage')"><span>📊</span>1. Percentage</button>
-  <button class="tile c2" data-name="Discount" onclick="openTool('discount')"><span>🏷️</span>2. Discount</button>
-  <button class="tile c3" data-name="Dukaan Bill" onclick="openTool('bill')"><span>🛒</span>3. Dukaan Bill</button>
-  <button class="tile c4" data-name="Ghar Kharch" onclick="openTool('expense')"><span>🏠</span>4. Ghar Kharch</button>
-  <button class="tile c5" data-name="Weight Price" onclick="openTool('weightprice')"><span>⚖️</span>5. Weight → Price</button>
-  <button class="tile c6" data-name="Money Weight" onclick="openTool('moneyweight')"><span>💰</span>6. Money → Weight</button>
-  <button class="tile c1" data-name="Age Calculator" onclick="openTool('age')"><span>🎂</span>7. Age Calculator</button>
-  <button class="tile c2" data-name="Maths Calculator" onclick="openTool('maths')"><span>➗</span>8. Maths Calculator</button>
-  <button class="tile c3" data-name="Bank Money" onclick="openTool('bank')"><span>💵</span>9. Bank Money</button>
-  <button class="tile c4" data-name="Profit Loss" onclick="openTool('profit')"><span>📈</span>10. Profit & Loss</button>
-  <button class="tile c5" data-name="GST Calculator" onclick="openTool('gst')"><span>🧾</span>11. GST Calculator</button>
-  <button class="tile c6" data-name="EMI Calculator" onclick="openTool('emi')"><span>🏦</span>12. EMI Calculator</button>
-  <button class="tile c1" data-name="Simple Interest" onclick="openTool('interest')"><span>💳</span>13. Simple Interest</button>
-  <button class="tile c2" data-name="Unit Converter" onclick="openTool('unit')"><span>📏</span>14. Unit Converter</button>
-  <button class="tile c3" data-name="Age in Days" onclick="openTool('agedays')"><span>📅</span>15. Age in Days</button>
-  <button class="tile c4" data-name="Electricity Bill" onclick="openTool('electric')"><span>💡</span>16. Electricity Bill</button>
-  <button class="tile c5" data-name="Savings Calculator" onclick="openTool('savings')"><span>🐷</span>17. Savings</button>
-  <button class="tile c6" data-name="Average Calculator" onclick="openTool('average')"><span>📝</span>18. Average</button>
-  <button class="tile c1" data-name="Ratio Calculator" onclick="openTool('ratio')"><span>🔢</span>19. Ratio</button>
+<div class="menu" id="menu">
+  <button onclick="showAbout()">ℹ️ About</button>
+  <button onclick="setTheme();toggleMenu()">🌗 Dark / Light Mode</button>
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'});toggleMenu()">🏠 Home</button>
 </div>
 
-<div id="workspace"></div>
+<main>
+  <section class="intro">
+    <h1>All Calculators</h1>
+    <p>Simple tools for your everyday calculations.</p>
+  </section>
+
+  <input id="searchInput" class="search" type="search"
+    placeholder="🔍 Search calculator..."
+    oninput="searchTools()">
+
+  <div class="tool-grid" id="toolGrid">
+    <button class="tool" data-name="percentage marks" onclick="openTool('percentage')"><span class="emoji">📊</span><strong>Percentage Calculator</strong><small>Marks & percentage</small></button>
+    <button class="tool" data-name="discount" onclick="openTool('discount')"><span class="emoji">🏷️</span><strong>Discount Calculator</strong><small>Discount & final price</small></button>
+    <button class="tool" data-name="bank note money" onclick="openTool('bank')"><span class="emoji">💵</span><strong>Bank Note Calculator</strong><small>₹500 to ₹10 notes</small></button>
+    <button class="tool" data-name="age birthday date" onclick="openTool('age')"><span class="emoji">🎂</span><strong>Age Calculator</strong><small>Age from date of birth</small></button>
+    <button class="tool" data-name="salary" onclick="openTool('salary')"><span class="emoji">💰</span><strong>Salary Calculator</strong><small>Salary calculation</small></button>
+    <button class="tool" data-name="unit converter" onclick="openTool('unit')"><span class="emoji">🔄</span><strong>Unit Converter</strong><small>Length conversion</small></button>
+    <button class="tool" data-name="gst tax" onclick="openTool('gst')"><span class="emoji">🧾</span><strong>GST Calculator</strong><small>GST amount</small></button>
+    <button class="tool" data-name="simple interest" onclick="openTool('interest')"><span class="emoji">📈</span><strong>Simple Interest</strong><small>Interest calculation</small></button>
+    <button class="tool" data-name="average" onclick="openTool('average')"><span class="emoji">➗</span><strong>Average Calculator</strong><small>Average of numbers</small></button>
+    <button class="tool" data-name="profit loss" onclick="openTool('profit')"><span class="emoji">📉</span><strong>Profit & Loss</strong><small>Profit or loss amount</small></button>
+    <button class="tool" data-name="bmi" onclick="openTool('bmi')"><span class="emoji">⚖️</span><strong>BMI Calculator</strong><small>Height and weight</small></button>
+    <button class="tool" data-name="electricity bill" onclick="openTool('electricity')"><span class="emoji">⚡</span><strong>Electricity Bill</strong><small>Units × rate</small></button>
+    <button class="tool" data-name="speed distance time" onclick="openTool('speed')"><span class="emoji">🚗</span><strong>Speed Calculator</strong><small>Distance and time</small></button>
+    <button class="tool" data-name="temperature" onclick="openTool('temperature')"><span class="emoji">🌡️</span><strong>Temperature Converter</strong><small>°C and °F</small></button>
+    <button class="tool" data-name="loan emi" onclick="openTool('emi')"><span class="emoji">🏦</span><strong>EMI Calculator</strong><small>Monthly EMI estimate</small></button>
+    <button class="tool" data-name="time converter" onclick="openTool('time')"><span class="emoji">⏱️</span><strong>Time Converter</strong><small>Hours and minutes</small></button>
+    <button class="tool" data-name="square area" onclick="openTool('square')"><span class="emoji">⬜</span><strong>Square Calculator</strong><small>Area and perimeter</small></button>
+    <button class="tool" data-name="rectangle" onclick="openTool('rectangle')"><span class="emoji">▭</span><strong>Rectangle Calculator</strong><small>Area and perimeter</small></button>
+    <button class="tool" data-name="addition sum" onclick="openTool('sum')"><span class="emoji">➕</span><strong>Addition Calculator</strong><small>Add two numbers</small></button>
+  </div>
+
+  <div id="workspace"></div>
 </main>
 
-<footer>© 2026 Satyam Calculator · Made for everyday use</footer>
+<footer>© Satyam Calculator · Made by Satyam Kumar</footer>
 
-<!-- About is outside main, so it opens as a full-screen page -->
+<!-- Detailed About Page -->
 <div id="aboutPage">
-  <button onclick="closeAbout()">← Back</button>
+  <button class="about-back" onclick="closeAbout()">← Back to Calculator</button>
+
   <div class="about-content">
-    <h1>About Satyam Calculator</h1>
-    <h2>Mr. Satyam Kumar</h2>
-    <p>Software Engineer</p>
-    <hr>
-    <h3>🧮 Satyam Calculator</h3>
-    <p>A simple all-in-one website for everyday calculations.</p>
-    <h3>Our 19 Calculators</h3>
-    <ol>
-      <li>Percentage</li><li>Discount</li><li>Dukaan Bill</li>
-      <li>Ghar Kharch</li><li>Weight → Price</li><li>Money → Weight</li>
-      <li>Age Calculator</li><li>Maths Calculator</li>
-      <li>Bank Money Calculator</li><li>Profit &amp; Loss</li>
-      <li>GST Calculator</li><li>EMI Calculator</li>
-      <li>Simple Interest</li><li>Unit Converter</li><li>Age in Days</li>
-      <li>Electricity Bill</li><li>Savings</li><li>Average</li><li>Ratio</li>
-    </ol>
-    <h3>Contact Us</h3>
-    <p>Instagram: Satyambind0062</p>
+    <header class="about-hero">
+      <div class="about-logo">🧮</div>
+      <h1>Satyam Calculator</h1>
+      <p class="about-tagline">Smart • Simple • Accurate</p>
+      <p>Your everyday calculation partner.</p>
+    </header>
+
+    <section class="about-card">
+      <h2>👋 Welcome to Satyam Calculator!</h2>
+      <p>Satyam Calculator is a simple and convenient online calculation platform designed to help users perform everyday calculations easily.</p>
+      <p>Whether you are a student, shopkeeper, professional, or someone who needs quick calculations, our goal is to bring useful tools together in one place.</p>
+    </section>
+
+    <section class="about-card">
+      <h2>🎯 Our Vision & Mission</h2>
+      <p>Our vision is to make everyday mathematics accessible to everyone through simple digital tools.</p>
+      <p>Our mission is to provide an easy-to-use interface, understandable results, and useful calculators that help save time.</p>
+    </section>
+
+    <section class="about-card">
+      <h2>🧮 Our Calculator Features</h2>
+      <div class="about-feature"><h3>📊 Percentage Calculator</h3><p>Calculate total marks, obtained marks, and percentage.</p></div>
+      <div class="about-feature"><h3>🏷️ Discount Calculator</h3><p>Find discount amounts and final prices.</p></div>
+      <div class="about-feature"><h3>💵 Bank Note Calculator</h3><p>Calculate how many ₹500, ₹200, ₹100, ₹50, ₹20, or ₹10 notes make your entered amount, separately for each denomination.</p></div>
+      <div class="about-feature"><h3>💰 Salary Calculator</h3><p>Perform salary-related calculations.</p></div>
+      <div class="about-feature"><h3>🎂 Age Calculator</h3><p>Calculate age using your date of birth.</p></div>
+      <div class="about-feature"><h3>🔄 Unit Converter</h3><p>Convert supported measurement units.</p></div>
+      <div class="about-feature"><h3>🧾 GST Calculator</h3><p>Calculate GST and total price.</p></div>
+      <div class="about-feature"><h3>📈 Interest & EMI</h3><p>Estimate simple interest and monthly loan payments.</p></div>
+      <div class="about-feature"><h3>📐 Area & Perimeter</h3><p>Calculate square and rectangle measurements.</p></div>
+    </section>
+
+    <section class="about-card">
+      <h2>⭐ Why Choose Us?</h2>
+      <p>✅ Simple and easy-to-use interface</p>
+      <p>📱 Designed for mobile and desktop screens</p>
+      <p>⚡ Quick calculations with clear results</p>
+      <p>🧮 Multiple useful tools in one website</p>
+    </section>
+
+    <section class="about-card">
+      <h2>🔒 Privacy & Responsible Use</h2>
+      <p>Avoid entering sensitive personal or banking information into calculator fields.</p>
+      <p>How information is stored depends on the website's actual implementation and hosting setup.</p>
+    </section>
+
+    <section class="about-developer">
+      <div class="developer-avatar">SK</div>
+      <h2>Mr. Satyam Kumar</h2>
+      <p>Software Engineer</p>
+      <p>Interested in technology, software development, and creating useful digital tools.</p>
+      <a href="https://www.instagram.com/Satyambind0062/" target="_blank" rel="noopener noreferrer">📸 Instagram: @Satyambind0062</a>
+    </section>
+
+    <footer class="about-footer">
+      <h3>❤️ Thank You for Visiting!</h3>
+      <p>Thank you for using Satyam Calculator. We hope our tools make your everyday calculations easier.</p>
+      <small>© Satyam Calculator · Made by Satyam Kumar</small>
+    </footer>
   </div>
 </div>
 
-<script>
+<!-- Step 2 JavaScript goes below -->
 
+<script>
 function toggleMenu() {
-  const menu = document.getElementById("menuitems");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+  document.getElementById("menu").classList.toggle("show");
 }
 
-function setTheme(theme) {
-  document.body.classList.toggle("light", theme === "light");
-  document.getElementById("menuitems").style.display = "none";
+function setTheme() {
+  document.body.classList.toggle("dark");
 }
 
 function showAbout() {
-  document.getElementById("menuitems").style.display = "none";
   closePanels();
+  document.getElementById("menu").classList.remove("show");
   document.getElementById("aboutPage").classList.add("open");
   window.scrollTo(0, 0);
 }
 
 function closeAbout() {
   document.getElementById("aboutPage").classList.remove("open");
-  window.scrollTo(0, 0);
 }
 
 function searchTools() {
-  const q = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll("#tiles .tile").forEach(tile => {
-    tile.style.display = tile.dataset.name.toLowerCase().includes(q) ? "" : "none";
+  const query = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll(".tool").forEach(function(tile) {
+    tile.style.display = tile.dataset.name.includes(query) ? "" : "none";
   });
 }
 
 function closePanels() {
-  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
   document.getElementById("workspace").innerHTML = "";
 }
 
-function num(v) {
-  const n = Number(v);
-  return Number.isFinite(n) ? n : 0;
+function num(value) {
+  return Number(value);
 }
 
-function safe(s) {
-  return String(s).replace(/[&<>"']/g, ch => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[ch]));
+function money(value) {
+  return Number(value).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
 }
 
 const tools = {
@@ -178,11 +445,13 @@ const tools = {
       {id:"total",label:"Total Marks",placeholder:"500"}
     ],
     run:v => {
-      const total=num(v.total);
-      if(total<=0) return "Total marks must be greater than zero.";
-      return `Percentage: ${(num(v.obtained)/total*100).toFixed(2)}%`;
+      const o=num(v.obtained), t=num(v.total);
+      if(v.obtained==="" || v.total==="" || t<=0 || o<0)
+        return "Enter valid obtained and total marks.";
+      return `Obtained: ${o}<br>Total: ${t}<br>Percentage: <b>${(o/t*100).toFixed(2)}%</b>`;
     }
   },
+
   discount: {
     title: "Discount Calculator",
     fields: [
@@ -190,255 +459,356 @@ const tools = {
       {id:"discount",label:"Discount (%)",placeholder:"20"}
     ],
     run:v => {
-      const p=num(v.price),d=num(v.discount);
-      if(p<0||d<0||d>100) return "Enter a valid price and discount (0–100%).";
-      return `Discount: ₹${(p*d/100).toFixed(2)}<br>Final Price: ₹${(p-p*d/100).toFixed(2)}`;
+      const p=num(v.price), d=num(v.discount);
+      if(v.price==="" || v.discount==="" || p<0 || d<0 || d>100)
+        return "Enter a valid price and discount from 0 to 100.";
+      const saved=p*d/100;
+      return `Discount: ₹${money(saved)}<br>Final Price: <b>₹${money(p-saved)}</b>`;
     }
   },
-  bill: {
-    title: "Dukaan Bill",
-    fields: [
-      {id:"qty",label:"Quantity",placeholder:"5"},
-      {id:"price",label:"Price per Item (₹)",placeholder:"20"}
-    ],
-    run:v => `Total Bill: ₹${(num(v.qty)*num(v.price)).toFixed(2)}`
-  },
-  expense: {
-    title: "Ghar Kharch",
-    fields: [
-      {id:"income",label:"Monthly Income (₹)",placeholder:"20000"},
-      {id:"expense",label:"Monthly Expenses (₹)",placeholder:"12000"}
-    ],
-    run:v => `Remaining Money: ₹${(num(v.income)-num(v.expense)).toFixed(2)}`
-  },
-  weightprice: {
-    title: "Weight to Price",
-    fields: [
-      {id:"weight",label:"Weight (kg)",placeholder:"2"},
-      {id:"rate",label:"Price per kg (₹)",placeholder:"50"}
-    ],
-    run:v => `Total Price: ₹${(num(v.weight)*num(v.rate)).toFixed(2)}`
-  },
-  moneyweight: {
-    title: "Money to Weight",
-    fields: [
-      {id:"money",label:"Money (₹)",placeholder:"100"},
-      {id:"rate",label:"Price per kg (₹)",placeholder:"50"}
-    ],
-    run:v => {
-      const r=num(v.rate);
-      if(r<=0) return "Price per kg must be greater than zero.";
-      return `Weight: ${(num(v.money)/r).toFixed(3)} kg`;
-    }
-  },
-  age: {
-    title: "Age Calculator",
-    fields: [{id:"birth",label:"Date of Birth",type:"date"}],
-    run:v => {
-      if(!v.birth) return "Please select your date of birth.";
-      const b=new Date(v.birth+"T00:00:00"), now=new Date();
-      if(b>now) return "Date of birth cannot be in the future.";
-      let y=now.getFullYear()-b.getFullYear();
-      let m=now.getMonth()-b.getMonth();
-      let d=now.getDate()-b.getDate();
-      if(d<0){m--;d+=new Date(now.getFullYear(),now.getMonth(),0).getDate();}
-      if(m<0){y--;m+=12;}
-      return `Age: ${y} years, ${m} months, ${d} days`;
-    }
-  },
-  maths: {
-    title: "Maths Calculator",
-    fields: [
-      {id:"a",label:"First Number",placeholder:"10"},
-      {id:"op",label:"Operation (+, -, *, /)",placeholder:"+"},
-      {id:"b",label:"Second Number",placeholder:"5"}
-    ],
-    run:v => {
-      const a=num(v.a),b=num(v.b);
-      switch(v.op.trim()){
-        case "+": return `Answer: ${a+b}`;
-        case "-": return `Answer: ${a-b}`;
-        case "*": return `Answer: ${a*b}`;
-        case "/": return b===0?"Cannot divide by zero.":`Answer: ${a/b}`;
-        default: return "Use +, -, * or / as the operation.";
-      }
-    }
-  },
+
   bank: {
     title: "Bank Note Calculator",
-    fields: [{id:"amount",label:"Enter Total Money (₹)",placeholder:"2780"}],
-    run:v => {
-      let rem=Math.floor(num(v.amount));
-      if(rem<0) return "Please enter a non-negative amount.";
+    fields: [
+      {id:"amount",label:"Enter Total Money (₹)",placeholder:"5000"}
+    ],
+    run:function(v) {
+      if(v.amount==="" || v.amount===undefined)
+        return "Please enter total money.";
+
+      const amount=Number(v.amount);
+      if(!Number.isSafeInteger(amount) || amount<0)
+        return "Please enter a valid whole amount.";
+
       const notes=[500,200,100,50,20,10];
-      let html="<h3>Note Details</h3>";
-      notes.forEach(n=>{
-        const count=Math.floor(rem/n);
-        rem%=n;
-        html+=`<p>₹${n} notes: <b>${count}</b> — ₹${count*n}</p>`;
+      let html=`<h3>💵 Bank Note Details</h3>
+        <p>Total Money: <b>₹${money(amount)}</b></p><hr>`;
+
+      notes.forEach(function(note) {
+        const count=Math.floor(amount/note);
+        const value=count*note;
+        html+=`<div style="display:flex;justify-content:space-between;gap:10px;padding:12px;margin:8px 0;background:rgba(59,130,246,.12);border-radius:10px">
+          <b>₹${note} Note</b>
+          <span><b>${count}</b> notes<br><small>Amount: ₹${money(value)}</small></span>
+        </div>`;
       });
-      return html+`<hr><b>Remaining amount: ₹${rem}</b>`;
+
+      html+=`<p style="font-size:12px">Each denomination is calculated separately for the full entered amount.</p>`;
+      return html;
     }
   },
-  profit: {
-    title: "Profit & Loss",
+
+  age: {
+    title: "Age Calculator",
     fields: [
-      {id:"cost",label:"Cost Price (₹)",placeholder:"500"},
-      {id:"sell",label:"Selling Price (₹)",placeholder:"650"}
+      {id:"dob",label:"Date of Birth",type:"date"}
     ],
     run:v => {
-      const diff=num(v.sell)-num(v.cost);
-      if(diff>0) return `Profit: ₹${diff.toFixed(2)}<br>Profit %: ${num(v.cost)>0?(diff/num(v.cost)*100).toFixed(2):"N/A"}%`;
-      if(diff<0) return `Loss: ₹${(-diff).toFixed(2)}<br>Loss %: ${num(v.cost)>0?(-diff/num(v.cost)*100).toFixed(2):"N/A"}%`;
-      return "No profit, no loss.";
+      if(!v.dob) return "Please select your date of birth.";
+      const dob=new Date(v.dob+"T00:00:00");
+      const today=new Date();
+      if(isNaN(dob.getTime()) || dob>today) return "Enter a valid date of birth.";
+      let years=today.getFullYear()-dob.getFullYear();
+      let months=today.getMonth()-dob.getMonth();
+      let days=today.getDate()-dob.getDate();
+      if(days<0) {
+        months--;
+        days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();
+      }
+      if(months<0) { years--; months+=12; }
+      return `Your age: <b>${years} years, ${months} months, ${days} days</b>`;
     }
   },
+
+  salary: {
+    title: "Salary Calculator",
+    fields: [
+      {id:"salary",label:"Monthly Salary (₹)",placeholder:"25000"},
+      {id:"bonus",label:"Extra Monthly Income (₹)",placeholder:"1000"}
+    ],
+    run:v => {
+      if(v.salary==="" || v.bonus==="") return "Enter both amounts.";
+      const s=num(v.salary), b=num(v.bonus);
+      if(s<0 || b<0) return "Amounts cannot be negative.";
+      return `Monthly Total: <b>₹${money(s+b)}</b><br>Estimated Yearly Total: <b>₹${money((s+b)*12)}</b>`;
+    }
+  },
+
+  unit: {
+    title: "Length Unit Converter",
+    fields: [
+      {id:"value",label:"Value",placeholder:"10"},
+      {id:"unit",label:"Convert From",type:"select",options:[
+        {value:"m",label:"Metres"},
+        {value:"km",label:"Kilometres"},
+        {value:"cm",label:"Centimetres"},
+        {value:"ft",label:"Feet"}
+      ]}
+    ],
+    run:v => {
+      if(v.value==="") return "Enter a value.";
+      const factors={m:1,km:1000,cm:.01,ft:.3048};
+      const meters=num(v.value)*factors[v.unit];
+      return `Metres: ${money(meters)} m<br>Kilometres: ${money(meters/1000)} km<br>Centimetres: ${money(meters*100)} cm<br>Feet: ${money(meters/.3048)} ft`;
+    }
+  },
+
   gst: {
     title: "GST Calculator",
     fields: [
-      {id:"amount",label:"Base Amount (₹)",placeholder:"1000"},
-      {id:"gst",label:"GST Rate (%)",placeholder:"18"}
+      {id:"price",label:"Price Before GST (₹)",placeholder:"1000"},
+      {id:"rate",label:"GST Rate (%)",placeholder:"18"}
     ],
     run:v => {
-      const a=num(v.amount),g=num(v.gst);
-      return `GST Amount: ₹${(a*g/100).toFixed(2)}<br>Total with GST: ₹${(a+a*g/100).toFixed(2)}`;
+      if(v.price==="" || v.rate==="") return "Enter price and GST rate.";
+      const p=num(v.price), r=num(v.rate);
+      if(p<0 || r<0) return "Values cannot be negative.";
+      return `GST Amount: ₹${money(p*r/100)}<br>Total Price: <b>₹${money(p+p*r/100)}</b>`;
     }
   },
+
+  interest: {
+    title: "Simple Interest Calculator",
+    fields: [
+      {id:"principal",label:"Principal (₹)",placeholder:"10000"},
+      {id:"rate",label:"Annual Interest Rate (%)",placeholder:"5"},
+      {id:"years",label:"Time (Years)",placeholder:"2"}
+    ],
+    run:v => {
+      if(v.principal==="" || v.rate==="" || v.years==="") return "Fill all fields.";
+      const p=num(v.principal), r=num(v.rate), t=num(v.years);
+      if(p<0 || r<0 || t<0) return "Values cannot be negative.";
+      const i=p*r*t/100;
+      return `Simple Interest: ₹${money(i)}<br>Total Amount: <b>₹${money(p+i)}</b>`;
+    }
+  },
+
+  average: {
+    title: "Average Calculator",
+    fields: [
+      {id:"numbers",label:"Numbers (comma separated)",type:"text",placeholder:"10,20,30"}
+    ],
+    run:v => {
+      const parts=v.numbers.split(",").map(x=>x.trim());
+      if(!v.numbers.trim() || parts.some(x=>x==="" || !Number.isFinite(Number(x))))
+        return "Enter numbers separated by commas.";
+      const arr=parts.map(Number);
+      return `Count: ${arr.length}<br>Sum: ${money(arr.reduce((a,b)=>a+b,0))}<br>Average: <b>${money(arr.reduce((a,b)=>a+b,0)/arr.length)}</b>`;
+    }
+  },
+
+  profit: {
+    title: "Profit & Loss Calculator",
+    fields: [
+      {id:"cost",label:"Cost Price (₹)",placeholder:"500"},
+      {id:"selling",label:"Selling Price (₹)",placeholder:"650"}
+    ],
+    run:v => {
+      if(v.cost==="" || v.selling==="") return "Enter both prices.";
+      const c=num(v.cost), s=num(v.selling);
+      if(c<0 || s<0) return "Prices cannot be negative.";
+      if(s===c) return "No profit and no loss.";
+      const diff=Math.abs(s-c);
+      const pct=c===0 ? 0 : diff/c*100;
+      return `${s>c?"Profit":"Loss"}: <b>₹${money(diff)}</b><br>Percentage: ${money(pct)}%`;
+    }
+  },
+
+  bmi: {
+    title: "BMI Calculator",
+    fields: [
+      {id:"weight",label:"Weight (kg)",placeholder:"60"},
+      {id:"height",label:"Height (cm)",placeholder:"170"}
+    ],
+    run:v => {
+      if(v.weight==="" || v.height==="") return "Enter weight and height.";
+      const w=num(v.weight), h=num(v.height)/100;
+      if(w<=0 || h<=0) return "Enter positive values.";
+      return `BMI: <b>${(w/(h*h)).toFixed(2)}</b><br><small>BMI is a screening measure, not a diagnosis.</small>`;
+    }
+  },
+
+  electricity: {
+    title: "Electricity Bill Calculator",
+    fields: [
+      {id:"units",label:"Units Used",placeholder:"100"},
+      {id:"rate",label:"Rate Per Unit (₹)",placeholder:"7"}
+    ],
+    run:v => {
+      if(v.units==="" || v.rate==="") return "Enter units and rate.";
+      const u=num(v.units), r=num(v.rate);
+      if(u<0 || r<0) return "Values cannot be negative.";
+      return `Estimated Bill: <b>₹${money(u*r)}</b><br><small>Excludes any extra charges or taxes.</small>`;
+    }
+  },
+
+  speed: {
+    title: "Speed Calculator",
+    fields: [
+      {id:"distance",label:"Distance (km)",placeholder:"100"},
+      {id:"time",label:"Time (hours)",placeholder:"2"}
+    ],
+    run:v => {
+      if(v.distance==="" || v.time==="") return "Enter distance and time.";
+      const d=num(v.distance), t=num(v.time);
+      if(d<0 || t<=0) return "Distance must be non-negative and time must be positive.";
+      return `Average Speed: <b>${money(d/t)} km/h</b>`;
+    }
+  },
+
+  temperature: {
+    title: "Temperature Converter",
+    fields: [
+      {id:"value",label:"Temperature",placeholder:"25"},
+      {id:"direction",label:"Convert From",type:"select",options:[
+        {value:"c",label:"Celsius to Fahrenheit"},
+        {value:"f",label:"Fahrenheit to Celsius"}
+      ]}
+    ],
+    run:v => {
+      if(v.value==="") return "Enter a temperature.";
+      const n=num(v.value);
+      return v.direction==="c"
+        ? `${n}°C = <b>${money(n*9/5+32)}°F</b>`
+        : `${n}°F = <b>${money((n-32)*5/9)}°C</b>`;
+    }
+  },
+
   emi: {
     title: "EMI Calculator",
     fields: [
       {id:"principal",label:"Loan Amount (₹)",placeholder:"100000"},
       {id:"rate",label:"Annual Interest (%)",placeholder:"10"},
-      {id:"years",label:"Loan Period (Years)",placeholder:"2"}
+      {id:"months",label:"Loan Duration (Months)",placeholder:"12"}
     ],
     run:v => {
-      const p=num(v.principal),r=num(v.rate)/1200,n=num(v.years)*12;
-      if(p<=0||n<=0||num(v.rate)<0) return "Enter valid loan details.";
-      const emi=r===0?p/n:p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-      return `Monthly EMI: ₹${emi.toFixed(2)}<br>Total Payment: ₹${(emi*n).toFixed(2)}`;
+      if(v.principal==="" || v.rate==="" || v.months==="") return "Fill all fields.";
+      const p=num(v.principal), annual=num(v.rate), n=num(v.months);
+      if(p<=0 || annual<0 || !Number.isInteger(n) || n<=0) return "Enter valid loan details.";
+      const r=annual/1200;
+      const emi=r===0 ? p/n : p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+      return `Monthly EMI: <b>₹${money(emi)}</b><br>Total Payment: ₹${money(emi*n)}<br>Total Interest: ₹${money(emi*n-p)}`;
     }
   },
-  interest: {
-    title: "Simple Interest",
+
+  time: {
+    title: "Time Converter",
     fields: [
-      {id:"p",label:"Principal (₹)",placeholder:"10000"},
-      {id:"r",label:"Annual Rate (%)",placeholder:"5"},
-      {id:"t",label:"Time (Years)",placeholder:"2"}
+      {id:"minutes",label:"Minutes",placeholder:"90"}
     ],
     run:v => {
-      const si=num(v.p)*num(v.r)*num(v.t)/100;
-      return `Simple Interest: ₹${si.toFixed(2)}<br>Total Amount: ₹${(num(v.p)+si).toFixed(2)}`;
+      if(v.minutes==="") return "Enter minutes.";
+      const n=num(v.minutes);
+      if(n<0) return "Minutes cannot be negative.";
+      return `${n} minutes = <b>${Math.floor(n/60)} hours ${n%60} minutes</b><br>Seconds: ${money(n*60)}`;
     }
   },
-  unit: {
-    title: "Unit Converter",
+
+  square: {
+    title: "Square Calculator",
     fields: [
-      {id:"value",label:"Value",placeholder:"1"},
-      {id:"from",label:"From Unit (m, km, cm, kg, g)",placeholder:"km"},
-      {id:"to",label:"To Unit (m, km, cm, kg, g)",placeholder:"m"}
+      {id:"side",label:"Side Length",placeholder:"5"}
     ],
     run:v => {
-      const factors={m:{group:"length",f:1},km:{group:"length",f:1000},cm:{group:"length",f:.01},mm:{group:"length",f:.001},kg:{group:"weight",f:1},g:{group:"weight",f:.001},mg:{group:"weight",f:.000001}};
-      const a=factors[v.from.trim().toLowerCase()],b=factors[v.to.trim().toLowerCase()];
-      if(!a||!b||a.group!==b.group) return "Use compatible units: m, km, cm, mm or kg, g, mg.";
-      return `Result: ${(num(v.value)*a.f/b.f).toLocaleString("en-IN",{maximumFractionDigits:6})} ${v.to}`;
+      if(v.side==="") return "Enter side length.";
+      const s=num(v.side);
+      if(s<0) return "Side cannot be negative.";
+      return `Area: <b>${money(s*s)}</b> square units<br>Perimeter: <b>${money(4*s)}</b> units`;
     }
   },
-  agedays: {
-    title: "Age in Days",
-    fields: [{id:"birth",label:"Date of Birth",type:"date"}],
+
+  rectangle: {
+    title: "Rectangle Calculator",
+    fields: [
+      {id:"length",label:"Length",placeholder:"10"},
+      {id:"width",label:"Width",placeholder:"5"}
+    ],
     run:v => {
-      if(!v.birth) return "Please select your date of birth.";
-      const days=Math.floor((new Date().setHours(0,0,0,0)-new Date(v.birth+"T00:00:00").getTime())/86400000);
-      if(days<0) return "Date cannot be in the future.";
-      return `Total Age: ${days.toLocaleString("en-IN")} days`;
+      if(v.length==="" || v.width==="") return "Enter length and width.";
+      const l=num(v.length), w=num(v.width);
+      if(l<0 || w<0) return "Values cannot be negative.";
+      return `Area: <b>${money(l*w)}</b> square units<br>Perimeter: <b>${money(2*(l+w))}</b> units`;
     }
   },
-  electric: {
-    title: "Electricity Bill",
+
+  sum: {
+    title: "Addition Calculator",
     fields: [
-      {id:"units",label:"Units Used",placeholder:"100"},
-      {id:"rate",label:"Rate per Unit (₹)",placeholder:"6"}
-    ],
-    run:v => `Estimated Bill: ₹${(num(v.units)*num(v.rate)).toFixed(2)}`
-  },
-  savings: {
-    title: "Savings Calculator",
-    fields: [
-      {id:"monthly",label:"Monthly Savings (₹)",placeholder:"1000"},
-      {id:"months",label:"Number of Months",placeholder:"12"}
-    ],
-    run:v => `Total Savings: ₹${(num(v.monthly)*num(v.months)).toFixed(2)}`
-  },
-  average: {
-    title: "Average Calculator",
-    fields: [
-      {id:"numbers",label:"Numbers (comma separated)",placeholder:"10,20,30"}
+      {id:"a",label:"First Number",placeholder:"100"},
+      {id:"b",label:"Second Number",placeholder:"200"}
     ],
     run:v => {
-      const parts=v.numbers.split(",").map(s=>s.trim());
-      if(!parts.length||parts.some(s=>s===""||!Number.isFinite(Number(s)))) return "Enter numbers separated by commas.";
-      const arr=parts.map(Number);
-      return `Average: ${(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2)}`;
-    }
-  },
-  ratio: {
-    title: "Ratio Calculator",
-    fields: [
-      {id:"a",label:"First Number",placeholder:"20"},
-      {id:"b",label:"Second Number",placeholder:"30"}
-    ],
-    run:v => {
-      let a=Math.abs(num(v.a)),b=Math.abs(num(v.b));
-      if(a===0&&b===0) return "Both numbers cannot be zero.";
-      let x=a,y=b;
-      while(y){const t=x%y;x=y;y=t;}
-      return `Simplified Ratio: ${a/x}:${b/x}`;
+      if(v.a==="" || v.b==="") return "Enter both numbers.";
+      return `Answer: <b>${money(num(v.a)+num(v.b))}</b>`;
     }
   }
 };
 
 function openTool(id) {
   if(!tools[id]) return;
+
   closePanels();
+  document.getElementById("menu").classList.remove("show");
+
   const tool=tools[id];
   const workspace=document.getElementById("workspace");
   const panel=document.createElement("section");
   panel.className="panel active";
 
-  let html=`<h2>${safe(tool.title)}</h2><div class="fields">`;
-  tool.fields.forEach(f=>{
-    html+=`<div><label for="field_${f.id}">${safe(f.label)}</label>
-      <input id="field_${f.id}" data-field="${safe(f.id)}" type="${f.type||"number"}" placeholder="${safe(f.placeholder||"")}" ${f.type==="date"?"max=\""+new Date().toISOString().slice(0,10)+"\"":""}></div>`;
+  let html=`<h2>${tool.title}</h2><div class="fields">`;
+
+  tool.fields.forEach(function(f) {
+    html+=`<div><label for="field_${f.id}">${f.label}</label>`;
+
+    if(f.type==="select") {
+      html+=`<select id="field_${f.id}" data-field="${f.id}">`;
+      f.options.forEach(function(o) {
+        html+=`<option value="${o.value}">${o.label}</option>`;
+      });
+      html+=`</select>`;
+    } else {
+      const type=f.type || "number";
+      html+=`<input id="field_${f.id}" data-field="${f.id}" type="${type}" placeholder="${f.placeholder||""}" ${type==="date" ? 'max="'+new Date().toISOString().slice(0,10)+'"' : ""}>`;
+    }
+
+    html+="</div>";
   });
-  html+=`</div><div class="actions">
-    <button type="button" id="calculateBtn">Calculate</button>
-    <button type="button" id="clearBtn">Clear</button>
-    <button type="button" id="backBtn">Back</button>
-    </div><div class="result" id="toolResult" hidden></div>`;
+
+  html+=`</div>
+    <div class="actions">
+      <button type="button" id="calculateBtn">Calculate</button>
+      <button type="button" class="secondary" id="clearBtn">Clear</button>
+      <button type="button" class="secondary" id="backBtn">Back</button>
+    </div>
+    <div class="result" id="toolResult"></div>`;
+
   panel.innerHTML=html;
   workspace.appendChild(panel);
 
-  panel.querySelector("#calculateBtn").addEventListener("click",()=>{
+  panel.querySelector("#calculateBtn").addEventListener("click",function() {
     const values={};
-    panel.querySelectorAll("[data-field]").forEach(input=>values[input.dataset.field]=input.value);
-    const result=panel.querySelector("#toolResult");
-    result.innerHTML=tool.run(values);
-    result.hidden=false;
+    panel.querySelectorAll("[data-field]").forEach(function(input) {
+      values[input.dataset.field]=input.value;
+    });
+    panel.querySelector("#toolResult").innerHTML=tool.run(values);
   });
-  panel.querySelector("#clearBtn").addEventListener("click",()=>{
-    panel.querySelectorAll("[data-field]").forEach(input=>input.value="");
-    const result=panel.querySelector("#toolResult");
-    result.innerHTML="";
-    result.hidden=true;
+
+  panel.querySelector("#clearBtn").addEventListener("click",function() {
+    panel.querySelectorAll("[data-field]").forEach(function(input) {
+      if(input.tagName==="SELECT") input.selectedIndex=0;
+      else input.value="";
+    });
+    panel.querySelector("#toolResult").innerHTML="";
   });
-  panel.querySelector("#backBtn").addEventListener("click",()=>{
+
+  panel.querySelector("#backBtn").addEventListener("click",function() {
     closePanels();
-    window.scrollTo(0,0);
+    window.scrollTo({top:0,behavior:"smooth"});
   });
+
   panel.scrollIntoView({behavior:"smooth",block:"start"});
 }
-
 </script>
 </body>
 </html>
+
