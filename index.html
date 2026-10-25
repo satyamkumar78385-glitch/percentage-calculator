@@ -124,32 +124,36 @@ function showAbout() {
 
   workspace.innerHTML = `
     <div class="about-page">
-      <button class="back-btn" onclick="closePanels()">
+      <button class="back-btn" onclick="showHome()">
         ← Back
       </button>
 
-      <div class="about-content">
-        <h1>ℹ️ About Us</h1>
-        <h2>Mr. Satyam Kumar</h2>
-        <p>Software Engineer</p>
+      <h1>About Us</h1>
+      <h2>Mr. Satyam Kumar</h2>
+      <p>Software Engineer</p>
 
-        <hr>
+      <hr>
 
-        <h3>🧮 Satyam Calculator</h3>
-        <p>Smart tools for Everyday</p>
+      <h3>🧮 Satyam Calculator</h3>
+      <p>Smart Tools for Everyday</p>
 
-        <h3>📱 Contact Us</h3>
-        <p>Instagram: Satyambind0062</p>
+      <h3>Contact Us</h3>
+      <p>Instagram: Satyambind0062</p>
 
-        <p class="about-footer">
-          © 2026 Satyam Calculator
-        </p>
-      </div>
+      <p>© 2026 Satyam Calculator</p>
     </div>
   `;
 
-  workspace.classList.add("about-full-page");
+  document.body.classList.add("about-open");
+  window.scrollTo(0, 0);
 }
+
+function showHome() {
+  document.body.classList.remove("about-open");
+  closePanels();
+  window.scrollTo(0, 0);
+}
+
 
 const tools = {
   percentage: {
