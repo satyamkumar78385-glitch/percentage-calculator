@@ -119,16 +119,36 @@ function closePanels() {
 
 function showAbout() {
   closePanels();
-  document.getElementById("about").classList.add("active");
-  document.getElementById("menuitems").style.display = "none";
-}
 
-function searchTools() {
-  const q = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll(".tile").forEach(tile => {
-    tile.style.display =
-      tile.dataset.name.toLowerCase().includes(q) ? "" : "none";
-  });
+  const workspace = document.getElementById("workspace");
+
+  workspace.innerHTML = `
+    <div class="about-page">
+      <button class="back-btn" onclick="closePanels()">
+        ← Back
+      </button>
+
+      <div class="about-content">
+        <h1>ℹ️ About Us</h1>
+        <h2>Mr. Satyam Kumar</h2>
+        <p>Software Engineer</p>
+
+        <hr>
+
+        <h3>🧮 Satyam Calculator</h3>
+        <p>Smart tools for Everyday</p>
+
+        <h3>📱 Contact Us</h3>
+        <p>Instagram: Satyambind0062</p>
+
+        <p class="about-footer">
+          © 2026 Satyam Calculator
+        </p>
+      </div>
+    </div>
+  `;
+
+  workspace.classList.add("about-full-page");
 }
 
 const tools = {
