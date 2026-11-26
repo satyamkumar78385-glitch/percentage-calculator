@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Calculator</title>
+<title>Satyam Calculator</title>
 
 <style>
 * {
@@ -28,20 +28,15 @@ body {
     box-shadow: 0 5px 20px #0002;
 }
 
-h2 {
+h2, h3 {
     color: #1769e0;
+}
+
+h2, p {
     text-align: center;
 }
 
-h3 {
-    color: #1769e0;
-    margin-top: 10px;
-}
-
-p {
-    color: #666;
-    text-align: center;
-}
+p { color: #666; }
 
 input {
     width: 100%;
@@ -69,17 +64,35 @@ button {
 }
 
 .result {
-    background: #eaf2ff;
-    padding: 13px;
-    border-radius: 10px;
-    margin-top: 15px;
+    background: #f0f7ff;
+    border: 2px solid #1769e0;
+    padding: 18px;
+    border-radius: 14px;
+    margin-top: 18px;
     line-height: 2;
     color: #222;
+    display: none;
+    scroll-margin-top: 20px;
+    box-shadow: 0 4px 12px #1769e020;
+}
+
+.answer {
+    display: block;
+    background: white;
+    border: 1px solid #b8d5ff;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 10px;
+    color: #168447;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ddd;
+    margin: 22px 0;
 }
 </style>
 </head>
@@ -88,7 +101,7 @@ hr {
 
 <div class="calculator">
 
-<h2>Smart Calculator</h2>
+<h2>Satyam Calculator</h2>
 <p>Smart Tools for Everyday</p>
 
 <hr>
@@ -97,14 +110,9 @@ hr {
 
 <h3>1. Percentage Calculator</h3>
 
-<input type="number" id="total"
-placeholder="Total Marks">
-
-<input type="number" id="obtained"
-placeholder="Obtained Marks">
-
-<input type="number" id="percentage"
-placeholder="Percentage (%)">
+<input type="number" id="total" placeholder="Total Marks">
+<input type="number" id="obtained" placeholder="Obtained Marks">
+<input type="number" id="percentage" placeholder="Percentage (%)">
 
 <button onclick="calculatePercentage()">
 Calculate Percentage
@@ -114,17 +122,16 @@ Calculate Percentage
 Clear Percentage
 </button>
 
+<div class="result" id="percentageResult"></div>
+
 <hr>
 
 <!-- Discount Calculator -->
 
 <h3>2. Discount Calculator</h3>
 
-<input type="number" id="price"
-placeholder="Original Price (₹)">
-
-<input type="number" id="discount"
-placeholder="Discount (%)">
+<input type="number" id="price" placeholder="Original Price (₹)">
+<input type="number" id="discount" placeholder="Discount (%)">
 
 <button onclick="calculateDiscount()">
 Calculate Discount
@@ -134,13 +141,24 @@ Calculate Discount
 Clear Discount
 </button>
 
-<div class="result" id="discountResult">
-Discount Result Will Appear Here
-</div>
+<div class="result" id="discountResult"></div>
 
 </div>
 
 <script>
+
+// Automatic Scroll
+function showResult(id) {
+    let box = document.getElementById(id);
+    box.style.display = "block";
+
+    setTimeout(() => {
+        box.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }, 100);
+}
 
 // Percentage Calculator
 
@@ -162,6 +180,8 @@ alert("Please enter any TWO values!");
 return;
 }
 
+let answer = "";
+
 if(total === "" && obtained !== "" && percentage !== "") {
 
 if(Number(percentage) <= 0 ||
@@ -171,8 +191,9 @@ alert("Invalid values!");
 return;
 }
 
-t.value = (Number(obtained) * 100 /
-Number(percentage)).toFixed(2);
+let value = Number(obtained) * 100 / Number(percentage);
+t.value = value.toFixed(2);
+answer = "Total Marks = " + value.toFixed(2);
 
 }
 
@@ -185,8 +206,9 @@ alert("Invalid values!");
 return;
 }
 
-o.value = (Number(total) *
-Number(percentage) / 100).toFixed(2);
+let value = Number(total) * Number(percentage) / 100;
+o.value = value.toFixed(2);
+answer = "Obtained Marks = " + value.toFixed(2);
 
 }
 
@@ -199,16 +221,29 @@ alert("Invalid values!");
 return;
 }
 
-p.value = (Number(obtained) /
-Number(total) * 100).toFixed(2);
+let value = Number(obtained) / Number(total) * 100;
+p.value = value.toFixed(2);
+answer = "Percentage = " + value.toFixed(2) + "%";
 
 }
+
+document.getElementById("percentageResult").innerHTML = `
+<strong>Calculation Result</strong>
+<div class="answer">${answer}</div>
+`;
+
+showResult("percentageResult");
 }
 
 function clearPercentage() {
+
 document.getElementById("total").value = "";
 document.getElementById("obtained").value = "";
 document.getElementById("percentage").value = "";
+
+let box = document.getElementById("percentageResult");
+box.style.display = "none";
+box.innerHTML = "";
 }
 
 
@@ -235,28 +270,32 @@ let discountAmount = price * discount / 100;
 let finalAmount = price - discountAmount;
 
 document.getElementById("discountResult").innerHTML = `
-<strong>Original Price:</strong> ₹${price.toFixed(2)}<br>
+<strong>Discount Result</strong><br>
 
-<strong>Discount:</strong> ${discount}%<br>
-
-<strong>Discount Amount:</strong>
-₹${discountAmount.toFixed(2)}
+Original Price: ₹${price.toFixed(2)}<br>
+Discount: ${discount}%<br>
+Discount Amount: ₹${discountAmount.toFixed(2)}
 
 <hr>
 
 <strong>Pay to Shopkeeper:</strong>
-<span style="color:green;font-size:22px">
+
+<div class="answer">
 ₹${finalAmount.toFixed(2)}
-</span>
+</div>
 `;
+
+showResult("discountResult");
 }
 
 function clearDiscount() {
+
 document.getElementById("price").value = "";
 document.getElementById("discount").value = "";
 
-document.getElementById("discountResult").innerHTML =
-"Discount Result Will Appear Here";
+let box = document.getElementById("discountResult");
+box.style.display = "none";
+box.innerHTML = "";
 }
 
 </script>
