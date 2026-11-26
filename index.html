@@ -7,808 +7,259 @@
 <title>Satyam Calculator</title>
 
 <style>
-:root {
-  --bg: #f1f5f9;
-  --panel: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #dbe3ef;
-  --primary: #2563eb;
-  --input: #ffffff;
+* {
+    box-sizing: border-box;
 }
-body.dark {
-  --bg: #0b1220;
-  --panel: #111c2e;
-  --text: #f8fafc;
-  --muted: #a8b5c8;
-  --border: #29374c;
-  --primary: #3b82f6;
-  --input: #0b1220;
-}
-* { box-sizing: border-box; }
+
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  transition: background .2s, color .2s;
+    font-family: Arial, sans-serif;
+    background: #eaf2ff;
+    margin: 0;
+    padding: 20px 0;
 }
-header {
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+
+.calculator {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px #0002;
 }
-.header-row {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+
+h2 {
+    color: #1769e0;
+    text-align: center;
 }
-.brand {
-  flex: 1;
-  font-size: 21px;
-  font-weight: bold;
-  color: var(--primary);
+
+h3 {
+    color: #1769e0;
+    margin-top: 10px;
 }
-.icon-btn {
-  background: var(--panel);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 9px 12px;
-  cursor: pointer;
-  font-size: 17px;
+
+p {
+    color: #666;
+    text-align: center;
 }
-main {
-  max-width: 1100px;
-  margin: auto;
-  padding: 18px;
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin: 9px 0;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 16px;
 }
-.intro h1 { margin-bottom: 5px; }
-.intro p { color: var(--muted); }
-.search {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--input);
-  color: var(--text);
-  font-size: 16px;
-  margin: 12px 0 18px;
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 9px;
+    background: #1769e0;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
-.tool-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+
+.clear {
+    background: #555;
 }
-.tool {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--text);
-  border-radius: 14px;
-  padding: 16px 10px;
-  min-height: 105px;
-  cursor: pointer;
-  text-align: left;
-}
-.tool:hover { border-color: var(--primary); }
-.tool .emoji { font-size: 27px; display: block; margin-bottom: 8px; }
-.tool strong { font-size: 14px; }
-.tool small { display: block; color: var(--muted); margin-top: 5px; }
-.panel {
-  display: none;
-  margin-top: 22px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 18px;
-}
-.panel.active { display: block; }
-.panel h2 { margin-top: 0; }
-.fields {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 13px;
-}
-.fields label {
-  display: block;
-  margin-bottom: 7px;
-  font-size: 14px;
-  font-weight: bold;
-}
-.fields input, .fields select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  background: var(--input);
-  color: var(--text);
-  border-radius: 9px;
-  font-size: 16px;
-}
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 16px;
-}
-.actions button, .primary-btn {
-  padding: 11px 16px;
-  border: 0;
-  border-radius: 9px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-size: 15px;
-}
-.actions .secondary {
-  background: #64748b;
-}
+
 .result {
-  margin-top: 18px;
-  padding: 15px;
-  background: rgba(37,99,235,.08);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow-wrap: anywhere;
-}
-.result:empty { display: none; }
-.menu {
-  display: none;
-  position: fixed;
-  right: 15px;
-  top: 62px;
-  z-index: 500;
-  width: 200px;
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  background: var(--panel);
-  box-shadow: 0 10px 35px #0002;
-}
-.menu.show { display: block; }
-.menu button {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  padding: 12px;
-  text-align: left;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.menu button:hover { background: var(--bg); }
-footer {
-  text-align: center;
-  color: var(--muted);
-  padding: 25px 12px;
-  font-size: 13px;
+    background: #eaf2ff;
+    padding: 13px;
+    border-radius: 10px;
+    margin-top: 15px;
+    line-height: 2;
+    color: #222;
 }
 
-/* Full-screen About page */
-#aboutPage {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  overflow-y: auto;
-  padding: 14px;
-  background: var(--bg);
-  color: var(--text);
-}
-#aboutPage.open { display: block; }
-.about-back {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  padding: 11px 16px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--primary);
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-}
-.about-content {
-  max-width: 650px;
-  margin: 18px auto;
-  line-height: 1.75;
-}
-.about-hero {
-  text-align: center;
-  padding: 24px 10px;
-}
-.about-logo {
-  width: 82px;
-  height: 82px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary);
-  border-radius: 22px;
-  font-size: 42px;
-}
-.about-hero h1 { color: var(--primary); }
-.about-tagline { color: var(--primary); font-weight: bold; }
-.about-card, .about-developer {
-  margin: 15px 0;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--panel);
-}
-.about-card h2, .about-developer h2 { color: var(--primary); }
-.about-feature {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
-}
-.about-feature:last-child { border-bottom: none; }
-.about-feature h3 { margin-bottom: 3px; }
-.about-feature p { margin-top: 0; }
-.about-developer { text-align: center; }
-.developer-avatar {
-  width: 75px;
-  height: 75px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--primary);
-  color: white;
-  border-radius: 50%;
-  font-size: 25px;
-  font-weight: bold;
-}
-.about-developer a { color: var(--primary); overflow-wrap: anywhere; }
-.about-footer { text-align: center; padding: 25px 10px; color: var(--muted); }
-.about-footer h3 { color: #ef4444; }
-
-@media(max-width: 600px) {
-  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .fields { grid-template-columns: 1fr; }
-  main { padding: 13px; }
-  .brand { font-size: 18px; }
-  .about-card, .about-developer { padding: 15px; }
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
 }
 </style>
 </head>
 
 <body>
-<header>
-  <div class="header-row">
-    <button class="icon-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-    <div class="brand">🧮 Satyam Calculator</div>
-    <button class="icon-btn" onclick="setTheme()" aria-label="Change theme">🌙</button>
-  </div>
-</header>
 
-<div class="menu" id="menu">
-  <button onclick="showAbout()">ℹ️ About</button>
-  <button onclick="setTheme();toggleMenu()">🌗 Dark / Light Mode</button>
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'});toggleMenu()">🏠 Home</button>
+<div class="calculator">
+
+<h2>Satyam Calculator</h2>
+<p>Smart Tools for Everyday</p>
+
+<hr>
+
+<!-- Percentage Calculator -->
+
+<h3>1. Percentage Calculator</h3>
+
+<input type="number" id="total"
+placeholder="Total Marks">
+
+<input type="number" id="obtained"
+placeholder="Obtained Marks">
+
+<input type="number" id="percentage"
+placeholder="Percentage (%)">
+
+<button onclick="calculatePercentage()">
+Calculate Percentage
+</button>
+
+<button class="clear" onclick="clearPercentage()">
+Clear Percentage
+</button>
+
+<hr>
+
+<!-- Discount Calculator -->
+
+<h3>2. Discount Calculator</h3>
+
+<input type="number" id="price"
+placeholder="Original Price (₹)">
+
+<input type="number" id="discount"
+placeholder="Discount (%)">
+
+<button onclick="calculateDiscount()">
+Calculate Discount
+</button>
+
+<button class="clear" onclick="clearDiscount()">
+Clear Discount
+</button>
+
+<div class="result" id="discountResult">
+Discount Result Will Appear Here
 </div>
 
-<main>
-  <section class="intro">
-    <h1>All Calculators</h1>
-    <p>Simple tools for your everyday calculations.</p>
-  </section>
-
-  <input id="searchInput" class="search" type="search"
-    placeholder="🔍 Search calculator..."
-    oninput="searchTools()">
-
-  <div class="tool-grid" id="toolGrid">
-    <button class="tool" data-name="percentage marks" onclick="openTool('percentage')"><span class="emoji">📊</span><strong>Percentage Calculator</strong><small>Marks & percentage</small></button>
-    <button class="tool" data-name="discount" onclick="openTool('discount')"><span class="emoji">🏷️</span><strong>Discount Calculator</strong><small>Discount & final price</small></button>
-    <button class="tool" data-name="bank note money" onclick="openTool('bank')"><span class="emoji">💵</span><strong>Bank Note Calculator</strong><small>₹500 to ₹10 notes</small></button>
-    <button class="tool" data-name="age birthday date" onclick="openTool('age')"><span class="emoji">🎂</span><strong>Age Calculator</strong><small>Age from date of birth</small></button>
-    <button class="tool" data-name="salary" onclick="openTool('salary')"><span class="emoji">💰</span><strong>Salary Calculator</strong><small>Salary calculation</small></button>
-    <button class="tool" data-name="unit converter" onclick="openTool('unit')"><span class="emoji">🔄</span><strong>Unit Converter</strong><small>Length conversion</small></button>
-    <button class="tool" data-name="gst tax" onclick="openTool('gst')"><span class="emoji">🧾</span><strong>GST Calculator</strong><small>GST amount</small></button>
-    <button class="tool" data-name="simple interest" onclick="openTool('interest')"><span class="emoji">📈</span><strong>Simple Interest</strong><small>Interest calculation</small></button>
-    <button class="tool" data-name="average" onclick="openTool('average')"><span class="emoji">➗</span><strong>Average Calculator</strong><small>Average of numbers</small></button>
-    <button class="tool" data-name="profit loss" onclick="openTool('profit')"><span class="emoji">📉</span><strong>Profit & Loss</strong><small>Profit or loss amount</small></button>
-    <button class="tool" data-name="bmi" onclick="openTool('bmi')"><span class="emoji">⚖️</span><strong>BMI Calculator</strong><small>Height and weight</small></button>
-    <button class="tool" data-name="electricity bill" onclick="openTool('electricity')"><span class="emoji">⚡</span><strong>Electricity Bill</strong><small>Units × rate</small></button>
-    <button class="tool" data-name="speed distance time" onclick="openTool('speed')"><span class="emoji">🚗</span><strong>Speed Calculator</strong><small>Distance and time</small></button>
-    <button class="tool" data-name="temperature" onclick="openTool('temperature')"><span class="emoji">🌡️</span><strong>Temperature Converter</strong><small>°C and °F</small></button>
-    <button class="tool" data-name="loan emi" onclick="openTool('emi')"><span class="emoji">🏦</span><strong>EMI Calculator</strong><small>Monthly EMI estimate</small></button>
-    <button class="tool" data-name="time converter" onclick="openTool('time')"><span class="emoji">⏱️</span><strong>Time Converter</strong><small>Hours and minutes</small></button>
-    <button class="tool" data-name="square area" onclick="openTool('square')"><span class="emoji">⬜</span><strong>Square Calculator</strong><small>Area and perimeter</small></button>
-    <button class="tool" data-name="rectangle" onclick="openTool('rectangle')"><span class="emoji">▭</span><strong>Rectangle Calculator</strong><small>Area and perimeter</small></button>
-    <button class="tool" data-name="addition sum" onclick="openTool('sum')"><span class="emoji">➕</span><strong>Addition Calculator</strong><small>Add two numbers</small></button>
-  </div>
-
-  <div id="workspace"></div>
-</main>
-
-<footer>© Satyam Calculator · Made by Satyam Kumar</footer>
-
-<!-- Detailed About Page -->
-<div id="aboutPage">
-  <button class="about-back" onclick="closeAbout()">← Back to Calculator</button>
-
-  <div class="about-content">
-    <header class="about-hero">
-      <div class="about-logo">🧮</div>
-      <h1>Satyam Calculator</h1>
-      <p class="about-tagline">Smart • Simple • Accurate</p>
-      <p>Your everyday calculation partner.</p>
-    </header>
-
-    <section class="about-card">
-      <h2>👋 Welcome to Satyam Calculator!</h2>
-      <p>Satyam Calculator is a simple and convenient online calculation platform designed to help users perform everyday calculations easily.</p>
-      <p>Whether you are a student, shopkeeper, professional, or someone who needs quick calculations, our goal is to bring useful tools together in one place.</p>
-    </section>
-
-    <section class="about-card">
-      <h2>🎯 Our Vision & Mission</h2>
-      <p>Our vision is to make everyday mathematics accessible to everyone through simple digital tools.</p>
-      <p>Our mission is to provide an easy-to-use interface, understandable results, and useful calculators that help save time.</p>
-    </section>
-
-    <section class="about-card">
-      <h2>🧮 Our Calculator Features</h2>
-      <div class="about-feature"><h3>📊 Percentage Calculator</h3><p>Calculate total marks, obtained marks, and percentage.</p></div>
-      <div class="about-feature"><h3>🏷️ Discount Calculator</h3><p>Find discount amounts and final prices.</p></div>
-      <div class="about-feature"><h3>💵 Bank Note Calculator</h3><p>Calculate how many ₹500, ₹200, ₹100, ₹50, ₹20, or ₹10 notes make your entered amount, separately for each denomination.</p></div>
-      <div class="about-feature"><h3>💰 Salary Calculator</h3><p>Perform salary-related calculations.</p></div>
-      <div class="about-feature"><h3>🎂 Age Calculator</h3><p>Calculate age using your date of birth.</p></div>
-      <div class="about-feature"><h3>🔄 Unit Converter</h3><p>Convert supported measurement units.</p></div>
-      <div class="about-feature"><h3>🧾 GST Calculator</h3><p>Calculate GST and total price.</p></div>
-      <div class="about-feature"><h3>📈 Interest & EMI</h3><p>Estimate simple interest and monthly loan payments.</p></div>
-      <div class="about-feature"><h3>📐 Area & Perimeter</h3><p>Calculate square and rectangle measurements.</p></div>
-    </section>
-
-    <section class="about-card">
-      <h2>⭐ Why Choose Us?</h2>
-      <p>✅ Simple and easy-to-use interface</p>
-      <p>📱 Designed for mobile and desktop screens</p>
-      <p>⚡ Quick calculations with clear results</p>
-      <p>🧮 Multiple useful tools in one website</p>
-    </section>
-
-    <section class="about-card">
-      <h2>🔒 Privacy & Responsible Use</h2>
-      <p>Avoid entering sensitive personal or banking information into calculator fields.</p>
-      <p>How information is stored depends on the website's actual implementation and hosting setup.</p>
-    </section>
-
-    <section class="about-developer">
-      <div class="developer-avatar">SK</div>
-      <h2>Mr. Satyam Kumar</h2>
-      <p>Software Engineer</p>
-      <p>Interested in technology, software development, and creating useful digital tools.</p>
-      <a href="https://www.instagram.com/Satyambind0062/" target="_blank" rel="noopener noreferrer">📸 Instagram: @Satyambind0062</a>
-    </section>
-
-    <footer class="about-footer">
-      <h3>❤️ Thank You for Visiting!</h3>
-      <p>Thank you for using Satyam Calculator. We hope our tools make your everyday calculations easier.</p>
-      <small>© Satyam Calculator · Made by Satyam Kumar</small>
-    </footer>
-  </div>
 </div>
-
-<!-- Step 2 JavaScript goes below -->
 
 <script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("show");
+
+// Percentage Calculator
+
+function calculatePercentage() {
+
+let t = document.getElementById("total");
+let o = document.getElementById("obtained");
+let p = document.getElementById("percentage");
+
+let total = t.value;
+let obtained = o.value;
+let percentage = p.value;
+
+let count = [total, obtained, percentage]
+.filter(v => v !== "").length;
+
+if(count !== 2) {
+alert("Please enter any TWO values!");
+return;
 }
 
-function setTheme() {
-  document.body.classList.toggle("dark");
+if(total === "" && obtained !== "" && percentage !== "") {
+
+if(Number(percentage) <= 0 ||
+Number(percentage) > 100 ||
+Number(obtained) < 0) {
+alert("Invalid values!");
+return;
 }
 
-function showAbout() {
-  closePanels();
-  document.getElementById("menu").classList.remove("show");
-  document.getElementById("aboutPage").classList.add("open");
-  window.scrollTo(0, 0);
+t.value = (Number(obtained) * 100 /
+Number(percentage)).toFixed(2);
+
 }
 
-function closeAbout() {
-  document.getElementById("aboutPage").classList.remove("open");
+else if(obtained === "" && total !== "" && percentage !== "") {
+
+if(Number(total) <= 0 ||
+Number(percentage) < 0 ||
+Number(percentage) > 100) {
+alert("Invalid values!");
+return;
 }
 
-function searchTools() {
-  const query = document.getElementById("searchInput").value.toLowerCase();
-  document.querySelectorAll(".tool").forEach(function(tile) {
-    tile.style.display = tile.dataset.name.includes(query) ? "" : "none";
-  });
+o.value = (Number(total) *
+Number(percentage) / 100).toFixed(2);
+
 }
 
-function closePanels() {
-  document.getElementById("workspace").innerHTML = "";
+else if(percentage === "" && total !== "" && obtained !== "") {
+
+if(Number(total) <= 0 ||
+Number(obtained) < 0 ||
+Number(obtained) > Number(total)) {
+alert("Invalid values!");
+return;
 }
 
-function num(value) {
-  return Number(value);
+p.value = (Number(obtained) /
+Number(total) * 100).toFixed(2);
+
+}
 }
 
-function money(value) {
-  return Number(value).toLocaleString("en-IN", {
-    maximumFractionDigits: 2
-  });
+function clearPercentage() {
+document.getElementById("total").value = "";
+document.getElementById("obtained").value = "";
+document.getElementById("percentage").value = "";
 }
 
-const tools = {
-  percentage: {
-    title: "Percentage Calculator",
-    fields: [
-      {id:"obtained",label:"Obtained Marks",placeholder:"450"},
-      {id:"total",label:"Total Marks",placeholder:"500"}
-    ],
-    run:v => {
-      const o=num(v.obtained), t=num(v.total);
-      if(v.obtained==="" || v.total==="" || t<=0 || o<0)
-        return "Enter valid obtained and total marks.";
-      return `Obtained: ${o}<br>Total: ${t}<br>Percentage: <b>${(o/t*100).toFixed(2)}%</b>`;
-    }
-  },
 
-  discount: {
-    title: "Discount Calculator",
-    fields: [
-      {id:"price",label:"Original Price (₹)",placeholder:"1000"},
-      {id:"discount",label:"Discount (%)",placeholder:"20"}
-    ],
-    run:v => {
-      const p=num(v.price), d=num(v.discount);
-      if(v.price==="" || v.discount==="" || p<0 || d<0 || d>100)
-        return "Enter a valid price and discount from 0 to 100.";
-      const saved=p*d/100;
-      return `Discount: ₹${money(saved)}<br>Final Price: <b>₹${money(p-saved)}</b>`;
-    }
-  },
+// Discount Calculator
 
-  bank: {
-    title: "Bank Note Calculator",
-    fields: [
-      {id:"amount",label:"Enter Total Money (₹)",placeholder:"5000"}
-    ],
-    run:function(v) {
-      if(v.amount==="" || v.amount===undefined)
-        return "Please enter total money.";
+function calculateDiscount() {
 
-      const amount=Number(v.amount);
-      if(!Number.isSafeInteger(amount) || amount<0)
-        return "Please enter a valid whole amount.";
+let price = document.getElementById("price").value;
+let discount = document.getElementById("discount").value;
 
-      const notes=[500,200,100,50,20,10];
-      let html=`<h3>💵 Bank Note Details</h3>
-        <p>Total Money: <b>₹${money(amount)}</b></p><hr>`;
+if(price === "" || discount === "" ||
+Number(price) < 0 ||
+Number(discount) < 0 ||
+Number(discount) > 100) {
 
-      notes.forEach(function(note) {
-        const count=Math.floor(amount/note);
-        const value=count*note;
-        html+=`<div style="display:flex;justify-content:space-between;gap:10px;padding:12px;margin:8px 0;background:rgba(59,130,246,.12);border-radius:10px">
-          <b>₹${note} Note</b>
-          <span><b>${count}</b> notes<br><small>Amount: ₹${money(value)}</small></span>
-        </div>`;
-      });
-
-      html+=`<p style="font-size:12px">Each denomination is calculated separately for the full entered amount.</p>`;
-      return html;
-    }
-  },
-
-  age: {
-    title: "Age Calculator",
-    fields: [
-      {id:"dob",label:"Date of Birth",type:"date"}
-    ],
-    run:v => {
-      if(!v.dob) return "Please select your date of birth.";
-      const dob=new Date(v.dob+"T00:00:00");
-      const today=new Date();
-      if(isNaN(dob.getTime()) || dob>today) return "Enter a valid date of birth.";
-      let years=today.getFullYear()-dob.getFullYear();
-      let months=today.getMonth()-dob.getMonth();
-      let days=today.getDate()-dob.getDate();
-      if(days<0) {
-        months--;
-        days+=new Date(today.getFullYear(),today.getMonth(),0).getDate();
-      }
-      if(months<0) { years--; months+=12; }
-      return `Your age: <b>${years} years, ${months} months, ${days} days</b>`;
-    }
-  },
-
-  salary: {
-    title: "Salary Calculator",
-    fields: [
-      {id:"salary",label:"Monthly Salary (₹)",placeholder:"25000"},
-      {id:"bonus",label:"Extra Monthly Income (₹)",placeholder:"1000"}
-    ],
-    run:v => {
-      if(v.salary==="" || v.bonus==="") return "Enter both amounts.";
-      const s=num(v.salary), b=num(v.bonus);
-      if(s<0 || b<0) return "Amounts cannot be negative.";
-      return `Monthly Total: <b>₹${money(s+b)}</b><br>Estimated Yearly Total: <b>₹${money((s+b)*12)}</b>`;
-    }
-  },
-
-  unit: {
-    title: "Length Unit Converter",
-    fields: [
-      {id:"value",label:"Value",placeholder:"10"},
-      {id:"unit",label:"Convert From",type:"select",options:[
-        {value:"m",label:"Metres"},
-        {value:"km",label:"Kilometres"},
-        {value:"cm",label:"Centimetres"},
-        {value:"ft",label:"Feet"}
-      ]}
-    ],
-    run:v => {
-      if(v.value==="") return "Enter a value.";
-      const factors={m:1,km:1000,cm:.01,ft:.3048};
-      const meters=num(v.value)*factors[v.unit];
-      return `Metres: ${money(meters)} m<br>Kilometres: ${money(meters/1000)} km<br>Centimetres: ${money(meters*100)} cm<br>Feet: ${money(meters/.3048)} ft`;
-    }
-  },
-
-  gst: {
-    title: "GST Calculator",
-    fields: [
-      {id:"price",label:"Price Before GST (₹)",placeholder:"1000"},
-      {id:"rate",label:"GST Rate (%)",placeholder:"18"}
-    ],
-    run:v => {
-      if(v.price==="" || v.rate==="") return "Enter price and GST rate.";
-      const p=num(v.price), r=num(v.rate);
-      if(p<0 || r<0) return "Values cannot be negative.";
-      return `GST Amount: ₹${money(p*r/100)}<br>Total Price: <b>₹${money(p+p*r/100)}</b>`;
-    }
-  },
-
-  interest: {
-    title: "Simple Interest Calculator",
-    fields: [
-      {id:"principal",label:"Principal (₹)",placeholder:"10000"},
-      {id:"rate",label:"Annual Interest Rate (%)",placeholder:"5"},
-      {id:"years",label:"Time (Years)",placeholder:"2"}
-    ],
-    run:v => {
-      if(v.principal==="" || v.rate==="" || v.years==="") return "Fill all fields.";
-      const p=num(v.principal), r=num(v.rate), t=num(v.years);
-      if(p<0 || r<0 || t<0) return "Values cannot be negative.";
-      const i=p*r*t/100;
-      return `Simple Interest: ₹${money(i)}<br>Total Amount: <b>₹${money(p+i)}</b>`;
-    }
-  },
-
-  average: {
-    title: "Average Calculator",
-    fields: [
-      {id:"numbers",label:"Numbers (comma separated)",type:"text",placeholder:"10,20,30"}
-    ],
-    run:v => {
-      const parts=v.numbers.split(",").map(x=>x.trim());
-      if(!v.numbers.trim() || parts.some(x=>x==="" || !Number.isFinite(Number(x))))
-        return "Enter numbers separated by commas.";
-      const arr=parts.map(Number);
-      return `Count: ${arr.length}<br>Sum: ${money(arr.reduce((a,b)=>a+b,0))}<br>Average: <b>${money(arr.reduce((a,b)=>a+b,0)/arr.length)}</b>`;
-    }
-  },
-
-  profit: {
-    title: "Profit & Loss Calculator",
-    fields: [
-      {id:"cost",label:"Cost Price (₹)",placeholder:"500"},
-      {id:"selling",label:"Selling Price (₹)",placeholder:"650"}
-    ],
-    run:v => {
-      if(v.cost==="" || v.selling==="") return "Enter both prices.";
-      const c=num(v.cost), s=num(v.selling);
-      if(c<0 || s<0) return "Prices cannot be negative.";
-      if(s===c) return "No profit and no loss.";
-      const diff=Math.abs(s-c);
-      const pct=c===0 ? 0 : diff/c*100;
-      return `${s>c?"Profit":"Loss"}: <b>₹${money(diff)}</b><br>Percentage: ${money(pct)}%`;
-    }
-  },
-
-  bmi: {
-    title: "BMI Calculator",
-    fields: [
-      {id:"weight",label:"Weight (kg)",placeholder:"60"},
-      {id:"height",label:"Height (cm)",placeholder:"170"}
-    ],
-    run:v => {
-      if(v.weight==="" || v.height==="") return "Enter weight and height.";
-      const w=num(v.weight), h=num(v.height)/100;
-      if(w<=0 || h<=0) return "Enter positive values.";
-      return `BMI: <b>${(w/(h*h)).toFixed(2)}</b><br><small>BMI is a screening measure, not a diagnosis.</small>`;
-    }
-  },
-
-  electricity: {
-    title: "Electricity Bill Calculator",
-    fields: [
-      {id:"units",label:"Units Used",placeholder:"100"},
-      {id:"rate",label:"Rate Per Unit (₹)",placeholder:"7"}
-    ],
-    run:v => {
-      if(v.units==="" || v.rate==="") return "Enter units and rate.";
-      const u=num(v.units), r=num(v.rate);
-      if(u<0 || r<0) return "Values cannot be negative.";
-      return `Estimated Bill: <b>₹${money(u*r)}</b><br><small>Excludes any extra charges or taxes.</small>`;
-    }
-  },
-
-  speed: {
-    title: "Speed Calculator",
-    fields: [
-      {id:"distance",label:"Distance (km)",placeholder:"100"},
-      {id:"time",label:"Time (hours)",placeholder:"2"}
-    ],
-    run:v => {
-      if(v.distance==="" || v.time==="") return "Enter distance and time.";
-      const d=num(v.distance), t=num(v.time);
-      if(d<0 || t<=0) return "Distance must be non-negative and time must be positive.";
-      return `Average Speed: <b>${money(d/t)} km/h</b>`;
-    }
-  },
-
-  temperature: {
-    title: "Temperature Converter",
-    fields: [
-      {id:"value",label:"Temperature",placeholder:"25"},
-      {id:"direction",label:"Convert From",type:"select",options:[
-        {value:"c",label:"Celsius to Fahrenheit"},
-        {value:"f",label:"Fahrenheit to Celsius"}
-      ]}
-    ],
-    run:v => {
-      if(v.value==="") return "Enter a temperature.";
-      const n=num(v.value);
-      return v.direction==="c"
-        ? `${n}°C = <b>${money(n*9/5+32)}°F</b>`
-        : `${n}°F = <b>${money((n-32)*5/9)}°C</b>`;
-    }
-  },
-
-  emi: {
-    title: "EMI Calculator",
-    fields: [
-      {id:"principal",label:"Loan Amount (₹)",placeholder:"100000"},
-      {id:"rate",label:"Annual Interest (%)",placeholder:"10"},
-      {id:"months",label:"Loan Duration (Months)",placeholder:"12"}
-    ],
-    run:v => {
-      if(v.principal==="" || v.rate==="" || v.months==="") return "Fill all fields.";
-      const p=num(v.principal), annual=num(v.rate), n=num(v.months);
-      if(p<=0 || annual<0 || !Number.isInteger(n) || n<=0) return "Enter valid loan details.";
-      const r=annual/1200;
-      const emi=r===0 ? p/n : p*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-      return `Monthly EMI: <b>₹${money(emi)}</b><br>Total Payment: ₹${money(emi*n)}<br>Total Interest: ₹${money(emi*n-p)}`;
-    }
-  },
-
-  time: {
-    title: "Time Converter",
-    fields: [
-      {id:"minutes",label:"Minutes",placeholder:"90"}
-    ],
-    run:v => {
-      if(v.minutes==="") return "Enter minutes.";
-      const n=num(v.minutes);
-      if(n<0) return "Minutes cannot be negative.";
-      return `${n} minutes = <b>${Math.floor(n/60)} hours ${n%60} minutes</b><br>Seconds: ${money(n*60)}`;
-    }
-  },
-
-  square: {
-    title: "Square Calculator",
-    fields: [
-      {id:"side",label:"Side Length",placeholder:"5"}
-    ],
-    run:v => {
-      if(v.side==="") return "Enter side length.";
-      const s=num(v.side);
-      if(s<0) return "Side cannot be negative.";
-      return `Area: <b>${money(s*s)}</b> square units<br>Perimeter: <b>${money(4*s)}</b> units`;
-    }
-  },
-
-  rectangle: {
-    title: "Rectangle Calculator",
-    fields: [
-      {id:"length",label:"Length",placeholder:"10"},
-      {id:"width",label:"Width",placeholder:"5"}
-    ],
-    run:v => {
-      if(v.length==="" || v.width==="") return "Enter length and width.";
-      const l=num(v.length), w=num(v.width);
-      if(l<0 || w<0) return "Values cannot be negative.";
-      return `Area: <b>${money(l*w)}</b> square units<br>Perimeter: <b>${money(2*(l+w))}</b> units`;
-    }
-  },
-
-  sum: {
-    title: "Addition Calculator",
-    fields: [
-      {id:"a",label:"First Number",placeholder:"100"},
-      {id:"b",label:"Second Number",placeholder:"200"}
-    ],
-    run:v => {
-      if(v.a==="" || v.b==="") return "Enter both numbers.";
-      return `Answer: <b>${money(num(v.a)+num(v.b))}</b>`;
-    }
-  }
-};
-
-function openTool(id) {
-  if(!tools[id]) return;
-
-  closePanels();
-  document.getElementById("menu").classList.remove("show");
-
-  const tool=tools[id];
-  const workspace=document.getElementById("workspace");
-  const panel=document.createElement("section");
-  panel.className="panel active";
-
-  let html=`<h2>${tool.title}</h2><div class="fields">`;
-
-  tool.fields.forEach(function(f) {
-    html+=`<div><label for="field_${f.id}">${f.label}</label>`;
-
-    if(f.type==="select") {
-      html+=`<select id="field_${f.id}" data-field="${f.id}">`;
-      f.options.forEach(function(o) {
-        html+=`<option value="${o.value}">${o.label}</option>`;
-      });
-      html+=`</select>`;
-    } else {
-      const type=f.type || "number";
-      html+=`<input id="field_${f.id}" data-field="${f.id}" type="${type}" placeholder="${f.placeholder||""}" ${type==="date" ? 'max="'+new Date().toISOString().slice(0,10)+'"' : ""}>`;
-    }
-
-    html+="</div>";
-  });
-
-  html+=`</div>
-    <div class="actions">
-      <button type="button" id="calculateBtn">Calculate</button>
-      <button type="button" class="secondary" id="clearBtn">Clear</button>
-      <button type="button" class="secondary" id="backBtn">Back</button>
-    </div>
-    <div class="result" id="toolResult"></div>`;
-
-  panel.innerHTML=html;
-  workspace.appendChild(panel);
-
-  panel.querySelector("#calculateBtn").addEventListener("click",function() {
-    const values={};
-    panel.querySelectorAll("[data-field]").forEach(function(input) {
-      values[input.dataset.field]=input.value;
-    });
-    panel.querySelector("#toolResult").innerHTML=tool.run(values);
-  });
-
-  panel.querySelector("#clearBtn").addEventListener("click",function() {
-    panel.querySelectorAll("[data-field]").forEach(function(input) {
-      if(input.tagName==="SELECT") input.selectedIndex=0;
-      else input.value="";
-    });
-    panel.querySelector("#toolResult").innerHTML="";
-  });
-
-  panel.querySelector("#backBtn").addEventListener("click",function() {
-    closePanels();
-    window.scrollTo({top:0,behavior:"smooth"});
-  });
-
-  panel.scrollIntoView({behavior:"smooth",block:"start"});
+alert("Please enter valid values!");
+return;
 }
+
+price = Number(price);
+discount = Number(discount);
+
+let discountAmount = price * discount / 100;
+let finalAmount = price - discountAmount;
+
+document.getElementById("discountResult").innerHTML = `
+<strong>Original Price:</strong> ₹${price.toFixed(2)}<br>
+
+<strong>Discount:</strong> ${discount}%<br>
+
+<strong>Discount Amount:</strong>
+₹${discountAmount.toFixed(2)}
+
+<hr>
+
+<strong>Pay to Shopkeeper:</strong>
+<span style="color:green;font-size:22px">
+₹${finalAmount.toFixed(2)}
+</span>
+`;
+}
+
+function clearDiscount() {
+document.getElementById("price").value = "";
+document.getElementById("discount").value = "";
+
+document.getElementById("discountResult").innerHTML =
+"Discount Result Will Appear Here";
+}
+
 </script>
+
 </body>
 </html>
-
